@@ -44,8 +44,10 @@ export default function LoginPage() {
         {/* Left side - Branding */}
         <div className={styles.brandSide}>
           <div className={styles.brandContent}>
-            <div className={styles.brandIcon}>🛡️</div>
-            <h1 className={styles.brandTitle}>Helpdesk & Shape Up</h1>
+            <div className={styles.brandIcon}>
+              <img src="/LOGO.png" alt="Logo" className={styles.logoImg} />
+            </div>
+            <h1 className={styles.brandTitle}>SHS Helpdesk</h1>
             <p className={styles.brandDesc}>
               Hệ thống quản lý Ticket và Thư viện tri thức Shape Up.
               Tiếp nhận, xử lý và phản hồi nhanh chóng.

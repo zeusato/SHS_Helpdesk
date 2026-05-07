@@ -23,10 +23,12 @@
   background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca);
   padding: var(--space-2xl);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  text-align: center;
 }
 
 .brandSide::before {
@@ -36,7 +38,7 @@
   right: -50%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
   animation: pulse 4s ease infinite;
 }
 
@@ -54,9 +56,13 @@
   font-size: var(--font-size-2xl);
   font-weight: 800;
   margin-bottom: var(--space-sm);
-  background: linear-gradient(135deg, #fff, #c7d2fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: white;
+}
+
+.logoImg {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
 }
 
 .brandDesc {
@@ -70,6 +76,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  align-items: center;
 }
 
 .feature {
@@ -79,6 +86,7 @@
   font-size: var(--font-size-sm);
   color: #e0e7ff;
   font-weight: 500;
+  justify-content: center;
 }
 
 .featureIcon {

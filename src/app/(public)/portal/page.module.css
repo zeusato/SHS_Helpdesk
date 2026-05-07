@@ -17,16 +17,15 @@
   margin-bottom: var(--space-xl);
 }
 
-.portalLogo {
-  font-size: 3rem;
-  margin-bottom: var(--space-sm);
+.logoImg {
+  height: 64px;
+  width: auto;
+  object-fit: contain;
 }
 
 .portalHeader h1 {
   font-size: var(--font-size-2xl);
-  background: linear-gradient(135deg, var(--color-brand), #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--color-brand);
   margin-bottom: var(--space-xs);
 }
 

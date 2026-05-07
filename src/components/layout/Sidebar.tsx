@@ -87,8 +87,8 @@ export default function Sidebar({ user }: { user?: User | null }) {
       <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''} ${mobileOpen ? styles.mobileOpen : ''}`}>
         {/* Logo */}
         <div className={styles.logo}>
-          <span className={styles.logoIcon}>🛡️</span>
-          {!collapsed && <span className={styles.logoText}>Helpdesk</span>}
+          <img src="/LOGO.png" alt="Logo" className={styles.logoImg} />
+          {!collapsed && <span className={styles.logoText}>SHS Helpdesk</span>}
         </div>
 
         {/* Navigation */}

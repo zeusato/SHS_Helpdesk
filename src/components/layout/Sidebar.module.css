@@ -26,17 +26,16 @@
   min-height: var(--header-height);
 }
 
-.logoIcon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
+.logoImg {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
 }
 
 .logoText {
   font-size: var(--font-size-xl);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--color-brand), #a78bfa);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--color-brand);
   white-space: nowrap;
 }
 

@@ -162,9 +162,11 @@ export default function PortalPage() {
     <div className={styles.portalPage}>
       <div className={styles.portalContainer}>
         <div className={styles.portalHeader}>
-          <div className={styles.portalLogo}>🛡️</div>
-          <h1>Gửi yêu cầu hỗ trợ</h1>
-          <p>Vui lòng điền đầy đủ thông tin để chúng tôi hỗ trợ nhanh nhất</p>
+          <div className={styles.portalLogo}>
+            <img src="/LOGO.png" alt="Logo" className={styles.logoImg} />
+          </div>
+          <h1>SHS Helpdesk</h1>
+          <p>Hệ thống tiếp nhận và xử lý yêu cầu hỗ trợ</p>
         </div>
 
         <form className={styles.portalForm} onSubmit={handleSubmit}>

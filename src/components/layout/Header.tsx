@@ -90,7 +90,7 @@ export default function Header({ user }: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
-        <h2 className={styles.pageTitle}>Helpdesk & Shape Up</h2>
+        <h2 className={styles.pageTitle}>SHS Helpdesk</h2>
       </div>
 
       <div className={styles.headerRight}>
