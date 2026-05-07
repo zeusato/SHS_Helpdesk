@@ -10,19 +10,29 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
+  let authUser = null
+  let profile = null
+  
   const supabase = await createClient()
-  const { data: { user: authUser } } = await supabase.auth.getUser()
+  try {
+    const { data } = await supabase.auth.getUser()
+    authUser = data.user
+    
+    if (authUser) {
+      const { data: profileData } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', authUser.id)
+        .single()
+      profile = profileData
+    }
+  } catch (err) {
+    console.error('Auth check error:', err)
+  }
 
   if (!authUser) {
     redirect('/login')
   }
-
-  // Fetch profile
-  const { data: profile } = await supabase
-    .from('users')
-    .select('*')
-    .eq('id', authUser.id)
-    .single()
 
   return (
     <div className={styles.dashboardLayout}>
