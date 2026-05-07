@@ -28,13 +28,11 @@ export async function POST(request: NextRequest) {
   }
 
   // Use service_role key to create auth user
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!serviceKey) {
-    return NextResponse.json({ error: 'Service role key chưa được cấu hình' }, { status: 500 })
-  }
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder'
 
   const adminClient = createAdminClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    url,
     serviceKey,
     { auth: { autoRefreshToken: false, persistSession: false } }
   )

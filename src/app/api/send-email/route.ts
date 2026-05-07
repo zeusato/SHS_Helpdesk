@@ -4,10 +4,10 @@ import { createClient } from '@supabase/supabase-js';
 
 export async function POST(req: Request) {
   // Create a Supabase client inside the request handler to avoid build-time errors
-  const supabaseAdmin = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder'
+
+  const supabaseAdmin = createClient(url, serviceKey);
 
   try {
     const { to, subject, html, ticket_id, sender_id } = await req.json();
