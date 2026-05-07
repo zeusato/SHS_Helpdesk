@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import styles from '../shared.module.css'
 import { encryptKey, decryptKey } from '@/lib/utils/crypto'
