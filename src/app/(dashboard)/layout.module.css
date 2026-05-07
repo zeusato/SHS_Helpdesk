@@ -1,0 +1,29 @@
+.dashboardLayout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.mainArea {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  transition: margin-left var(--transition-base);
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  padding: var(--space-lg);
+  margin-top: var(--header-height);
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .mainArea {
+    margin-left: 0;
+  }
+
+  .content {
+    padding: var(--space-md);
+  }
+}

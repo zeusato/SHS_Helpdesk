@@ -1,0 +1,154 @@
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-primary);
+  padding: var(--space-md);
+}
+
+.loginContainer {
+  display: flex;
+  width: 100%;
+  max-width: 960px;
+  min-height: 560px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.brandSide {
+  flex: 1;
+  background: linear-gradient(135deg, #1e1b4b, #312e81, #4338ca);
+  padding: var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.brandSide::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 60%);
+  animation: pulse 4s ease infinite;
+}
+
+.brandContent {
+  position: relative;
+  z-index: 1;
+}
+
+.brandIcon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.brandTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+  background: linear-gradient(135deg, #fff, #c7d2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brandDesc {
+  font-size: var(--font-size-base);
+  color: #c7d2fe;
+  line-height: 1.7;
+  margin-bottom: var(--space-xl);
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  color: #e0e7ff;
+  font-weight: 500;
+}
+
+.featureIcon {
+  font-size: 1.1rem;
+}
+
+.formSide {
+  flex: 1;
+  background: var(--color-bg-secondary);
+  padding: var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.formTitle {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.formSubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 12px 16px;
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.loginBtn {
+  width: 100%;
+  justify-content: center;
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .loginContainer {
+    flex-direction: column;
+    max-width: 420px;
+    min-height: auto;
+  }
+
+  .brandSide {
+    padding: var(--space-lg);
+  }
+
+  .features {
+    display: none;
+  }
+
+  .formSide {
+    padding: var(--space-lg);
+  }
+}

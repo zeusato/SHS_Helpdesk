@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.layout {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.mainContent {
+  width: 100%;
+  max-width: 800px;
+}
