@@ -35,6 +35,7 @@ export default function ShapeUpsPage() {
       .from('shape_ups')
       .select('*, project:projects(id, name), author:users!created_by(id, name)')
       .order('created_at', { ascending: false })
+      .range(0, 49)
 
     if (filterStatus) query = query.eq('status', filterStatus)
     if (filterProject) query = query.eq('project_id', filterProject)

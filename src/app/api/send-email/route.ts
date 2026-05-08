@@ -56,34 +56,19 @@ export async function POST(req: Request) {
     });
 
     // 4. Log to Database
-    const emailData: any = {
-      ticket_id,
-      sender_id,
-      subject,
-      content: html,
-    };
-
-    // Try to include recipient_email if column exists
     const { error: dbError } = await supabaseAdmin
       .from('emails')
-      .insert({ ...emailData, recipient_email: to });
+      .insert({
+        ticket_id,
+        sender_id,
+        subject,
+        content: html,
+        recipient_email: to
+      });
 
     if (dbError) {
-      console.error('Database Logging Error (with recipient_email):', dbError);
-      
-      // Fallback: Try without recipient_email in case migration hasn't been run
-      if (dbError.code === '42703') { // Undefined column error code
-        const { error: fallbackError } = await supabaseAdmin
-          .from('emails')
-          .insert(emailData);
-        
-        if (fallbackError) {
-          console.error('Database Logging Error (fallback):', fallbackError);
-          return NextResponse.json({ success: true, messageId: info.messageId, dbWarning: 'Email sent but failed to log to DB.' });
-        }
-      } else {
-        return NextResponse.json({ success: true, messageId: info.messageId, dbWarning: 'Email sent but failed to log to DB: ' + dbError.message });
-      }
+      console.error('Database Logging Error:', dbError);
+      return NextResponse.json({ success: true, messageId: info.messageId, dbWarning: 'Email sent but failed to log to DB.' });
     }
 
     return NextResponse.json({ success: true, messageId: info.messageId });

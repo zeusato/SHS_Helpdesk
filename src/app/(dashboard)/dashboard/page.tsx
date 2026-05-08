@@ -33,68 +33,37 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchDashboardData = async () => {
       setLoading(true)
-
-      const [
-        { count: ticketsNew },
-        { count: ticketsInProgress },
-        { count: ticketsResolved },
-        { count: ticketsClosed },
-        { count: ticketsTotal },
-        { count: shapeUpsTotal },
-        { count: shapeUpsDraft },
-        { count: shapeUpsPublished },
-        { data: recent },
-        { data: projects },
-        { data: allTickets },
-        { data: allShapeUps }
-      ] = await Promise.all([
-        supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'new'),
-        supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'in_progress'),
-        supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'resolved'),
-        supabase.from('tickets').select('*', { count: 'exact', head: true }).eq('status', 'closed'),
-        supabase.from('tickets').select('*', { count: 'exact', head: true }),
-        supabase.from('shape_ups').select('*', { count: 'exact', head: true }),
-        supabase.from('shape_ups').select('*', { count: 'exact', head: true }).eq('status', 'draft'),
-        supabase.from('shape_ups').select('*', { count: 'exact', head: true }).eq('status', 'published'),
-        supabase.from('tickets').select('id, title, status, requester_name, created_at').order('created_at', { ascending: false }).limit(5),
-        supabase.from('projects').select('id, name'),
-        supabase.from('tickets').select('project_id, status'),
-        supabase.from('shape_ups').select('project_id')
-      ])
-
-      // Calculate project stats
-      const pStats: ProjectStat[] = (projects || []).map(p => {
-        const pTickets = (allTickets || []).filter(t => t.project_id === p.id)
-        const pShapeUps = (allShapeUps || []).filter(s => s.project_id === p.id)
-        return {
-          id: p.id,
-          name: p.name,
-          new: pTickets.filter(t => t.status === 'new').length,
-          in_progress: pTickets.filter(t => t.status === 'in_progress').length,
-          resolved: pTickets.filter(t => t.status === 'resolved').length,
-          total: pTickets.length,
-          shape_ups: pShapeUps.length
+      try {
+        const { data, error } = await supabase.rpc('get_dashboard_stats')
+        if (error) {
+          console.error('RPC Error:', error)
+          return
         }
-      }).sort((a, b) => (b.total + b.shape_ups) - (a.total + a.shape_ups))
-
-      setStats({
-        ticketsNew: ticketsNew || 0,
-        ticketsInProgress: ticketsInProgress || 0,
-        ticketsResolved: ticketsResolved || 0,
-        ticketsClosed: ticketsClosed || 0,
-        ticketsTotal: ticketsTotal || 0,
-        shapeUpsTotal: shapeUpsTotal || 0,
-        shapeUpsDraft: shapeUpsDraft || 0,
-        shapeUpsPublished: shapeUpsPublished || 0,
-        projectStats: pStats
-      })
-      setRecentTickets(recent || [])
-      setLoading(false)
+        
+        if (data) {
+          setStats({
+            ticketsNew: data.ticketsNew,
+            ticketsInProgress: data.ticketsInProgress,
+            ticketsResolved: data.ticketsResolved,
+            ticketsClosed: data.ticketsClosed,
+            ticketsTotal: data.ticketsTotal,
+            shapeUpsTotal: data.shapeUpsTotal,
+            shapeUpsDraft: data.shapeUpsDraft,
+            shapeUpsPublished: data.shapeUpsPublished,
+            projectStats: data.projectStats
+          })
+          setRecentTickets(data.recentTickets)
+        }
+      } catch (err) {
+        console.error('Error fetching dashboard stats:', err)
+      } finally {
+        setLoading(false)
+      }
     }
 
-    fetchStats()
+    fetchDashboardData()
   }, [])
 
   const STATUS_MAP: Record<string, { label: string; badge: string }> = {

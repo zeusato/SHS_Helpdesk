@@ -42,6 +42,7 @@ export default function TicketsPage() {
       .from('tickets')
       .select('*, project:projects(id, name), assignee:users!assignee_id(id, name)')
       .order('created_at', { ascending: false })
+      .range(0, 49)
 
     if (filterStatus) query = query.eq('status', filterStatus)
     if (filterPriority) query = query.eq('priority', filterPriority)
