@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import type { User, Notification } from '@/lib/types'
@@ -14,7 +14,7 @@ import { useTheme } from '@/components/providers/ThemeProvider'
 
 export default function Header({ user }: HeaderProps) {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const { theme, toggleTheme } = useTheme()
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [showNotifications, setShowNotifications] = useState(false)
@@ -24,7 +24,7 @@ export default function Header({ user }: HeaderProps) {
   const profileRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setMounted(true)
+    requestAnimationFrame(() => setMounted(true))
   }, [])
 
   const unreadCount = notifications.filter(n => !n.is_read).length
@@ -57,7 +57,7 @@ export default function Header({ user }: HeaderProps) {
       .subscribe()
 
     return () => { supabase.removeChannel(channel) }
-  }, [user])
+  }, [user, supabase])
 
   // Close dropdowns on outside click
   useEffect(() => {

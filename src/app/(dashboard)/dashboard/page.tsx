@@ -1,6 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import { vi } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase/client'
 import styles from './page.module.css'
 
@@ -27,44 +29,44 @@ interface Stats {
 }
 
 export default function DashboardPage() {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [stats, setStats] = useState<Stats | null>(null)
   const [recentTickets, setRecentTickets] = useState<{ id: string; title: string; status: string; requester_name: string; created_at: string }[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      setLoading(true)
-      try {
-        const { data, error } = await supabase.rpc('get_dashboard_stats')
-        if (error) {
-          console.error('RPC Error:', error)
-          return
-        }
-        
-        if (data) {
-          setStats({
-            ticketsNew: data.ticketsNew,
-            ticketsInProgress: data.ticketsInProgress,
-            ticketsResolved: data.ticketsResolved,
-            ticketsClosed: data.ticketsClosed,
-            ticketsTotal: data.ticketsTotal,
-            shapeUpsTotal: data.shapeUpsTotal,
-            shapeUpsDraft: data.shapeUpsDraft,
-            shapeUpsPublished: data.shapeUpsPublished,
-            projectStats: data.projectStats
-          })
-          setRecentTickets(data.recentTickets)
-        }
-      } catch (err) {
-        console.error('Error fetching dashboard stats:', err)
-      } finally {
-        setLoading(false)
+  const fetchDashboardData = useCallback(async () => {
+    try {
+      const { data, error } = await supabase.rpc('get_dashboard_stats')
+      if (error) {
+        console.error('RPC Error:', error)
+        return
       }
+      
+      if (data) {
+        setStats({
+          ticketsNew: data.ticketsNew,
+          ticketsInProgress: data.ticketsInProgress,
+          ticketsResolved: data.ticketsResolved,
+          ticketsClosed: data.ticketsClosed,
+          ticketsTotal: data.ticketsTotal,
+          shapeUpsTotal: data.shapeUpsTotal,
+          shapeUpsDraft: data.shapeUpsDraft,
+          shapeUpsPublished: data.shapeUpsPublished,
+          projectStats: data.projectStats
+        })
+        setRecentTickets(data.recentTickets)
+      }
+    } catch (err) {
+      console.error('Error fetching dashboard stats:', err)
+    } finally {
+      setLoading(false)
     }
+  }, [supabase])
 
-    fetchDashboardData()
-  }, [])
+  useEffect(() => {
+    const t = setTimeout(() => fetchDashboardData(), 0)
+    return () => clearTimeout(t)
+  }, [fetchDashboardData])
 
   const STATUS_MAP: Record<string, { label: string; badge: string }> = {
     new: { label: 'Mới', badge: 'badge-new' },
@@ -75,12 +77,11 @@ export default function DashboardPage() {
   }
 
   const timeAgo = (dateStr: string) => {
-    const diff = Date.now() - new Date(dateStr).getTime()
-    const mins = Math.floor(diff / 60000)
-    if (mins < 60) return `${mins}p trước`
-    const hours = Math.floor(mins / 60)
-    if (hours < 24) return `${hours}h trước`
-    return `${Math.floor(hours / 24)}d trước`
+    try {
+      return formatDistanceToNow(new Date(dateStr), { addSuffix: true, locale: vi })
+    } catch {
+      return '—'
+    }
   }
 
   return (

@@ -1,20 +1,18 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styles from '../shared.module.css'
 import { encryptKey, decryptKey } from '@/lib/utils/crypto'
 
 export default function AiSettingsPage() {
-  const [geminiKey, setGeminiKey] = useState('')
-  const [status, setStatus] = useState<{ type: 'success' | 'error' | ''; message: string }>({ type: '', message: '' })
-
-  useEffect(() => {
-    // Load Gemini API Key from localStorage
-    const savedKey = localStorage.getItem('gemini_api_key')
-    if (savedKey) {
-      setGeminiKey(decryptKey(savedKey))
+  const [geminiKey, setGeminiKey] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedKey = localStorage.getItem('gemini_api_key')
+      return savedKey ? decryptKey(savedKey) : ''
     }
-  }, [])
+    return ''
+  })
+  const [status, setStatus] = useState<{ type: 'success' | 'error' | ''; message: string }>({ type: '', message: '' })
 
   const handleSaveApiKey = (e: React.FormEvent) => {
     e.preventDefault()

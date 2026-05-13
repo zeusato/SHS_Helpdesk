@@ -1,12 +1,13 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
 import styles from './RichTextEditor.module.css'
 
-export default function RichTextEditor({ content, onChange, placeholder }: { content: string, onChange: (html: string) => void, placeholder?: string }) {
+export default function RichTextEditor({ content, onChange }: { content: string, onChange: (html: string) => void, placeholder?: string }) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -20,6 +21,12 @@ export default function RichTextEditor({ content, onChange, placeholder }: { con
     },
   })
 
+  useEffect(() => {
+    if (editor && content !== editor.getHTML()) {
+      editor.commands.setContent(content)
+    }
+  }, [content, editor])
+
   if (!editor) return null
 
   return (
@@ -32,7 +39,7 @@ export default function RichTextEditor({ content, onChange, placeholder }: { con
         <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={`btn btn-sm ${editor.isActive('heading') ? 'btn-secondary' : 'btn-ghost'}`}>H3</button>
         <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()} className={`btn btn-sm ${editor.isActive('bulletList') ? 'btn-secondary' : 'btn-ghost'}`}>• List</button>
         <button type="button" onClick={() => editor.chain().focus().toggleOrderedList().run()} className={`btn btn-sm ${editor.isActive('orderedList') ? 'btn-secondary' : 'btn-ghost'}`}>1. List</button>
-        <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={`btn btn-sm ${editor.isActive('blockquote') ? 'btn-secondary' : 'btn-ghost'}`}>" Quote</button>
+        <button type="button" onClick={() => editor.chain().focus().toggleBlockquote().run()} className={`btn btn-sm ${editor.isActive('blockquote') ? 'btn-secondary' : 'btn-ghost'}`}>&quot; Quote</button>
         <div style={{ width: '1px', background: 'var(--color-border)', margin: '0 4px' }} />
         <button type="button" onClick={() => {
           const url = window.prompt('URL')

@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import styles from '../shared.module.css'
 
 export default function MailSettingsPage() {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [status, setStatus] = useState<{ type: 'success' | 'error' | ''; message: string }>({ type: '', message: '' })
@@ -17,12 +17,8 @@ export default function MailSettingsPage() {
     smtp_pass: ''
   })
 
-  useEffect(() => {
-    fetchSettings()
-  }, [])
-
-  const fetchSettings = async () => {
-    setLoading(true)
+  const fetchSettings = useMemo(() => async () => {
+    // Note: No setLoading(true) here as it's already true on mount
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
       const { data } = await supabase.from('user_mail_settings').select('*').eq('user_id', user.id).single()
@@ -36,7 +32,12 @@ export default function MailSettingsPage() {
       }
     }
     setLoading(false)
-  }
+  }, [supabase])
+
+  useEffect(() => {
+    const t = setTimeout(() => fetchSettings(), 0)
+    return () => clearTimeout(t)
+  }, [fetchSettings])
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()

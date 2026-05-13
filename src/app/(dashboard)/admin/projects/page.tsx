@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { Project } from '@/lib/types'
 import styles from './page.module.css'
 
 export default function AdminProjectsPage() {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -15,16 +15,18 @@ export default function AdminProjectsPage() {
   const [saving, setSaving] = useState(false)
 
   const fetchProjects = useCallback(async () => {
-    setLoading(true)
     const { data } = await supabase
       .from('projects')
       .select('*')
       .order('created_at', { ascending: false })
     setProjects(data || [])
     setLoading(false)
-  }, [])
+  }, [supabase])
 
-  useEffect(() => { fetchProjects() }, [fetchProjects])
+  useEffect(() => {
+    const t = setTimeout(() => fetchProjects(), 0)
+    return () => clearTimeout(t)
+  }, [fetchProjects])
 
   const openCreate = () => {
     setEditingProject(null)
@@ -41,6 +43,7 @@ export default function AdminProjectsPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
+    setLoading(true)
     try {
       if (editingProject) {
         await supabase.from('projects').update(form).eq('id', editingProject.id)
@@ -56,6 +59,7 @@ export default function AdminProjectsPage() {
 
   const handleDelete = async (id: string) => {
     if (!confirm('Bạn có chắc chắn muốn xóa dự án này?')) return
+    setLoading(true)
     await supabase.from('projects').delete().eq('id', id)
     fetchProjects()
   }
@@ -91,7 +95,7 @@ export default function AdminProjectsPage() {
                 <div className="empty-state">
                   <div className="empty-state-icon">📁</div>
                   <div className="empty-state-title">Chưa có dự án nào</div>
-                  <p className="text-muted">Bấm "Thêm dự án" để bắt đầu</p>
+                  <p className="text-muted">Bấm &quot;Thêm dự án&quot; để bắt đầu</p>
                 </div>
               </td></tr>
             ) : (

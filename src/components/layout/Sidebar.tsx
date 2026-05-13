@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import type { User } from '@/lib/types'
 import styles from './Sidebar.module.css'
@@ -87,7 +88,7 @@ export default function Sidebar({ user }: { user?: User | null }) {
       <aside className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''} ${mobileOpen ? styles.mobileOpen : ''}`}>
         {/* Logo */}
         <div className={styles.logo}>
-          <img src="/LOGO.png" alt="Logo" className={styles.logoImg} />
+          <Image src="/LOGO.png" alt="Logo" width={32} height={32} className={styles.logoImg} />
           {!collapsed && <span className={styles.logoText}>SHS Helpdesk</span>}
         </div>
 

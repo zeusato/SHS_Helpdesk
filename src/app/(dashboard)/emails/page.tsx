@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { format } from 'date-fns'
 import { vi } from 'date-fns/locale'
@@ -23,25 +23,26 @@ interface EmailRecord {
 }
 
 export default function EmailsPage() {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [emails, setEmails] = useState<EmailRecord[]>([])
   const [loading, setLoading] = useState(true)
   const [selectedEmail, setSelectedEmail] = useState<EmailRecord | null>(null)
 
-  useEffect(() => {
-    fetchEmails()
-  }, [])
-
-  const fetchEmails = async () => {
-    setLoading(true)
+  const fetchEmails = useCallback(async () => {
+    // Note: setLoading(true) is handled by initial state
     const { data } = await supabase
       .from('emails')
       .select('*, ticket:tickets(title), sender:users(name)')
       .order('sent_date', { ascending: false })
     
-    setEmails((data || []) as any)
+    setEmails((data || []) as unknown as EmailRecord[])
     setLoading(false)
-  }
+  }, [supabase])
+
+  useEffect(() => {
+    const t = setTimeout(() => fetchEmails(), 0)
+    return () => clearTimeout(t)
+  }, [fetchEmails])
 
   return (
     <div className="container">

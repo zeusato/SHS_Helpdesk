@@ -1,11 +1,15 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import type { Ticket, Project, User, ShapeUp, TicketShapeUp } from '@/lib/types'
 import styles from './page.module.css'
-import { decryptKey, encryptKey } from '@/lib/utils/crypto'
+import { decryptKey } from '@/lib/utils/crypto'
+import { marked } from 'marked'
+import RichTextEditor from '@/components/ui/RichTextEditor'
+import editorStyles from '@/components/ui/RichTextEditor.module.css'
 
 const STATUS_OPTIONS = [
   { value: 'new', label: 'Mới' },
@@ -24,7 +28,7 @@ const PRIORITY_OPTIONS = [
 export default function TicketDetailPage() {
   const params = useParams()
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const ticketId = params.id as string
 
   const [ticket, setTicket] = useState<Ticket | null>(null)
@@ -69,42 +73,49 @@ export default function TicketDetailPage() {
         })
       }
     }
-    fetchUserAndSettings()
-  }, [])
+    const t = setTimeout(() => fetchUserAndSettings(), 0)
+    return () => clearTimeout(t)
+  }, [supabase])
 
   const fetchTicket = useCallback(async () => {
-    setLoading(true)
     const { data } = await supabase
       .from('tickets')
       .select('*, project:projects(*), assignee:users!assignee_id(*), linked_shapeups:ticket_shapeup(shape_up:shape_ups(*))')
       .eq('id', ticketId)
       .single()
-    setTicket(data as Ticket | null)
-
-    // Fetch linked shape ups
-    const { data: links } = await supabase
-      .from('ticket_shapeup')
-      .select('*, shapeup:shape_ups(*)')
-      .eq('ticket_id', ticketId)
-    setLinkedShapeUps((links || []) as (TicketShapeUp & { shapeup: ShapeUp })[])
-
-    // Fetch POs assigned to this project
-    const { data: projectPo } = await supabase
-      .from('project_po')
-      .select('user:users(id, name, email)')
-      .eq('project_id', data.project_id)
     
-    const assignedPos = projectPo?.map(p => p.user).filter(Boolean) || []
-    setPoUsers(assignedPos as unknown as User[])
+    if (data) {
+      setTicket(data as unknown as Ticket)
+
+      // Fetch linked shape ups
+      const { data: links } = await supabase
+        .from('ticket_shapeup')
+        .select('*, shapeup:shape_ups(*)')
+        .eq('ticket_id', ticketId)
+      setLinkedShapeUps((links || []) as (TicketShapeUp & { shapeup: ShapeUp })[])
+
+      // Fetch POs assigned to this project
+      const { data: projectPo } = await supabase
+        .from('project_po')
+        .select('user:users(id, name, email)')
+        .eq('project_id', data.project_id)
+      
+      const assignedPos = projectPo?.map(p => p.user).filter(Boolean) || []
+      setPoUsers(assignedPos as unknown as User[])
+    }
 
     setLoading(false)
-  }, [ticketId])
+  }, [ticketId, supabase])
 
-  useEffect(() => { fetchTicket() }, [fetchTicket])
+  useEffect(() => {
+    const t = setTimeout(() => fetchTicket(), 0)
+    return () => clearTimeout(t)
+  }, [fetchTicket])
 
   useEffect(() => {
     if (ticket) {
-      setReplySubject(`RE: ${ticket.title}`)
+      const t = setTimeout(() => setReplySubject(`RE: ${ticket.title}`), 0)
+      return () => clearTimeout(t)
     }
   }, [ticket])
 
@@ -184,7 +195,7 @@ YÊU CẦU:
 
     setDraftingAI(true)
     try {
-      const linkedData = (ticket as any)?.linked_shapeups
+      const linkedData = (ticket as unknown as { linked_shapeups: { shape_up: ShapeUp }[] })?.linked_shapeups
       const shapeUp = linkedData?.[0]?.shape_up
       const solutionText = shapeUp?.solution || ''
       const shapeUpProblem = shapeUp?.issue_detail || ''
@@ -214,7 +225,7 @@ YÊU CẦU:
   5. Mong khách phản hồi nếu cần thêm hỗ trợ.
 - Chỉ trả về nội dung email hoàn chỉnh, không bao gồm lời dẫn của AI.`
 
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -224,7 +235,11 @@ YÊU CẦU:
 
       const data = await response.json()
       const draftedContent = data.candidates?.[0]?.content?.parts?.[0]?.text || ''
-      if (draftedContent) setReplyContent(draftedContent)
+      if (draftedContent) {
+        // Convert Markdown to HTML
+        const htmlContent = marked.parse(draftedContent)
+        setReplyContent(htmlContent as string)
+      }
     } catch (err) {
       console.error('AI Error:', err)
       alert('Có lỗi xảy ra khi gọi AI')
@@ -234,11 +249,10 @@ YÊU CẦU:
   }
 
   const handleFillFromShapeUp = () => {
-    const linkedData = (ticket as any)?.linked_shapeups
+    const linkedData = (ticket as unknown as { linked_shapeups: { shape_up: ShapeUp }[] })?.linked_shapeups
     const solution = linkedData?.[0]?.shape_up?.solution || ''
     if (solution) {
-      // Basic HTML to Text conversion if needed, or just append
-      setReplyContent(prev => prev + (prev ? '\n\n' : '') + solution.replace(/<[^>]*>/g, ''))
+      setReplyContent(prev => prev + (prev ? '<br/><br/>' : '') + solution)
     }
   }
 
@@ -256,7 +270,7 @@ YÊU CẦU:
         body: JSON.stringify({
           to: ticket.requester_email,
           subject: replySubject,
-          html: replyContent.replace(/\n/g, '<br/>'),
+          html: replyContent,
           ticket_id: ticketId,
           sender_id: authUser.id
         })
@@ -264,10 +278,9 @@ YÊU CẦU:
 
       const resData = await response.json()
       if (resData.success) {
-        // Update ticket reply_date
         await supabase.from('tickets').update({ 
           reply_date: new Date().toISOString(),
-          status: 'resolved' // Auto-resolve on reply
+          status: 'resolved' 
         }).eq('id', ticketId)
         
         setShowPreview(false)
@@ -354,7 +367,6 @@ YÊU CẦU:
       }).select('id').single()
 
       if (!error && newShapeUp) {
-        // Auto-link shape up to this ticket
         await supabase.from('ticket_shapeup').insert({
           ticket_id: ticket.id,
           shapeup_id: newShapeUp.id,
@@ -373,11 +385,9 @@ YÊU CẦU:
   if (!ticket) return <div className="empty-state"><div className="empty-state-title">Ticket không tồn tại</div></div>
 
   const project = ticket.project as unknown as Project
-  const assignee = ticket.assignee as unknown as User
 
   return (
     <div className={styles.page}>
-      {/* Breadcrumb */}
       <div className={styles.breadcrumb}>
         <button className="btn btn-ghost btn-sm" onClick={() => router.push('/tickets')}>← Danh sách Ticket</button>
         <span className="text-muted">/ {ticket.id.slice(0, 8)}</span>
@@ -385,7 +395,6 @@ YÊU CẦU:
       </div>
 
       <div className={styles.layout}>
-        {/* Main content */}
         <div className={styles.main}>
           <div className="card">
             <h2 className={styles.title}>{ticket.title}</h2>
@@ -401,14 +410,13 @@ YÊU CẦU:
               <div className={styles.detailContent}>{ticket.issue_detail || 'Không có mô tả'}</div>
             </div>
 
-            {/* Images */}
             {ticket.images && (ticket.images as string[]).length > 0 && (
               <div className={styles.detailSection}>
                 <h4>Ảnh đính kèm ({(ticket.images as string[]).length})</h4>
                 <div className={styles.imageGrid}>
                   {(ticket.images as string[]).map((url, i) => (
-                    <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-                      <img src={url} alt={`Ảnh ${i + 1}`} className={styles.imageThumb} />
+                    <a key={i} href={url} target="_blank" rel="noopener noreferrer" style={{ position: 'relative', display: 'block', aspectRatio: '16/9' }}>
+                      <Image src={url} alt={`Ảnh ${i + 1}`} fill style={{ objectFit: 'cover' }} className={styles.imageThumb} />
                     </a>
                   ))}
                 </div>
@@ -416,7 +424,6 @@ YÊU CẦU:
             )}
           </div>
 
-          {/* Linked Shape Ups */}
           <div className="card">
             <div className="card-header">
               <span className="card-title">📚 Shape Up liên quan</span>
@@ -503,8 +510,10 @@ YÊU CẦU:
                       </button>
                     </div>
                   </div>
-                  <textarea className="textarea" rows={10} value={replyContent} onChange={e => setReplyContent(e.target.value)}
-                    placeholder="Soạn nội dung phản hồi..." />
+                  <RichTextEditor 
+                    content={replyContent} 
+                    onChange={setReplyContent} 
+                  />
                 </div>
                 <div className="flex justify-end items-center">
                   <button className="btn btn-primary" onClick={() => setShowPreview(true)} disabled={!replyContent.trim()}>
@@ -626,9 +635,11 @@ YÊU CẦU:
                   <p><strong>Tới:</strong> {ticket.requester_email}</p>
                   <p><strong>Tiêu đề:</strong> {replySubject}</p>
                 </div>
-                <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>
-                  {replyContent}
-                </div>
+                <div 
+                  className={editorStyles.editorContent} 
+                  style={{ lineHeight: '1.6', minHeight: 'auto', padding: 0, background: 'transparent' }} 
+                  dangerouslySetInnerHTML={{ __html: replyContent }} 
+                />
                 <div style={{ marginTop: '32px', borderTop: '1px solid #e2e8f0', paddingTop: '16px', fontSize: '12px', color: '#64748b' }}>
                   <p>Trân trọng,<br/>Đội ngũ Hỗ trợ khách hàng</p>
                 </div>

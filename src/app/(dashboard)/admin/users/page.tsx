@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { User } from '@/lib/types'
 import styles from '../projects/page.module.css'
 
 export default function AdminUsersPage() {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [users, setUsers] = useState<User[]>([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -16,13 +16,15 @@ export default function AdminUsersPage() {
   const [error, setError] = useState('')
 
   const fetchUsers = useCallback(async () => {
-    setLoading(true)
     const { data } = await supabase.from('users').select('*').order('created_at', { ascending: false })
     setUsers(data || [])
     setLoading(false)
-  }, [])
+  }, [supabase])
 
-  useEffect(() => { fetchUsers() }, [fetchUsers])
+  useEffect(() => {
+    const t = setTimeout(() => fetchUsers(), 0)
+    return () => clearTimeout(t)
+  }, [fetchUsers])
 
   const openCreate = () => {
     setEditingUser(null)
@@ -41,6 +43,7 @@ export default function AdminUsersPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
+    setLoading(true)
     setError('')
 
     try {

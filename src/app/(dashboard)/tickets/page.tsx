@@ -1,7 +1,9 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import { formatDistanceToNow } from 'date-fns'
+import { vi } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase/client'
 import type { Ticket, Project } from '@/lib/types'
 import styles from './page.module.css'
@@ -24,7 +26,7 @@ type ViewMode = 'table' | 'kanban'
 
 export default function TicketsPage() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
@@ -37,7 +39,6 @@ export default function TicketsPage() {
   const [searchQuery, setSearchQuery] = useState('')
 
   const fetchTickets = useCallback(async () => {
-    setLoading(true)
     let query = supabase
       .from('tickets')
       .select('*, project:projects(id, name), assignee:users!assignee_id(id, name)')
@@ -52,24 +53,27 @@ export default function TicketsPage() {
     const { data } = await query
     setTickets((data as Ticket[]) || [])
     setLoading(false)
-  }, [filterStatus, filterPriority, filterProject, searchQuery])
+  }, [filterStatus, filterPriority, filterProject, searchQuery, supabase])
 
   const fetchProjects = useCallback(async () => {
     const { data } = await supabase.from('projects').select('id, name').eq('status', 'active').order('name')
     setProjects((data || []) as Project[])
-  }, [])
+  }, [supabase])
 
-  useEffect(() => { fetchProjects() }, [fetchProjects])
-  useEffect(() => { fetchTickets() }, [fetchTickets])
+  useEffect(() => {
+    const t = setTimeout(() => {
+      fetchProjects()
+      fetchTickets()
+    }, 0)
+    return () => clearTimeout(t)
+  }, [fetchProjects, fetchTickets])
 
   const timeAgo = (dateStr: string) => {
-    const diff = Date.now() - new Date(dateStr).getTime()
-    const mins = Math.floor(diff / 60000)
-    if (mins < 60) return `${mins} phút trước`
-    const hours = Math.floor(mins / 60)
-    if (hours < 24) return `${hours} giờ trước`
-    const days = Math.floor(hours / 24)
-    return `${days} ngày trước`
+    try {
+      return formatDistanceToNow(new Date(dateStr), { addSuffix: true, locale: vi })
+    } catch {
+      return '—'
+    }
   }
 
   // Kanban columns
@@ -93,16 +97,16 @@ export default function TicketsPage() {
 
       {/* Filters */}
       <div className={styles.filters}>
-        <input className="input" placeholder="🔍 Tìm kiếm ticket..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ maxWidth: '280px' }} />
-        <select className="select" value={filterProject} onChange={e => setFilterProject(e.target.value)} style={{ maxWidth: '200px' }}>
+        <input className="input" placeholder="🔍 Tìm Ticket..." value={searchQuery} onChange={_e => { setSearchQuery(_e.target.value); setLoading(true) }} style={{ maxWidth: '280px' }} />
+        <select className="select" value={filterProject} onChange={_e => { setFilterProject(_e.target.value); setLoading(true) }} style={{ maxWidth: '200px' }}>
           <option value="">Tất cả dự án</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
-        <select className="select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)} style={{ maxWidth: '180px' }}>
+        <select className="select" value={filterStatus} onChange={_e => { setFilterStatus(_e.target.value); setLoading(true) }} style={{ maxWidth: '180px' }}>
           <option value="">Tất cả trạng thái</option>
           {Object.entries(STATUS_MAP).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
         </select>
-        <select className="select" value={filterPriority} onChange={e => setFilterPriority(e.target.value)} style={{ maxWidth: '160px' }}>
+        <select className="select" value={filterPriority} onChange={e => { setFilterPriority(e.target.value); setLoading(true) }} style={{ maxWidth: '160px' }}>
           <option value="">Mức ưu tiên</option>
           {Object.entries(PRIORITY_MAP).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
         </select>
@@ -139,14 +143,14 @@ export default function TicketsPage() {
                     <div className={styles.ticketTitle}>{t.title}</div>
                     <div className="text-muted text-sm">{t.id.slice(0, 8)}</div>
                   </td>
-                  <td><span className={styles.projectTag}>{(t.project as unknown as Project)?.name || '—'}</span></td>
+                  <td><span className={styles.projectTag}>{t.project?.name || '—'}</span></td>
                   <td>
                     <div>{t.requester_name}</div>
                     <div className="text-muted text-sm">{t.requester_email}</div>
                   </td>
                   <td><span className={`badge ${PRIORITY_MAP[t.priority]?.badge}`}>{PRIORITY_MAP[t.priority]?.label}</span></td>
                   <td><span className={`badge ${STATUS_MAP[t.status]?.badge}`}>{STATUS_MAP[t.status]?.label}</span></td>
-                  <td className="text-secondary">{(t.assignee as unknown as { name: string })?.name || '—'}</td>
+                   <td className="text-secondary">{t.assignee?.name || '—'}</td>
                   <td className="text-muted text-sm">{timeAgo(t.created_at)}</td>
                 </tr>
               ))}
@@ -178,8 +182,8 @@ export default function TicketsPage() {
                         <span>{t.requester_name}</span>
                         <span>{timeAgo(t.created_at)}</span>
                       </div>
-                      {(t.project as unknown as Project)?.name && (
-                        <span className={styles.projectTag} style={{ fontSize: '11px', marginTop: '4px' }}>{(t.project as unknown as Project).name}</span>
+                       {t.project?.name && (
+                        <span className={styles.projectTag} style={{ fontSize: '11px', marginTop: '4px' }}>{t.project.name}</span>
                       )}
                     </div>
                   ))}

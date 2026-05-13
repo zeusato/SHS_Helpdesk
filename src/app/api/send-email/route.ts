@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     // 1. Fetch Sender's SMTP settings and Name
-    const [{ data: mailSettings, error: mailError }, { data: user, error: userError }] = await Promise.all([
+    const [{ data: mailSettings, error: mailError }, { data: user }] = await Promise.all([
       supabaseAdmin
         .from('user_mail_settings')
         .select('*')
@@ -72,9 +72,9 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true, messageId: info.messageId });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('SMTP API Error:', err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : 'Unknown error' }, { status: 500 });
   }
 }
 

@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { Project, User, ProjectPO } from '@/lib/types'
 import styles from '../projects/page.module.css'
 
 export default function AdminAssignmentsPage() {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [projects, setProjects] = useState<Project[]>([])
   const [poUsers, setPoUsers] = useState<User[]>([])
   const [assignments, setAssignments] = useState<(ProjectPO & { user?: User; project?: Project })[]>([])
@@ -16,7 +16,6 @@ export default function AdminAssignmentsPage() {
   const [saving, setSaving] = useState(false)
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
     const [projectsRes, usersRes, assignRes] = await Promise.all([
       supabase.from('projects').select('*').eq('status', 'active').order('name'),
       supabase.from('users').select('*').eq('role', 'po').eq('status', 'active').order('name'),
@@ -26,13 +25,17 @@ export default function AdminAssignmentsPage() {
     setPoUsers(usersRes.data || [])
     setAssignments(assignRes.data || [])
     setLoading(false)
-  }, [])
+  }, [supabase])
 
-  useEffect(() => { fetchData() }, [fetchData])
+  useEffect(() => {
+    const t = setTimeout(() => fetchData(), 0)
+    return () => clearTimeout(t)
+  }, [fetchData])
 
   const handleAssign = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
+    setLoading(true)
     try {
       await supabase.from('project_po').insert({ project_id: form.project_id, user_id: form.user_id })
       setShowModal(false)
@@ -42,6 +45,7 @@ export default function AdminAssignmentsPage() {
 
   const handleRemove = async (id: string) => {
     if (!confirm('Gỡ phân quyền PO này?')) return
+    setLoading(true)
     await supabase.from('project_po').delete().eq('id', id)
     fetchData()
   }

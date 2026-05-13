@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import type { ShapeUp, Project, Ticket } from '@/lib/types'
 import RichTextEditor from '@/components/ui/RichTextEditor'
@@ -12,7 +13,7 @@ export default function ShapeUpDetailPage() {
   const params = useParams()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const shapeUpId = params.id as string
   const isNew = shapeUpId === 'new'
 
@@ -34,7 +35,6 @@ export default function ShapeUpDetailPage() {
 
   const fetchShapeUp = useCallback(async () => {
     if (isNew) return
-    setLoading(true)
     
     // Fetch Shape Up details
     const { data: suData } = await supabase
@@ -56,7 +56,7 @@ export default function ShapeUpDetailPage() {
     }
     
     setLoading(false)
-  }, [isNew, shapeUpId])
+  }, [isNew, shapeUpId, supabase])
 
   const fetchProjects = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser()
@@ -72,10 +72,15 @@ export default function ShapeUpDetailPage() {
       const myProjects = data?.map(d => d.project).filter(Boolean) || []
       setProjects(myProjects as unknown as Project[])
     }
-  }, [])
+  }, [supabase])
 
-  useEffect(() => { fetchProjects() }, [fetchProjects])
-  useEffect(() => { fetchShapeUp() }, [fetchShapeUp])
+  useEffect(() => {
+    const t = setTimeout(() => {
+      fetchProjects()
+      fetchShapeUp()
+    }, 0)
+    return () => clearTimeout(t)
+  }, [fetchProjects, fetchShapeUp])
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
@@ -296,7 +301,7 @@ export default function ShapeUpDetailPage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '8px', marginTop: '16px' }}>
                 {(shapeUp.images as string[]).map((url, i) => (
                   <div key={i} style={{ position: 'relative', aspectRatio: '1', borderRadius: 'var(--radius-sm)', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
-                    <img src={url} alt="Đính kèm" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <Image src={url} alt="Đính kèm" fill style={{ objectFit: 'cover' }} />
                     <button 
                       className="btn btn-icon" 
                       style={{ position: 'absolute', top: '4px', right: '4px', background: 'rgba(0,0,0,0.6)', color: 'white', width: '20px', height: '20px', minWidth: '20px', fontSize: '12px' }}

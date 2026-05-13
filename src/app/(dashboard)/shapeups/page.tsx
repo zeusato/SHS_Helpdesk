@@ -1,16 +1,19 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { formatDistanceToNow } from 'date-fns'
+import { vi } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase/client'
-import type { ShapeUp, Project } from '@/lib/types'
+import type { ShapeUp, Project, ShapeUpStatus } from '@/lib/types'
 import * as XLSX from 'xlsx'
 import styles from './page.module.css'
 import editorStyles from '@/components/ui/RichTextEditor.module.css'
 
 export default function ShapeUpsPage() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [shapeUps, setShapeUps] = useState<ShapeUp[]>([])
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
@@ -30,7 +33,6 @@ export default function ShapeUpsPage() {
   const [viewShapeUp, setViewShapeUp] = useState<ShapeUp | null>(null)
 
   const fetchShapeUps = useCallback(async () => {
-    setLoading(true)
     let query = supabase
       .from('shape_ups')
       .select('*, project:projects(id, name), author:users!created_by(id, name)')
@@ -44,23 +46,27 @@ export default function ShapeUpsPage() {
     const { data } = await query
     setShapeUps((data as ShapeUp[]) || [])
     setLoading(false)
-  }, [filterStatus, filterProject, searchQuery])
+  }, [filterStatus, filterProject, searchQuery, supabase])
 
   const fetchProjects = useCallback(async () => {
     const { data } = await supabase.from('projects').select('id, name').eq('status', 'active').order('name')
     setProjects((data || []) as Project[])
-  }, [])
+  }, [supabase])
 
-  useEffect(() => { fetchProjects() }, [fetchProjects])
-  useEffect(() => { fetchShapeUps() }, [fetchShapeUps])
+  useEffect(() => {
+    const t = setTimeout(() => {
+      fetchProjects()
+      fetchShapeUps()
+    }, 0)
+    return () => clearTimeout(t)
+  }, [fetchProjects, fetchShapeUps])
 
   const timeAgo = (dateStr: string) => {
-    const diff = Date.now() - new Date(dateStr).getTime()
-    const mins = Math.floor(diff / 60000)
-    if (mins < 60) return `${mins} phút trước`
-    const hours = Math.floor(mins / 60)
-    if (hours < 24) return `${hours} giờ trước`
-    return `${Math.floor(hours / 24)} ngày trước`
+    try {
+      return formatDistanceToNow(new Date(dateStr), { addSuffix: true, locale: vi })
+    } catch {
+      return '—'
+    }
   }
 
   // --- EXCEL IMPORT LOGIC ---
@@ -74,7 +80,7 @@ export default function ShapeUpsPage() {
       const wb = XLSX.read(bstr, { type: 'binary' })
       const wsname = wb.SheetNames[0]
       const ws = wb.Sheets[wsname]
-      const data = XLSX.utils.sheet_to_json(ws) as any[]
+      const data = XLSX.utils.sheet_to_json(ws) as Record<string, string>[]
 
       // Map excel rows to ShapeUp object
       const parsedData: Partial<ShapeUp>[] = data.map(row => {
@@ -88,8 +94,8 @@ export default function ShapeUpsPage() {
           document_link: row.document_link || row['Link tài liệu'] || null,
           jira_link: row.jira_link || row['Link Jira'] || null,
           note: row.note || row['Ghi chú'] || null,
-          project_id: projectMatch ? projectMatch.id : (row.project_id || row['ID Dự án'] || null),
-          status: row.status || row['Trạng thái'] || 'draft',
+          project_id: projectMatch ? projectMatch.id : (row.project_id || row['ID Dự án'] || undefined),
+          status: (row.status || row['Trạng thái'] || 'draft') as ShapeUpStatus,
         }
       }).filter(row => row.title) // Only keep rows with title
 
@@ -174,12 +180,12 @@ export default function ShapeUpsPage() {
       </div>
 
       <div className={styles.filters}>
-        <input className="input" placeholder="🔍 Tìm Shape Up..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} style={{ maxWidth: '280px' }} />
-        <select className="select" value={filterProject} onChange={e => setFilterProject(e.target.value)} style={{ maxWidth: '200px' }}>
+        <input className="input" placeholder="🔍 Tìm Shape Up..." value={searchQuery} onChange={_e => { setSearchQuery(_e.target.value); setLoading(true) }} style={{ maxWidth: '280px' }} />
+        <select className="select" value={filterProject} onChange={_e => { setFilterProject(_e.target.value); setLoading(true) }} style={{ maxWidth: '200px' }}>
           <option value="">Tất cả dự án</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
-        <select className="select" value={filterStatus} onChange={e => setFilterStatus(e.target.value)} style={{ maxWidth: '180px' }}>
+        <select className="select" value={filterStatus} onChange={_e => { setFilterStatus(_e.target.value); setLoading(true) }} style={{ maxWidth: '180px' }}>
           <option value="">Tất cả trạng thái</option>
           <option value="draft">Bản nháp</option>
           <option value="published">Đã xuất bản</option>
@@ -219,7 +225,7 @@ export default function ShapeUpsPage() {
                     {s.status === 'published' ? 'Xuất bản' : 'Bản nháp'}
                   </span>
                 </td>
-                <td className="text-secondary">{((s as any).author as { name: string })?.name || '—'}</td>
+                <td className="text-secondary">{(s as unknown as { author?: { name: string } }).author?.name || '—'}</td>
                 <td className="text-muted text-sm">{timeAgo(s.updated_at)}</td>
               </tr>
             ))}
@@ -321,7 +327,7 @@ export default function ShapeUpsPage() {
                   </div>
                   <div>
                     <div className="text-muted text-sm">Người tạo</div>
-                    <div className="font-medium">{((viewShapeUp as any).author as { name: string })?.name || '—'}</div>
+                    <div className="font-medium">{(viewShapeUp as unknown as { author?: { name: string } }).author?.name || '—'}</div>
                   </div>
                   <div>
                     <div className="text-muted text-sm">Link tài liệu</div>
@@ -365,8 +371,8 @@ export default function ShapeUpsPage() {
                     <h4 style={{ marginBottom: '8px' }}>🖼️ Ảnh đính kèm</h4>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '12px' }}>
                       {(viewShapeUp.images as string[]).map((url, i) => (
-                        <a key={i} href={url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', aspectRatio: '1', borderRadius: 'var(--radius-sm)', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
-                          <img src={url} alt={`Đính kèm ${i+1}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        <a key={i} href={url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', aspectRatio: '1', borderRadius: 'var(--radius-sm)', overflow: 'hidden', border: '1px solid var(--color-border)', position: 'relative' }}>
+                          <Image src={url} alt={`Đính kèm ${i+1}`} fill style={{ objectFit: 'cover' }} />
                         </a>
                       ))}
                     </div>
