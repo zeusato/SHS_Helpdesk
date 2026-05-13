@@ -110,26 +110,6 @@ export default function PortalPage() {
         return
       }
 
-      // 4. Notify POs assigned to this project
-      if (newTicket) {
-        const { data: pos } = await supabase
-          .from('project_po')
-          .select('user_id')
-          .eq('project_id', form.project_id)
-        
-        if (pos && pos.length > 0) {
-          const notifications = pos.map(po => ({
-            user_id: po.user_id,
-            title: '🔥 Ticket mới cần xử lý',
-            message: `Ticket #${newTicket.id.slice(0, 8).toUpperCase()}: ${form.title}`,
-            link: `/tickets/${newTicket.id}`,
-            is_read: false
-          }))
-          
-          await supabase.from('notifications').insert(notifications)
-        }
-      }
-
       setSubmitted(true)
     } catch {
       setError('Đã có lỗi xảy ra. Vui lòng thử lại.')

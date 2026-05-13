@@ -83,8 +83,6 @@ export default function DashboardPage() {
     return `${Math.floor(hours / 24)}d trước`
   }
 
-  if (loading) return <div className="flex justify-center" style={{ padding: '80px' }}><div className="spinner" /></div>
-
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -97,28 +95,36 @@ export default function DashboardPage() {
         <div className={`card ${styles.statCard}`}>
           <div className={styles.statIcon} style={{ background: 'var(--color-info-bg)', color: 'var(--color-info)' }}>🎫</div>
           <div className={styles.statInfo}>
-            <span className={styles.statValue}>{stats?.ticketsNew ?? 0}</span>
+            <span className={styles.statValue}>
+              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.ticketsNew ?? 0)}
+            </span>
             <span className={styles.statLabel}>Ticket mới</span>
           </div>
         </div>
         <div className={`card ${styles.statCard}`}>
           <div className={styles.statIcon} style={{ background: 'var(--color-warning-bg)', color: 'var(--color-warning)' }}>⏳</div>
           <div className={styles.statInfo}>
-            <span className={styles.statValue}>{stats?.ticketsInProgress ?? 0}</span>
+            <span className={styles.statValue}>
+              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.ticketsInProgress ?? 0)}
+            </span>
             <span className={styles.statLabel}>Đang xử lý</span>
           </div>
         </div>
         <div className={`card ${styles.statCard}`}>
           <div className={styles.statIcon} style={{ background: 'var(--color-success-bg)', color: 'var(--color-success)' }}>✅</div>
           <div className={styles.statInfo}>
-            <span className={styles.statValue}>{stats?.ticketsResolved ?? 0}</span>
+            <span className={styles.statValue}>
+              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.ticketsResolved ?? 0)}
+            </span>
             <span className={styles.statLabel}>Đã giải quyết</span>
           </div>
         </div>
         <div className={`card ${styles.statCard}`}>
           <div className={styles.statIcon} style={{ background: 'rgba(168, 85, 247, 0.12)', color: '#a855f7' }}>📚</div>
           <div className={styles.statInfo}>
-            <span className={styles.statValue}>{stats?.shapeUpsTotal ?? 0}</span>
+            <span className={styles.statValue}>
+              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.shapeUpsTotal ?? 0)}
+            </span>
             <span className={styles.statLabel}>Shape Up</span>
           </div>
         </div>
@@ -142,39 +148,29 @@ export default function DashboardPage() {
               </tr>
             </thead>
             <tbody>
-              {stats?.projectStats?.map(p => (
+              {loading ? (
+                [1, 2, 3].map(i => (
+                  <tr key={i}>
+                    <td><span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '120px' }} /></td>
+                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
+                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
+                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
+                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
+                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
+                  </tr>
+                ))
+              ) : (stats?.projectStats || []).length === 0 ? (
+                <tr><td colSpan={6} className="text-center text-muted">Chưa có dữ liệu dự án</td></tr>
+              ) : stats?.projectStats.map(p => (
                 <tr key={p.id}>
                   <td style={{ fontWeight: 600 }}>{p.name}</td>
-                  <td>
-                    <span className="badge badge-new" style={{ minWidth: '32px', justifyContent: 'center' }}>
-                      {p.new}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="badge badge-in-progress" style={{ minWidth: '32px', justifyContent: 'center' }}>
-                      {p.in_progress}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="badge badge-resolved" style={{ minWidth: '32px', justifyContent: 'center' }}>
-                      {p.resolved}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="badge badge-pending" style={{ minWidth: '32px', justifyContent: 'center', background: 'rgba(168, 85, 247, 0.12)', color: '#a855f7' }}>
-                      {p.shape_ups}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="badge badge-closed" style={{ minWidth: '32px', justifyContent: 'center' }}>
-                      {p.total + p.shape_ups}
-                    </span>
-                  </td>
+                  <td><span className="badge badge-new" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.new}</span></td>
+                  <td><span className="badge badge-in-progress" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.in_progress}</span></td>
+                  <td><span className="badge badge-resolved" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.resolved}</span></td>
+                  <td><span className="badge badge-pending" style={{ minWidth: '32px', justifyContent: 'center', background: 'rgba(168, 85, 247, 0.12)', color: '#a855f7' }}>{p.shape_ups}</span></td>
+                  <td><span className="badge badge-closed" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.total + p.shape_ups}</span></td>
                 </tr>
               ))}
-              {stats?.projectStats.length === 0 && (
-                <tr><td colSpan={5} className="text-center text-muted">Chưa có dữ liệu dự án</td></tr>
-              )}
             </tbody>
           </table>
         </div>
@@ -187,22 +183,19 @@ export default function DashboardPage() {
             <span className="card-title">📈 Tổng hợp</span>
           </div>
           <div className={styles.summaryList}>
-            <div className={styles.summaryRow}>
-              <span className="text-secondary">Tổng ticket</span>
-              <strong>{stats?.ticketsTotal ?? 0}</strong>
-            </div>
-            <div className={styles.summaryRow}>
-              <span className="text-secondary">Ticket đã đóng</span>
-              <strong>{stats?.ticketsClosed ?? 0}</strong>
-            </div>
-            <div className={styles.summaryRow}>
-              <span className="text-secondary">Shape Up bản nháp</span>
-              <strong>{stats?.shapeUpsDraft ?? 0}</strong>
-            </div>
-            <div className={styles.summaryRow}>
-              <span className="text-secondary">Shape Up đã xuất bản</span>
-              <strong>{stats?.shapeUpsPublished ?? 0}</strong>
-            </div>
+            {[
+              { label: 'Tổng ticket', value: stats?.ticketsTotal },
+              { label: 'Ticket đã đóng', value: stats?.ticketsClosed },
+              { label: 'Shape Up bản nháp', value: stats?.shapeUpsDraft },
+              { label: 'Shape Up đã xuất bản', value: stats?.shapeUpsPublished },
+            ].map((row, i) => (
+              <div key={i} className={styles.summaryRow}>
+                <span className="text-secondary">{row.label}</span>
+                <strong>
+                  {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '30px' }} /> : (row.value ?? 0)}
+                </strong>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -211,11 +204,21 @@ export default function DashboardPage() {
           <div className="card-header">
             <span className="card-title">🕐 Ticket gần đây</span>
           </div>
-          {recentTickets.length === 0 ? (
-            <p className="text-muted">Chưa có ticket nào</p>
-          ) : (
-            <div className={styles.recentList}>
-              {recentTickets.map(t => (
+          <div className={styles.recentList}>
+            {loading ? (
+              [1, 2, 3, 4, 5].map(i => (
+                <div key={i} className={styles.recentItem}>
+                  <div className={styles.recentInfo}>
+                    <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '150px', marginBottom: '4px' }} />
+                    <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '100px', height: '12px' }} />
+                  </div>
+                  <span className={`${styles.skeleton} ${styles.skeletonBadge}`} />
+                </div>
+              ))
+            ) : recentTickets.length === 0 ? (
+              <p className="text-muted">Chưa có ticket nào</p>
+            ) : (
+              recentTickets.map(t => (
                 <div key={t.id} className={styles.recentItem}>
                   <div className={styles.recentInfo}>
                     <span className={styles.recentTitle}>{t.title}</span>
@@ -225,9 +228,9 @@ export default function DashboardPage() {
                     {STATUS_MAP[t.status]?.label || t.status}
                   </span>
                 </div>
-              ))}
-            </div>
-          )}
+              ))
+            )}
+          </div>
         </div>
       </div>
     </div>

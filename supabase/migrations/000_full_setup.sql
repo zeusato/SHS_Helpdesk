@@ -161,7 +161,7 @@ BEGIN
   WHERE pp.project_id = NEW.project_id;
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
 CREATE TRIGGER on_ticket_created
   AFTER INSERT ON tickets

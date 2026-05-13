@@ -24,18 +24,18 @@ export default function LoginPage() {
         password,
       })
 
-      if (authError) {
-        setError('Email hoặc mật khẩu không đúng')
+      if (!authError) {
+        router.push('/dashboard')
+        router.refresh()
+        // We don't set loading(false) here to keep the button disabled during navigation
         return
       }
-
-      router.push('/dashboard')
-      router.refresh()
+      
+      setError('Email hoặc mật khẩu không đúng')
     } catch {
       setError('Đã có lỗi xảy ra. Vui lòng thử lại.')
-    } finally {
-      setLoading(false)
     }
+    setLoading(false)
   }
 
   return (
