@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
@@ -8,6 +8,8 @@ import Image from '@tiptap/extension-image'
 import styles from './RichTextEditor.module.css'
 
 export default function RichTextEditor({ content, onChange }: { content: string, onChange: (html: string) => void, placeholder?: string }) {
+  const isPropUpdate = useRef(false)
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -17,13 +19,17 @@ export default function RichTextEditor({ content, onChange }: { content: string,
     content,
     immediatelyRender: false,
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML())
+      if (!isPropUpdate.current) {
+        onChange(editor.getHTML())
+      }
     },
   })
 
   useEffect(() => {
     if (editor && content !== editor.getHTML()) {
+      isPropUpdate.current = true
       editor.commands.setContent(content)
+      isPropUpdate.current = false
     }
   }, [content, editor])
 

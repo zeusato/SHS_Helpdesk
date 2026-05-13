@@ -186,6 +186,7 @@ YÊU CẦU:
   }
 
   const handleAIDraft = async () => {
+    console.log('Starting handleAIDraft...')
     const savedKey = localStorage.getItem('gemini_api_key')
     if (!savedKey) {
       alert('Vui lòng cài đặt Gemini API Key trong phần Cài đặt > AI')
@@ -225,7 +226,7 @@ YÊU CẦU:
   5. Mong khách phản hồi nếu cần thêm hỗ trợ.
 - Chỉ trả về nội dung email hoàn chỉnh, không bao gồm lời dẫn của AI.`
 
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -234,11 +235,20 @@ YÊU CẦU:
       })
 
       const data = await response.json()
+      console.log('AI raw response:', data)
+      
+      if (!data.candidates || data.candidates.length === 0) {
+        console.error('AI Error: No candidates in response')
+        alert('AI không trả về kết quả. Vui lòng kiểm tra lại API Key.')
+        return
+      }
+
       const draftedContent = data.candidates?.[0]?.content?.parts?.[0]?.text || ''
+      console.log('AI drafted text:', draftedContent)
       if (draftedContent) {
         // Convert Markdown to HTML
-        const htmlContent = marked.parse(draftedContent)
-        setReplyContent(htmlContent as string)
+        const htmlContent = await marked.parse(draftedContent)
+        setReplyContent(htmlContent)
       }
     } catch (err) {
       console.error('AI Error:', err)
