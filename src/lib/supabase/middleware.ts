@@ -14,8 +14,8 @@ export async function updateSession(request: NextRequest) {
         getAll() {
           return request.cookies.getAll()
         },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+        setAll(cookiesToSet, headers) {
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           )
           supabaseResponse = NextResponse.next({
@@ -24,25 +24,41 @@ export async function updateSession(request: NextRequest) {
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           )
+          Object.entries(headers || {}).forEach(([name, value]) => supabaseResponse.headers.set(name, value))
         },
       },
     }
   )
 
-  // Refresh session - important!
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  // Verify the signature/expiry with cached public keys. getClaims also refreshes
+  // expiring sessions; unlike getUser it does not require an Auth roundtrip on
+  // every navigation when the project uses asymmetric signing keys.
+  const { data, error } = await supabase.auth.getClaims()
+  const userId = error ? null : data?.claims.sub
+
+  const withSessionHeaders = (response: NextResponse) => {
+    supabaseResponse.cookies.getAll().forEach(cookie => response.cookies.set(cookie))
+    for (const name of ['cache-control', 'expires', 'pragma']) {
+      const value = supabaseResponse.headers.get(name)
+      if (value) response.headers.set(name, value)
+    }
+    return response
+  }
 
   // Public routes that don't require auth
   const publicPaths = ['/portal', '/login', '/api/tickets/public', '/api/recaptcha']
-  const isPublicPath = publicPaths.some(path => request.nextUrl.pathname.startsWith(path))
+  const isPublicPath = publicPaths.some(path => request.nextUrl.pathname === path || request.nextUrl.pathname.startsWith(path + '/'))
 
-  if (!user && !isPublicPath && request.nextUrl.pathname !== '/') {
+  if (!userId && !isPublicPath && request.nextUrl.pathname !== '/') {
+    if (request.nextUrl.pathname.startsWith('/api/')) {
+      const response = NextResponse.json({ error: 'Vui lòng đăng nhập.' }, { status: 401 })
+      return withSessionHeaders(response)
+    }
     // Redirect to login if not authenticated and not on public path
     const url = request.nextUrl.clone()
     url.pathname = '/login'
-    return NextResponse.redirect(url)
+    const response = NextResponse.redirect(url)
+    return withSessionHeaders(response)
   }
 
   return supabaseResponse

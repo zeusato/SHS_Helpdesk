@@ -7,6 +7,12 @@ import { vi } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase/client'
 import type { Ticket, Project } from '@/lib/types'
 import styles from './page.module.css'
+import Icon from '@/components/ui/Icon'
+import Link from 'next/link'
+import { usePagedQuery } from '@/lib/hooks/usePagedQuery'
+import { ticketSearchFilter } from '@/lib/data/pagination'
+import Pagination from '@/components/ui/Pagination'
+import QueryError from '@/components/ui/QueryError'
 
 const STATUS_MAP: Record<string, { label: string; badge: string }> = {
   new: { label: 'Mới', badge: 'badge-new' },
@@ -27,9 +33,7 @@ type ViewMode = 'table' | 'kanban'
 export default function TicketsPage() {
   const router = useRouter()
   const supabase = useMemo(() => createClient(), [])
-  const [tickets, setTickets] = useState<Ticket[]>([])
   const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
   const [viewMode, setViewMode] = useState<ViewMode>('table')
 
   // Filters
@@ -38,35 +42,32 @@ export default function TicketsPage() {
   const [filterProject, setFilterProject] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
 
-  const fetchTickets = useCallback(async () => {
-    let query = supabase
-      .from('tickets')
-      .select('*, project:projects(id, name), assignee:users!assignee_id(id, name)')
-      .order('created_at', { ascending: false })
-      .range(0, 49)
-
+  const loadTickets = useCallback((from: number, to: number, signal: AbortSignal) => {
+    let query = supabase.from('tickets')
+      .select('id,title,project_id,status,priority,requester_name,requester_email,created_at,project:projects(id,name),assignee:users!assignee_id(id,name)')
+      .order('created_at', { ascending: false }).order('id', { ascending: false })
+      .range(from, to).abortSignal(signal)
     if (filterStatus) query = query.eq('status', filterStatus)
     if (filterPriority) query = query.eq('priority', filterPriority)
     if (filterProject) query = query.eq('project_id', filterProject)
-    if (searchQuery) query = query.or(`title.ilike.%${searchQuery}%,requester_name.ilike.%${searchQuery}%,requester_email.ilike.%${searchQuery}%`)
-
-    const { data } = await query
-    setTickets((data as Ticket[]) || [])
-    setLoading(false)
+    if (searchQuery.trim()) query = query.or(ticketSearchFilter(searchQuery))
+    return query
   }, [filterStatus, filterPriority, filterProject, searchQuery, supabase])
-
-  const fetchProjects = useCallback(async () => {
-    const { data } = await supabase.from('projects').select('id, name').eq('status', 'active').order('name')
-    setProjects((data || []) as Project[])
-  }, [supabase])
-
+  const { rows: tickets, loading, error, page, hasNext, setPage, reload } = usePagedQuery<Ticket>(
+    loadTickets, JSON.stringify([filterStatus, filterPriority, filterProject, searchQuery]), searchQuery ? 300 : 0
+  )
+  const [projectError, setProjectError] = useState('')
+  const [projectRetry, setProjectRetry] = useState(0)
   useEffect(() => {
-    const t = setTimeout(() => {
-      fetchProjects()
-      fetchTickets()
-    }, 0)
-    return () => clearTimeout(t)
-  }, [fetchProjects, fetchTickets])
+    const controller = new AbortController()
+    void Promise.resolve(supabase.from('projects').select('id, name').eq('status', 'active').order('name').abortSignal(controller.signal))
+      .then(({ data, error }) => {
+        if (controller.signal.aborted) return
+        setProjects((data || []) as Project[])
+        setProjectError(error ? 'Không tải được danh sách dự án.' : '')
+      })
+    return () => controller.abort()
+  }, [supabase, projectRetry])
 
   const timeAgo = (dateStr: string) => {
     try {
@@ -84,37 +85,41 @@ export default function TicketsPage() {
       {/* Header */}
       <div className={styles.pageHeader}>
         <div>
-          <h1>Quản lý Ticket</h1>
-          <p className="text-secondary mt-sm">{tickets.length} ticket</p>
+          <p className={styles.eyebrow}>TVSI / Yêu cầu hỗ trợ</p><h1>Quản lý ticket</h1>
+          <p className="text-secondary mt-sm">Tiếp nhận, phân công và theo dõi từng yêu cầu hỗ trợ.</p>
         </div>
         <div className="flex gap-sm items-center">
           <div className={styles.viewToggle}>
-            <button className={`${styles.viewBtn} ${viewMode === 'table' ? styles.viewActive : ''}`} onClick={() => setViewMode('table')}>📋 Bảng</button>
-            <button className={`${styles.viewBtn} ${viewMode === 'kanban' ? styles.viewActive : ''}`} onClick={() => setViewMode('kanban')}>📊 Kanban</button>
+            <button className={`${styles.viewBtn} ${viewMode === 'table' ? styles.viewActive : ''}`} aria-pressed={viewMode === 'table'} onClick={() => setViewMode('table')}><Icon name="menu" size={16} /> Bảng</button>
+            <button className={`${styles.viewBtn} ${viewMode === 'kanban' ? styles.viewActive : ''}`} aria-pressed={viewMode === 'kanban'} onClick={() => setViewMode('kanban')}><Icon name="grid" size={16} /> Kanban</button>
           </div>
         </div>
       </div>
 
       {/* Filters */}
       <div className={styles.filters}>
-        <input className="input" placeholder="🔍 Tìm Ticket..." value={searchQuery} onChange={_e => { setSearchQuery(_e.target.value); setLoading(true) }} style={{ maxWidth: '280px' }} />
-        <select className="select" value={filterProject} onChange={_e => { setFilterProject(_e.target.value); setLoading(true) }} style={{ maxWidth: '200px' }}>
+        <input className="input" type="search" aria-label="Tìm kiếm ticket" placeholder="Tìm ticket, người gửi, email..." value={searchQuery} onChange={_e => { setSearchQuery(_e.target.value) }} style={{ maxWidth: '280px' }} />
+        <select className="select" aria-label="Lọc theo dự án" value={filterProject} onChange={_e => { setFilterProject(_e.target.value) }} style={{ maxWidth: '200px' }}>
           <option value="">Tất cả dự án</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
-        <select className="select" value={filterStatus} onChange={_e => { setFilterStatus(_e.target.value); setLoading(true) }} style={{ maxWidth: '180px' }}>
+        <select className="select" aria-label="Lọc theo trạng thái" value={filterStatus} onChange={_e => { setFilterStatus(_e.target.value) }} style={{ maxWidth: '180px' }}>
           <option value="">Tất cả trạng thái</option>
           {Object.entries(STATUS_MAP).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
         </select>
-        <select className="select" value={filterPriority} onChange={e => { setFilterPriority(e.target.value); setLoading(true) }} style={{ maxWidth: '160px' }}>
+        <select className="select" aria-label="Lọc theo mức ưu tiên" value={filterPriority} onChange={e => { setFilterPriority(e.target.value) }} style={{ maxWidth: '160px' }}>
           <option value="">Mức ưu tiên</option>
           {Object.entries(PRIORITY_MAP).map(([k, v]) => <option key={k} value={k}>{v.label}</option>)}
         </select>
       </div>
 
+      <div className={styles.resultSummary} aria-live="polite"><span>{loading ? 'Đang tải yêu cầu…' : tickets.length + ' ticket trong danh sách'}</span><span>Quản lý theo trạng thái và mức ưu tiên</span></div>
+      <QueryError message={error} onRetry={reload} />
+      <QueryError message={projectError} onRetry={() => setProjectRetry(value => value + 1)} />
+      {viewMode === 'kanban' && <p className="text-muted text-sm">Các cột hiển thị ticket trong trang hiện tại.</p>}
       {/* Table View */}
       {viewMode === 'table' && (
-        <div className="table-container">
+        <div className={styles.tableWrap} aria-busy={loading}>
           <table className="table">
             <thead>
               <tr>
@@ -133,14 +138,14 @@ export default function TicketsPage() {
               ) : tickets.length === 0 ? (
                 <tr><td colSpan={7}>
                   <div className="empty-state">
-                    <div className="empty-state-icon">🎫</div>
+                    <div className="empty-state-icon"><Icon name="ticket" size={36} /></div>
                     <div className="empty-state-title">Chưa có ticket nào</div>
                   </div>
                 </td></tr>
               ) : tickets.map(t => (
                 <tr key={t.id} onClick={() => router.push(`/tickets/${t.id}`)} style={{ cursor: 'pointer' }}>
                   <td>
-                    <div className={styles.ticketTitle}>{t.title}</div>
+                    <Link href={'/tickets/' + t.id} className={styles.ticketTitle}>{t.title}</Link>
                     <div className="text-muted text-sm">{t.id.slice(0, 8)}</div>
                   </td>
                   <td><span className={styles.projectTag}>{t.project?.name || '—'}</span></td>
@@ -160,7 +165,8 @@ export default function TicketsPage() {
       )}
 
       {/* Kanban View */}
-      {viewMode === 'kanban' && (
+      {viewMode === 'kanban' && loading && <div className={styles.loadingState} role="status"><span className="spinner" /> Đang tải ticket...</div>}
+      {viewMode === 'kanban' && !loading && (
         <div className={styles.kanbanBoard}>
           {kanbanStatuses.map(status => {
             const statusTickets = tickets.filter(t => t.status === status)
@@ -174,16 +180,16 @@ export default function TicketsPage() {
                   {statusTickets.map(t => (
                     <div key={t.id} className={styles.kanbanCard} onClick={() => router.push(`/tickets/${t.id}`)}>
                       <div className={styles.kanbanCardHeader}>
-                        <span className={`badge ${PRIORITY_MAP[t.priority]?.badge}`} style={{ fontSize: '10px', padding: '1px 6px' }}>{PRIORITY_MAP[t.priority]?.label}</span>
-                        <span className="text-muted" style={{ fontSize: '11px' }}>{t.id.slice(0, 8)}</span>
+                        <span className={`badge ${PRIORITY_MAP[t.priority]?.badge}`} style={{ fontSize: '12px', padding: '1px 6px' }}>{PRIORITY_MAP[t.priority]?.label}</span>
+                        <span className="text-muted" style={{ fontSize: '12px' }}>{t.id.slice(0, 8)}</span>
                       </div>
-                      <div className={styles.kanbanCardTitle}>{t.title}</div>
+                      <Link href={'/tickets/' + t.id} className={styles.kanbanCardTitle}>{t.title}</Link>
                       <div className={styles.kanbanCardMeta}>
                         <span>{t.requester_name}</span>
                         <span>{timeAgo(t.created_at)}</span>
                       </div>
                        {t.project?.name && (
-                        <span className={styles.projectTag} style={{ fontSize: '11px', marginTop: '4px' }}>{t.project.name}</span>
+                        <span className={styles.projectTag} style={{ fontSize: '12px', marginTop: '4px' }}>{t.project.name}</span>
                       )}
                     </div>
                   ))}
@@ -196,6 +202,7 @@ export default function TicketsPage() {
           })}
         </div>
       )}
+      <Pagination page={page} count={tickets.length} hasNext={hasNext} loading={loading} onChange={setPage} />
     </div>
   )
 }

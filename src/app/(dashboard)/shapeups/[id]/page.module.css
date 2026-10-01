@@ -1,80 +1,20 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: var(--space-lg);
-  align-items: start;
-}
-
-.mainContent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-}
-
-.editorGroup {
-  margin-top: var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  position: sticky;
-  top: calc(var(--header-height) + var(--space-lg));
-}
-
-.linkedTicket {
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  background: var(--color-bg-tertiary);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.linkedTicket:hover {
-  border-color: var(--color-brand);
-  background: var(--color-bg-hover);
-}
-
-.dragDropZone {
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-bg-tertiary);
-  transition: all 0.2s ease;
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dragDropZone.dragging {
-  border-color: var(--color-brand);
-  background: rgba(var(--color-brand-rgb), 0.1);
-}
-
-@media (max-width: 768px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-  .sidebar {
-    position: static;
-  }
-}
+.page { display:flex; flex-direction:column; gap:27px; min-width:0; }
+.header { display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding-bottom:23px; border-bottom:1px solid var(--color-border); }
+.header > :global(.flex) { flex-wrap:wrap; }
+.layout { display:grid; grid-template-columns:minmax(0,1fr) 292px; gap:40px; align-items:start; }
+.mainContent { display:flex; flex-direction:column; gap:25px; min-width:0; }
+.mainContent > :global(.card) { border:0; border-radius:0; box-shadow:none; padding:0; background:transparent; }
+.mainContent > :global(.card) > :global(.input-group) > :global(.input) { border-width:0 0 1px; border-radius:0; background:transparent; padding:15px 0!important; font-size:clamp(23px,2.5vw,30px)!important; font-weight:700; letter-spacing:-.5px; }
+.editorGroup { margin-top:30px; display:flex; flex-direction:column; gap:10px; }
+.editorGroup > :global(.input-label) { font-size:15px; font-weight:700; color:var(--color-text-primary); }
+.sidebar { display:flex; flex-direction:column; gap:0; border-left:1px solid var(--color-border); padding-left:25px; position:sticky; top:calc(var(--header-height) + 25px); min-width:0; }
+.sidebar > :global(.card) { border:0; border-radius:0; box-shadow:none; padding:24px 0; background:transparent; border-top:1px solid var(--color-border); }
+.sidebar > :global(.card):first-child { border-top:0; padding-top:0; }
+.sidebar :global(.input-group) { margin-top:17px; gap:7px; }
+.sidebar h4 { font-size:16px; font-weight:700; }
+.linkedTicket { width:100%; text-align:left; font:inherit; color:inherit; padding:12px 0; border:0; border-bottom:1px solid var(--color-border); border-radius:0; background:transparent; cursor:pointer; transition:color var(--transition-fast); }
+.linkedTicket:hover { color:var(--color-brand); }
+.dragDropZone { border:1px dashed var(--color-border); border-radius:5px; background:var(--color-bg-tertiary); transition:background var(--transition-fast),border-color var(--transition-fast); min-height:130px; display:flex; align-items:center; justify-content:center; }
+.dragDropZone.dragging { border-color:var(--color-brand); background:var(--color-brand-light); }
+@media(max-width:1000px) { .layout { grid-template-columns:minmax(0,1fr) 260px; gap:25px; } .sidebar { padding-left:20px; } }
+@media(max-width:760px) { .layout { grid-template-columns:1fr; gap:30px; } .sidebar { position:static; border-left:0; border-top:1px solid var(--color-border); padding:24px 0 0; } .header { gap:16px; } .editorGroup { margin-top:24px; } }

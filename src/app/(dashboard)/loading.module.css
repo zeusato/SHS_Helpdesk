@@ -1,0 +1,10 @@
+.loading { min-height: 440px; }
+.eyebrow, .heading, .description, .toolbar span, .rows span { background: var(--color-bg-tertiary); border-radius: 3px; }
+.eyebrow { height: 12px; width: 140px; margin: 4px 0 20px; }
+.heading { height: 38px; width: min(350px, 75%); }
+.description { height: 15px; width: min(460px, 90%); margin-top: 20px; }
+.toolbar { display: flex; gap: 16px; margin: 38px 0 28px; }
+.toolbar span { height: 40px; width: 180px; }
+.rows { border-top: 1px solid var(--color-border); }
+.rows > div { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; padding: 23px 0; border-bottom: 1px solid var(--color-border-light); }
+.rows span { height: 15px; }

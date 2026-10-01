@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -7,16 +9,17 @@ import { formatDistanceToNow } from 'date-fns'
 import { vi } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase/client'
 import type { ShapeUp, Project, ShapeUpStatus } from '@/lib/types'
-import * as XLSX from 'xlsx'
+import { usePagedQuery } from '@/lib/hooks/usePagedQuery'
+import { literalContains } from '@/lib/data/pagination'
+import Pagination from '@/components/ui/Pagination'
+import QueryError from '@/components/ui/QueryError'
 import styles from './page.module.css'
 import editorStyles from '@/components/ui/RichTextEditor.module.css'
 
 export default function ShapeUpsPage() {
   const router = useRouter()
   const supabase = useMemo(() => createClient(), [])
-  const [shapeUps, setShapeUps] = useState<ShapeUp[]>([])
   const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
 
   // Filters
   const [filterStatus, setFilterStatus] = useState('')
@@ -32,34 +35,53 @@ export default function ShapeUpsPage() {
   // View Modal
   const [viewShapeUp, setViewShapeUp] = useState<ShapeUp | null>(null)
 
-  const fetchShapeUps = useCallback(async () => {
-    let query = supabase
-      .from('shape_ups')
-      .select('*, project:projects(id, name), author:users!created_by(id, name)')
-      .order('created_at', { ascending: false })
-      .range(0, 49)
-
+  const loadShapeUps = useCallback((from: number, to: number, signal: AbortSignal) => {
+    let query = supabase.from('shape_ups')
+      .select('id,title,status,project_id,created_at,updated_at,project:projects(id,name),author:users!created_by(id,name)')
+      .order('created_at', { ascending: false }).order('id', { ascending: false })
+      .range(from, to).abortSignal(signal)
     if (filterStatus) query = query.eq('status', filterStatus)
     if (filterProject) query = query.eq('project_id', filterProject)
-    if (searchQuery) query = query.ilike('title', `%${searchQuery}%`)
-
-    const { data } = await query
-    setShapeUps((data as ShapeUp[]) || [])
-    setLoading(false)
+    if (searchQuery.trim()) query = query.ilike('title', literalContains(searchQuery))
+    return query
   }, [filterStatus, filterProject, searchQuery, supabase])
-
-  const fetchProjects = useCallback(async () => {
-    const { data } = await supabase.from('projects').select('id, name').eq('status', 'active').order('name')
-    setProjects((data || []) as Project[])
-  }, [supabase])
-
+  const { rows: shapeUps, loading, error, page, hasNext, setPage, reload } = usePagedQuery<ShapeUp>(
+    loadShapeUps, JSON.stringify([filterStatus, filterProject, searchQuery]), searchQuery ? 300 : 0
+  )
+  const [projectError, setProjectError] = useState('')
+  const [projectRetry, setProjectRetry] = useState(0)
+  const [previewError, setPreviewError] = useState('')
+  const [previewLoading, setPreviewLoading] = useState(false)
+  const [previewRetry, setPreviewRetry] = useState(0)
+  const previewId = viewShapeUp?.id
   useEffect(() => {
-    const t = setTimeout(() => {
-      fetchProjects()
-      fetchShapeUps()
-    }, 0)
-    return () => clearTimeout(t)
-  }, [fetchProjects, fetchShapeUps])
+    if (!previewId) return
+    const controller = new AbortController()
+    void Promise.resolve(supabase.from('shape_ups')
+      .select('*,project:projects(id,name),author:users!created_by(id,name)').eq('id', previewId).abortSignal(controller.signal).single())
+      .then(({ data, error }) => {
+        if (controller.signal.aborted) return
+        if (data) setViewShapeUp(data as ShapeUp)
+        setPreviewError(error ? 'Không tải được nội dung Shape Up.' : '')
+        setPreviewLoading(false)
+      })
+    return () => controller.abort()
+  }, [supabase, previewId, previewRetry])
+  const openPreview = (item: ShapeUp) => {
+    setPreviewError('')
+    setPreviewLoading(true)
+    setViewShapeUp(item)
+  }
+  useEffect(() => {
+    const controller = new AbortController()
+    void Promise.resolve(supabase.from('projects').select('id,name').eq('status', 'active').order('name').abortSignal(controller.signal))
+      .then(({ data, error }) => {
+        if (controller.signal.aborted) return
+        setProjects((data || []) as Project[])
+        setProjectError(error ? 'Không tải được danh sách dự án.' : '')
+      })
+    return () => controller.abort()
+  }, [supabase, projectRetry])
 
   const timeAgo = (dateStr: string) => {
     try {
@@ -75,7 +97,8 @@ export default function ShapeUpsPage() {
     if (!file) return
 
     const reader = new FileReader()
-    reader.onload = (evt) => {
+    reader.onload = async (evt) => {
+      const XLSX = await import('xlsx')
       const bstr = evt.target?.result
       const wb = XLSX.read(bstr, { type: 'binary' })
       const wsname = wb.SheetNames[0]
@@ -109,7 +132,7 @@ export default function ShapeUpsPage() {
     setImporting(true)
     
     const { data: { user: authUser } } = await supabase.auth.getUser()
-    if (!authUser) return
+    if (!authUser) { setImporting(false); alert('Phiên đăng nhập đã hết hạn.'); return }
 
     const rowsToInsert = importData.map(item => ({
       ...item,
@@ -122,7 +145,7 @@ export default function ShapeUpsPage() {
     if (!error) {
       setShowImport(false)
       setImportData([])
-      fetchShapeUps()
+      reload()
     } else {
       alert('Có lỗi xảy ra khi import: ' + error.message)
     }
@@ -134,7 +157,8 @@ export default function ShapeUpsPage() {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
-  const downloadTemplate = () => {
+  const downloadTemplate = async () => {
+    const XLSX = await import('xlsx')
     const templateData = [
       {
         'Tiêu đề': 'Hướng dẫn xử lý lỗi 404',
@@ -166,32 +190,35 @@ export default function ShapeUpsPage() {
     <div className={styles.page}>
       <div className={styles.pageHeader}>
         <div>
+          <span className={styles.eyebrow}>Thư viện tri thức</span>
           <h1>Thư viện Shape Up</h1>
           <p className="text-secondary mt-sm">Quản lý tài liệu tri thức, giải pháp và quy trình</p>
         </div>
         <div className="flex gap-sm items-center">
           <button className="btn btn-secondary" onClick={() => setShowImport(true)}>
-            📥 Import Excel
+            <Icon name="upload" size={18} /> Import Excel
           </button>
           <button className="btn btn-primary" onClick={() => router.push('/shapeups/new')}>
-            ＋ Tạo Shape Up
+            <Icon name="plus" size={18} /> Tạo Shape Up
           </button>
         </div>
       </div>
 
       <div className={styles.filters}>
-        <input className="input" placeholder="🔍 Tìm Shape Up..." value={searchQuery} onChange={_e => { setSearchQuery(_e.target.value); setLoading(true) }} style={{ maxWidth: '280px' }} />
-        <select className="select" value={filterProject} onChange={_e => { setFilterProject(_e.target.value); setLoading(true) }} style={{ maxWidth: '200px' }}>
+        <input className="input" placeholder="Tìm Shape Up..." aria-label="Tìm Shape Up" value={searchQuery} onChange={_e => { setSearchQuery(_e.target.value) }} style={{ maxWidth: '280px' }} />
+        <select className="select" value={filterProject} onChange={_e => { setFilterProject(_e.target.value) }} style={{ maxWidth: '200px' }}>
           <option value="">Tất cả dự án</option>
           {projects.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
         </select>
-        <select className="select" value={filterStatus} onChange={_e => { setFilterStatus(_e.target.value); setLoading(true) }} style={{ maxWidth: '180px' }}>
+        <select className="select" value={filterStatus} onChange={_e => { setFilterStatus(_e.target.value) }} style={{ maxWidth: '180px' }}>
           <option value="">Tất cả trạng thái</option>
           <option value="draft">Bản nháp</option>
           <option value="published">Đã xuất bản</option>
         </select>
       </div>
 
+      <QueryError message={error} onRetry={reload} />
+      <QueryError message={projectError} onRetry={() => setProjectRetry(value => value + 1)} />
       <div className="table-container">
         <table className="table">
           <thead>
@@ -209,14 +236,14 @@ export default function ShapeUpsPage() {
             ) : shapeUps.length === 0 ? (
               <tr><td colSpan={5}>
                 <div className="empty-state">
-                  <div className="empty-state-icon">📚</div>
+                  <div className="empty-state-icon"><Icon name="book" size={18} /></div>
                   <div className="empty-state-title">Chưa có Shape Up nào</div>
                 </div>
               </td></tr>
             ) : shapeUps.map(s => (
-              <tr key={s.id} onClick={() => setViewShapeUp(s)} style={{ cursor: 'pointer' }}>
+              <tr key={s.id} onClick={() => openPreview(s)} style={{ cursor: 'pointer' }}>
                 <td>
-                  <div className={styles.title}>{s.title}</div>
+                  <button type="button" className={styles.title} onClick={e => { e.stopPropagation(); openPreview(s) }}>{s.title}</button>
                   <div className="text-muted text-sm">{s.id.slice(0, 8)}</div>
                 </td>
                 <td><span className={styles.projectTag}>{(s.project as unknown as Project)?.name || '—'}</span></td>
@@ -233,13 +260,14 @@ export default function ShapeUpsPage() {
         </table>
       </div>
 
+      <Pagination page={page} count={shapeUps.length} hasNext={hasNext} loading={loading} onChange={setPage} />
       {/* IMPORT EXCEL MODAL */}
       {showImport && (
         <div className="modal-overlay" onClick={cancelImport}>
           <div className="modal" style={{ maxWidth: '900px' }} onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>📥 Import Shape Up từ Excel</h3>
-              <button className="btn btn-ghost btn-icon" onClick={cancelImport}>✕</button>
+              <h3><Icon name="upload" size={18} /> Import Shape Up từ Excel</h3>
+              <button className="btn btn-ghost btn-icon" onClick={cancelImport} aria-label="Đóng"><Icon name="close" size={18} /></button>
             </div>
             
             <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
@@ -250,7 +278,7 @@ export default function ShapeUpsPage() {
                   </p>
                   <div style={{ marginBottom: '16px' }}>
                     <button className="btn btn-ghost btn-sm" onClick={downloadTemplate}>
-                      📄 Tải file mẫu (Template)
+                      <Icon name="download" size={18} /> Tải file mẫu (Template)
                     </button>
                   </div>
                   <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} ref={fileInputRef} className="input" />
@@ -258,7 +286,7 @@ export default function ShapeUpsPage() {
               ) : (
                 <div className={styles.previewArea}>
                   <p className="text-success" style={{ fontWeight: 500, marginBottom: '12px' }}>
-                    ✅ Tìm thấy {importData.length} bản ghi hợp lệ. Vui lòng kiểm tra lại trước khi xác nhận.
+                    <Icon name="circleCheck" size={18} /> Tìm thấy {importData.length} bản ghi hợp lệ. Vui lòng kiểm tra lại trước khi xác nhận.
                   </p>
                   <div className="table-container" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     <table className="table">
@@ -294,7 +322,7 @@ export default function ShapeUpsPage() {
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={cancelImport}>Hủy</button>
               <button className="btn btn-primary" onClick={confirmImport} disabled={!importData.length || importing}>
-                {importing ? <><span className="spinner" /> Đang ghi...</> : '📥 Xác nhận Import'}
+                {importing ? <><span className="spinner" /> Đang ghi...</> : <><Icon name="upload" size={18} /> Xác nhận nhập</>}
               </button>
             </div>
           </div>
@@ -306,21 +334,23 @@ export default function ShapeUpsPage() {
         <div className="modal-overlay" onClick={() => setViewShapeUp(null)}>
           <div className="modal" style={{ maxWidth: '800px', width: '100%', maxHeight: '90vh', display: 'flex', flexDirection: 'column' }} onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <div className="flex items-center gap-sm">
+              <div className={`flex items-center gap-sm ${styles.previewHeading}`}>
                 <span className={`badge ${viewShapeUp.status === 'published' ? 'badge-resolved' : 'badge-pending'}`}>
                   {viewShapeUp.status === 'published' ? 'Đã xuất bản' : 'Bản nháp'}
                 </span>
                 <h3 style={{ margin: 0 }}>{viewShapeUp.title}</h3>
               </div>
               <div className="flex gap-sm">
-                <button className="btn btn-primary btn-sm" onClick={() => router.push(`/shapeups/${viewShapeUp.id}`)}>✏️ Chỉnh sửa</button>
-                <button className="btn btn-ghost btn-icon" onClick={() => setViewShapeUp(null)}>✕</button>
+                <button className="btn btn-primary btn-sm" onClick={() => router.push(`/shapeups/${viewShapeUp.id}`)}><Icon name="edit" size={18} /> Chỉnh sửa</button>
+                <button aria-label="Đóng" className="btn btn-ghost btn-icon" onClick={() => setViewShapeUp(null)}><Icon name="close" size={18} /></button>
               </div>
             </div>
             
-            <div className="modal-body" style={{ overflowY: 'auto', flex: 1 }}>
-              <div className="flex flex-col gap-lg">
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)', background: 'var(--color-bg-tertiary)', padding: 'var(--space-md)', borderRadius: 'var(--radius-md)' }}>
+            <div className={`modal-body ${styles.previewBody}`} style={{ overflowY: 'auto', flex: 1 }}>
+              <QueryError message={previewError} onRetry={() => { setPreviewLoading(true); setPreviewRetry(value => value + 1) }} />
+              {previewLoading && <p role="status">Đang tải nội dung…</p>}
+              {!previewLoading && !previewError && <div className="flex flex-col gap-lg">
+                <div className={styles.previewMeta}>
                   <div>
                     <div className="text-muted text-sm">Dự án</div>
                     <div className="font-medium">{(viewShapeUp.project as unknown as Project)?.name || '—'}</div>
@@ -341,7 +371,7 @@ export default function ShapeUpsPage() {
 
                 {viewShapeUp.note && (
                   <div>
-                    <h4 style={{ marginBottom: '8px' }}>📌 Ghi chú</h4>
+                    <h4 style={{ marginBottom: '8px' }}><Icon name="file" size={18} /> Ghi chú</h4>
                     <div style={{ padding: '12px', background: 'rgba(var(--color-brand-rgb), 0.1)', borderLeft: '3px solid var(--color-brand)', borderRadius: '0 var(--radius-sm) var(--radius-sm) 0' }}>
                       {viewShapeUp.note}
                     </div>
@@ -351,7 +381,7 @@ export default function ShapeUpsPage() {
                 <div>
                   <h4 style={{ marginBottom: '8px' }}>Mô tả vấn đề</h4>
                   {viewShapeUp.issue_detail ? (
-                    <div className={editorStyles.editorContent} style={{ minHeight: 'auto', padding: '12px', background: 'var(--color-bg-tertiary)', borderRadius: 'var(--radius-md)' }} dangerouslySetInnerHTML={{ __html: viewShapeUp.issue_detail }} />
+                    <div className={editorStyles.editorContent} style={{ minHeight: 'auto', padding: '0', background: 'transparent' }} dangerouslySetInnerHTML={{ __html: viewShapeUp.issue_detail }} />
                   ) : (
                     <div className="text-muted text-sm">Không có mô tả</div>
                   )}
@@ -360,7 +390,7 @@ export default function ShapeUpsPage() {
                 <div>
                   <h4 style={{ marginBottom: '8px' }}>Cách giải quyết (Solution)</h4>
                   {viewShapeUp.solution ? (
-                    <div className={editorStyles.editorContent} style={{ minHeight: 'auto', padding: '12px', background: 'var(--color-bg-tertiary)', borderRadius: 'var(--radius-md)' }} dangerouslySetInnerHTML={{ __html: viewShapeUp.solution }} />
+                    <div className={editorStyles.editorContent} style={{ minHeight: 'auto', padding: '0', background: 'transparent' }} dangerouslySetInnerHTML={{ __html: viewShapeUp.solution }} />
                   ) : (
                     <div className="text-muted text-sm">Chưa có giải pháp</div>
                   )}
@@ -368,7 +398,7 @@ export default function ShapeUpsPage() {
 
                 {viewShapeUp.images && (viewShapeUp.images as string[]).length > 0 && (
                   <div>
-                    <h4 style={{ marginBottom: '8px' }}>🖼️ Ảnh đính kèm</h4>
+                    <h4 style={{ marginBottom: '8px' }}><Icon name="image" size={18} /> Ảnh đính kèm</h4>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: '12px' }}>
                       {(viewShapeUp.images as string[]).map((url, i) => (
                         <a key={i} href={url} target="_blank" rel="noopener noreferrer" style={{ display: 'block', aspectRatio: '1', borderRadius: 'var(--radius-sm)', overflow: 'hidden', border: '1px solid var(--color-border)', position: 'relative' }}>
@@ -379,6 +409,7 @@ export default function ShapeUpsPage() {
                   </div>
                 )}
               </div>
+              }
             </div>
           </div>
         </div>

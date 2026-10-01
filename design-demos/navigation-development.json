@@ -1,0 +1,38 @@
+[
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /emails 225 ms",
+    "timestamp": "2026-10-01T15:28:46.331Z",
+    "url": "http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /shapeups 232 ms",
+    "timestamp": "2026-10-01T15:28:47.392Z",
+    "url": "http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /tickets 143 ms",
+    "timestamp": "2026-10-01T15:28:48.357Z",
+    "url": "http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /emails 70 ms",
+    "timestamp": "2026-10-01T15:28:48.862Z",
+    "url": "http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /shapeups 76 ms",
+    "timestamp": "2026-10-01T15:28:49.450Z",
+    "url": "http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /tickets 128 ms",
+    "timestamp": "2026-10-01T15:28:50.066Z",
+    "url": "http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js"
+  }
+]

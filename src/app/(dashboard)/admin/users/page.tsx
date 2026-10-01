@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { User } from '@/lib/types'
@@ -43,7 +45,6 @@ export default function AdminUsersPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault()
     setSaving(true)
-    setLoading(true)
     setError('')
 
     try {
@@ -75,10 +76,11 @@ export default function AdminUsersPage() {
     <div className={styles.page}>
       <div className={styles.header}>
         <div>
-          <h1>Quản lý Tài khoản</h1>
+          <span className={styles.eyebrow}>Quản trị hệ thống</span>
+          <h1>Quản lý tài khoản</h1>
           <p className="text-secondary mt-sm">Danh sách tài khoản nội bộ (Manager, PO)</p>
         </div>
-        <button className="btn btn-primary" onClick={openCreate}>＋ Thêm tài khoản</button>
+        <button className="btn btn-primary" onClick={openCreate}><Icon name="plus" size={18} /> Thêm tài khoản</button>
       </div>
 
       <div className="table-container">
@@ -99,7 +101,7 @@ export default function AdminUsersPage() {
             ) : users.length === 0 ? (
               <tr><td colSpan={6}>
                 <div className="empty-state">
-                  <div className="empty-state-icon">👤</div>
+                  <div className="empty-state-icon"><Icon name="users" size={18} /></div>
                   <div className="empty-state-title">Chưa có tài khoản nào</div>
                 </div>
               </td></tr>
@@ -111,7 +113,7 @@ export default function AdminUsersPage() {
                 <td><span className={`badge ${u.role === 'manager' ? 'badge-published' : 'badge-in-progress'}`}>{roleLabel(u.role)}</span></td>
                 <td><span className={`badge badge-${u.status}`}>{u.status === 'active' ? 'Hoạt động' : 'Ngừng'}</span></td>
                 <td>
-                  <button className="btn btn-ghost btn-sm" onClick={() => openEdit(u)}>✏️</button>
+                  <button aria-label="Chỉnh sửa" className="btn btn-ghost btn-sm" onClick={() => openEdit(u)}><Icon name="edit" size={18} /></button>
                 </td>
               </tr>
             ))}
@@ -124,11 +126,11 @@ export default function AdminUsersPage() {
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h3>{editingUser ? 'Sửa tài khoản' : 'Tạo tài khoản mới'}</h3>
-              <button className="btn btn-ghost btn-icon" onClick={() => setShowModal(false)}>✕</button>
+              <button aria-label="Đóng" className="btn btn-ghost btn-icon" onClick={() => setShowModal(false)}><Icon name="close" size={18} /></button>
             </div>
             <form onSubmit={handleSave}>
               <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-                {error && <div style={{ padding: '10px 14px', background: 'var(--color-danger-bg)', color: 'var(--color-danger)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-sm)' }}>⚠️ {error}</div>}
+                {error && <div style={{ padding: '10px 14px', background: 'var(--color-danger-bg)', color: 'var(--color-danger)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-sm)' }}><Icon name="warning" size={18} /> {error}</div>}
                 <div className="input-group">
                   <label className="input-label input-required">Tên đăng nhập</label>
                   <input className="input" value={form.username} onChange={e => setForm({ ...form, username: e.target.value })} required />
@@ -147,7 +149,7 @@ export default function AdminUsersPage() {
                     <input className="input" type="password" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} required minLength={6} placeholder="Tối thiểu 6 ký tự" />
                   </div>
                 )}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+                <div className={styles.formRow}>
                   <div className="input-group">
                     <label className="input-label">Vai trò</label>
                     <select className="select" value={form.role} onChange={e => setForm({ ...form, role: e.target.value })}>

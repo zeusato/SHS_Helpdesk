@@ -12,11 +12,11 @@ export async function POST(request: NextRequest) {
 
   const { data: profile } = await supabase
     .from('users')
-    .select('role')
+    .select('role,status')
     .eq('id', authUser.id)
     .single()
 
-  if (profile?.role !== 'manager') {
+  if (profile?.role !== 'manager' || profile.status !== 'active') {
     return NextResponse.json({ error: 'Chỉ Manager mới có quyền tạo tài khoản' }, { status: 403 })
   }
 

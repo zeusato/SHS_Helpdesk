@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState, useEffect, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import styles from '../shared.module.css'
@@ -67,9 +69,9 @@ export default function MailSettingsPage() {
   if (loading) return <div className="flex justify-center py-xl"><div className="spinner" /></div>
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <span className="card-title">📧 Cấu hình Email cá nhân (SMTP)</span>
+    <div className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <h2><Icon name="mail" size={18} /> Cấu hình Email cá nhân (SMTP)</h2>
       </div>
       
       <form className={styles.form} onSubmit={handleSave}>
@@ -84,7 +86,7 @@ export default function MailSettingsPage() {
           </div>
         )}
         
-        <div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr', gap: 'var(--space-md)' }}>
+        <div className={styles.fieldsRow}>
           <div className="input-group">
             <label className="input-label input-required">SMTP Host</label>
             <input 
@@ -130,7 +132,7 @@ export default function MailSettingsPage() {
             required
           />
           <p className="text-muted text-xs mt-xs">
-            💡 Lưu ý: Với Gmail, bạn nên sử dụng <strong>App Password</strong> thay vì mật khẩu chính.
+            <Icon name="info" size={18} /> Lưu ý: Với Gmail, bạn nên sử dụng <strong>App Password</strong> thay vì mật khẩu chính.
           </p>
         </div>
         

@@ -12,19 +12,19 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  let authUser = null
+  let userId: string | null = null
   let profile = null
   
   const supabase = await createClient()
   try {
-    const { data } = await supabase.auth.getUser()
-    authUser = data.user
+    const { data, error } = await supabase.auth.getClaims()
+    userId = error ? null : data?.claims.sub ?? null
     
-    if (authUser) {
+    if (userId) {
       const { data: profileData } = await supabase
         .from('users')
         .select('*')
-        .eq('id', authUser.id)
+        .eq('id', userId)
         .single()
       profile = profileData
     }
@@ -32,18 +32,20 @@ export default async function DashboardLayout({
     console.error('Auth check error:', err)
   }
 
-  if (!authUser) {
+  if (!userId || !profile || profile.status !== 'active') {
     redirect('/login')
   }
 
   return (
     <div className={styles.dashboardLayout}>
+      <a className="skip-link" href="#main-content">Đến nội dung chính</a>
+      <Header user={profile as User | null} />
       <Sidebar user={profile as User | null} />
       <div className={styles.mainArea}>
-        <Header user={profile as User | null} />
-        <main className={styles.content}>
+        <main className={styles.content} id="main-content" tabIndex={-1}>
           {children}
         </main>
+        <footer className={styles.footer}><strong>TVSI Helpdesk</strong><span>Công ty Cổ phần Chứng khoán Tân Việt</span></footer>
       </div>
     </div>
   )

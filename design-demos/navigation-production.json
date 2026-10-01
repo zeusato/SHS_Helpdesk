@@ -1,0 +1,38 @@
+[
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /emails 82 ms",
+    "timestamp": "2026-10-01T15:31:07.468Z",
+    "url": "http://localhost:3001/_next/static/chunks/0u.jbl2~xpq7c.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /shapeups 106 ms",
+    "timestamp": "2026-10-01T15:31:08.880Z",
+    "url": "http://localhost:3001/_next/static/chunks/0u.jbl2~xpq7c.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /tickets 91 ms",
+    "timestamp": "2026-10-01T15:31:10.262Z",
+    "url": "http://localhost:3001/_next/static/chunks/0u.jbl2~xpq7c.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /emails 49 ms",
+    "timestamp": "2026-10-01T15:31:10.477Z",
+    "url": "http://localhost:3001/_next/static/chunks/0u.jbl2~xpq7c.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /shapeups 84 ms",
+    "timestamp": "2026-10-01T15:31:10.882Z",
+    "url": "http://localhost:3001/_next/static/chunks/0u.jbl2~xpq7c.js"
+  },
+  {
+    "level": "debug",
+    "message": "[TVSI navigation] /tickets 55 ms",
+    "timestamp": "2026-10-01T15:31:11.112Z",
+    "url": "http://localhost:3001/_next/static/chunks/0u.jbl2~xpq7c.js"
+  }
+]

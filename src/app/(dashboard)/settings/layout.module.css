@@ -1,21 +1,12 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xl);
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.layout {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.mainContent {
-  width: 100%;
-  max-width: 800px;
-}
+.container { display:flex; flex-direction:column; gap:28px; min-width:0; }
+.header { display:flex; flex-direction:column; gap:7px; }
+.eyebrow { color:var(--color-brand); text-transform:uppercase; letter-spacing:.13em; font-size:12px; font-weight:700; }
+.header h1 { font-size:clamp(30px,3vw,40px); letter-spacing:-1px; font-weight:700; }
+.header p { margin-top:0; }
+.tabs { display:flex; gap:30px; border-bottom:1px solid var(--color-border); overflow-x:auto; }
+.tabs a { display:flex; align-items:center; gap:9px; padding:12px 0 15px; color:var(--color-text-secondary); white-space:nowrap; border-bottom:2px solid transparent; font-size:14px; font-weight:700; }
+.tabs a:hover { color:var(--color-brand); }
+.tabs a.active { color:var(--color-brand); border-color:var(--color-brand); }
+.layout { display:flex; justify-content:flex-start; }
+.mainContent { width:100%; max-width:820px; min-width:0; }
+@media(max-width:600px) { .container { gap:23px; } .tabs { gap:22px; } .tabs a { gap:7px; } }

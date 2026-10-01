@@ -7,7 +7,7 @@ import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
 import styles from './RichTextEditor.module.css'
 
-export default function RichTextEditor({ content, onChange }: { content: string, onChange: (html: string) => void, placeholder?: string }) {
+export default function RichTextEditor({ content, onChange, placeholder = 'Nhập nội dung chi tiết' }: { content: string, onChange: (html: string) => void, placeholder?: string }) {
   const isPropUpdate = useRef(false)
 
   const editor = useEditor({
@@ -18,6 +18,7 @@ export default function RichTextEditor({ content, onChange }: { content: string,
     ],
     content,
     immediatelyRender: false,
+    editorProps: { attributes: { role: 'textbox', 'aria-label': placeholder, 'aria-multiline': 'true' } },
     onUpdate: ({ editor }) => {
       if (!isPropUpdate.current) {
         onChange(editor.getHTML())
@@ -38,9 +39,9 @@ export default function RichTextEditor({ content, onChange }: { content: string,
   return (
     <div className={styles.editorContainer}>
       {/* Toolbar */}
-      <div className={styles.toolbar}>
-        <button type="button" onClick={() => editor.chain().focus().toggleBold().run()} className={`btn btn-sm ${editor.isActive('bold') ? 'btn-secondary' : 'btn-ghost'}`}><b>B</b></button>
-        <button type="button" onClick={() => editor.chain().focus().toggleItalic().run()} className={`btn btn-sm ${editor.isActive('italic') ? 'btn-secondary' : 'btn-ghost'}`}><i>I</i></button>
+      <div className={styles.toolbar} role="group" aria-label="Định dạng nội dung">
+        <button type="button" aria-label="In đậm" aria-pressed={editor.isActive('bold')} onClick={() => editor.chain().focus().toggleBold().run()} className={`btn btn-sm ${editor.isActive('bold') ? 'btn-secondary' : 'btn-ghost'}`}><b>B</b></button>
+        <button type="button" aria-label="In nghiêng" aria-pressed={editor.isActive('italic')} onClick={() => editor.chain().focus().toggleItalic().run()} className={`btn btn-sm ${editor.isActive('italic') ? 'btn-secondary' : 'btn-ghost'}`}><i>I</i></button>
         <div style={{ width: '1px', background: 'var(--color-border)', margin: '0 4px' }} />
         <button type="button" onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} className={`btn btn-sm ${editor.isActive('heading') ? 'btn-secondary' : 'btn-ghost'}`}>H3</button>
         <button type="button" onClick={() => editor.chain().focus().toggleBulletList().run()} className={`btn btn-sm ${editor.isActive('bulletList') ? 'btn-secondary' : 'btn-ghost'}`}>• List</button>
@@ -50,7 +51,7 @@ export default function RichTextEditor({ content, onChange }: { content: string,
         <button type="button" onClick={() => {
           const url = window.prompt('URL')
           if (url) editor.chain().focus().setLink({ href: url }).run()
-        }} className={`btn btn-sm ${editor.isActive('link') ? 'btn-secondary' : 'btn-ghost'}`}>🔗 Link</button>
+        }} className={`btn btn-sm ${editor.isActive('link') ? 'btn-secondary' : 'btn-ghost'}`}>Liên kết</button>
       </div>
 
       {/* Editor Content */}

@@ -1,0 +1,4515 @@
+{
+  "pages": 12,
+  "bounds": [
+    {
+      "page": 1,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 1,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 1,
+      "text": "01 / TỔNG QUAN SÁNG KIẾN",
+      "x": 45,
+      "y": 111,
+      "w": 129.49,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Từ phản hồi",
+      "x": 45,
+      "y": 140,
+      "w": 221.74,
+      "h": 40.5
+    },
+    {
+      "page": 1,
+      "text": "đến tri thức",
+      "x": 45,
+      "y": 185,
+      "w": 215.46,
+      "h": 40.5
+    },
+    {
+      "page": 1,
+      "text": "Hệ thống tiếp nhận ý kiến, phối hợp xử lý",
+      "x": 45,
+      "y": 237,
+      "w": 266.14,
+      "h": 14
+    },
+    {
+      "page": 1,
+      "text": "và tích lũy tri thức nghiệp vụ",
+      "x": 45,
+      "y": 256,
+      "w": 184.07,
+      "h": 14
+    },
+    {
+      "page": 1,
+      "text": "Tác giả: Trần Thị Quý | Phòng Marketing",
+      "x": 45,
+      "y": 283,
+      "w": 205.59,
+      "h": 11
+    },
+    {
+      "page": 1,
+      "text": "TÓM TẮT",
+      "x": 45,
+      "y": 310,
+      "w": 42.14,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Một cổng tiếp nhận chung giúp ghi nhận ý kiến và vấn đề cần hỗ trợ, giao đúng",
+      "x": 139,
+      "y": 307.0,
+      "w": 403.39,
+      "h": 11.5
+    },
+    {
+      "page": 1,
+      "text": "đầu mối, theo dõi việc xử lý và phản hồi người gửi. Những cách giải quyết có giá",
+      "x": 139,
+      "y": 323.5,
+      "w": 405.27,
+      "h": 11.5
+    },
+    {
+      "page": 1,
+      "text": "trị được biên tập thành bài tri thức để đội ngũ sử dụng lại.",
+      "x": 139,
+      "y": 340.0,
+      "w": 292.94,
+      "h": 11.5
+    },
+    {
+      "page": 1,
+      "text": "Hình 01",
+      "x": 45,
+      "y": 414,
+      "w": 34.12,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Chu trình tiếp nhận, xử lý và tích lũy tri thức để dùng lại.",
+      "x": 94,
+      "y": 414,
+      "w": 231.54,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "01 / TIẾP NHẬN",
+      "x": 45.0,
+      "y": 455,
+      "w": 69.67,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Tiếp nhận",
+      "x": 45.0,
+      "y": 478,
+      "w": 59.68,
+      "h": 13
+    },
+    {
+      "page": 1,
+      "text": "có đầu mối",
+      "x": 45.0,
+      "y": 495,
+      "w": 65.31,
+      "h": 13
+    },
+    {
+      "page": 1,
+      "text": "Ghi nhận thành phiếu và xác",
+      "x": 45.0,
+      "y": 519.0,
+      "w": 133.07,
+      "h": 10.5
+    },
+    {
+      "page": 1,
+      "text": "định người phụ trách.",
+      "x": 45.0,
+      "y": 533.5,
+      "w": 99.09,
+      "h": 10.5
+    },
+    {
+      "page": 1,
+      "text": "02 / XỬ LÝ",
+      "x": 218.43,
+      "y": 455,
+      "w": 45.72,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Xử lý",
+      "x": 218.43,
+      "y": 478,
+      "w": 30.77,
+      "h": 13
+    },
+    {
+      "page": 1,
+      "text": "có phản hồi",
+      "x": 218.43,
+      "y": 495,
+      "w": 69.2,
+      "h": 13
+    },
+    {
+      "page": 1,
+      "text": "Theo dõi việc giải quyết và trả",
+      "x": 218.43,
+      "y": 519.0,
+      "w": 139.88,
+      "h": 10.5
+    },
+    {
+      "page": 1,
+      "text": "lời người gửi.",
+      "x": 218.43,
+      "y": 533.5,
+      "w": 59.96,
+      "h": 10.5
+    },
+    {
+      "page": 1,
+      "text": "03 / TÍCH LŨY",
+      "x": 391.85,
+      "y": 455,
+      "w": 61.38,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Kinh nghiệm",
+      "x": 391.85,
+      "y": 478,
+      "w": 75.52,
+      "h": 13
+    },
+    {
+      "page": 1,
+      "text": "được tích lũy",
+      "x": 391.85,
+      "y": 495,
+      "w": 76.56,
+      "h": 13
+    },
+    {
+      "page": 1,
+      "text": "Chuẩn hóa cách giải quyết có",
+      "x": 391.85,
+      "y": 519.0,
+      "w": 136.57,
+      "h": 10.5
+    },
+    {
+      "page": 1,
+      "text": "giá trị thành bài Shape Up.",
+      "x": 391.85,
+      "y": 533.5,
+      "w": 124.68,
+      "h": 10.5
+    },
+    {
+      "page": 1,
+      "text": "Dùng lại cho yêu cầu tiếp theo",
+      "x": 310.95,
+      "y": 592,
+      "w": 128.38,
+      "h": 9.5
+    },
+    {
+      "page": 1,
+      "text": "SHAPE UP",
+      "x": 45,
+      "y": 637,
+      "w": 47.04,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Bài tri thức đã chuẩn hóa, gồm vấn đề, cách giải quyết và điều kiện áp dụng. Giữ liên",
+      "x": 139,
+      "y": 635.0,
+      "w": 410.5,
+      "h": 11
+    },
+    {
+      "page": 1,
+      "text": "kết với tình huống nguồn để tra cứu và dùng lại.",
+      "x": 139,
+      "y": 650.6,
+      "w": 233.51,
+      "h": 11
+    },
+    {
+      "page": 1,
+      "text": "PHẠM VI ÁP DỤNG",
+      "x": 45,
+      "y": 679,
+      "w": 85.79,
+      "h": 9.3
+    },
+    {
+      "page": 1,
+      "text": "Công nghệ · Chăm sóc khách hàng · Kinh doanh · Vận hành nội bộ",
+      "x": 45,
+      "y": 701,
+      "w": 307.18,
+      "h": 10.5
+    },
+    {
+      "page": 1,
+      "text": "Đã có bản hiện thực hóa để kiểm chứng luồng cốt lõi.",
+      "x": 57,
+      "y": 746,
+      "w": 230.64,
+      "h": 9.8
+    },
+    {
+      "page": 1,
+      "text": "Hiệu quả vận hành sẽ được đo trong giai đoạn thí điểm.",
+      "x": 57,
+      "y": 760,
+      "w": 240.84,
+      "h": 9.8
+    },
+    {
+      "page": 1,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 1,
+      "text": "01 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 2,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 2,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 2,
+      "text": "02 / BÀI TOÁN & MỤC TIÊU",
+      "x": 45,
+      "y": 111,
+      "w": 120.91,
+      "h": 9.3
+    },
+    {
+      "page": 2,
+      "text": "Giữ lại giá trị sau mỗi",
+      "x": 45,
+      "y": 140,
+      "w": 245.12,
+      "h": 25
+    },
+    {
+      "page": 2,
+      "text": "yêu cầu được giải quyết",
+      "x": 45,
+      "y": 170,
+      "w": 271.2,
+      "h": 25
+    },
+    {
+      "page": 2,
+      "text": "Một phản hồi mang theo hai giá trị: nhu cầu cần được giải quyết ngay và kinh nghiệm có thể giúp tổ",
+      "x": 45,
+      "y": 219.0,
+      "w": 484.67,
+      "h": 11
+    },
+    {
+      "page": 2,
+      "text": "chức làm tốt hơn trong tương lai. Sáng kiến kết nối hai giá trị này trong một quy trình chung.",
+      "x": 45,
+      "y": 234.6,
+      "w": 449.89,
+      "h": 11
+    },
+    {
+      "page": 2,
+      "text": "NHỮNG ĐIỂM CẦN KHẢO SÁT TẠI ĐƠN VỊ THÍ ĐIỂM",
+      "x": 45,
+      "y": 262.2,
+      "w": 232.02,
+      "h": 9.3
+    },
+    {
+      "page": 2,
+      "text": "Điểm vướng có thể gặp",
+      "x": 54,
+      "y": 302.2,
+      "w": 112.36,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Hướng cải tiến",
+      "x": 296.53,
+      "y": 302.2,
+      "w": 70.34,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Trao đổi phân tán, khó xác định trách nhiệm",
+      "x": 54,
+      "y": 336.7,
+      "w": 213.43,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Mỗi yêu cầu có phiếu, nhóm nghiệp vụ và đầu mối.",
+      "x": 296.53,
+      "y": 336.7,
+      "w": 235.11,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Hỏi lại thông tin, giải thích lại cùng một vấn",
+      "x": 54,
+      "y": 373.2,
+      "w": 211.77,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "đề",
+      "x": 54,
+      "y": 387.7,
+      "w": 11.99,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Chuẩn hóa thông tin đầu vào và dùng hướng dẫn",
+      "x": 296.53,
+      "y": 373.2,
+      "w": 228.82,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "phù hợp.",
+      "x": 296.53,
+      "y": 387.7,
+      "w": 41.0,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Kinh nghiệm nằm trong trao đổi cá nhân",
+      "x": 54,
+      "y": 424.2,
+      "w": 195.68,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Biên tập cách giải quyết thành tri thức chung.",
+      "x": 296.53,
+      "y": 424.2,
+      "w": 211.25,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Khó nhìn được nhóm nhu cầu lặp lại",
+      "x": 54,
+      "y": 460.7,
+      "w": 173.43,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Theo dõi theo nhóm để chọn chủ đề cần cải tiến.",
+      "x": 296.53,
+      "y": 460.7,
+      "w": 225.08,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "Các điểm trên là giả thuyết cần khảo sát, không phải kết luận về thực trạng của mọi đơn vị.",
+      "x": 45,
+      "y": 505.2,
+      "w": 394.17,
+      "h": 9.8
+    },
+    {
+      "page": 2,
+      "text": "Mục tiêu của sáng kiến",
+      "x": 45,
+      "y": 549.2,
+      "w": 130.24,
+      "h": 12.4
+    },
+    {
+      "page": 2,
+      "text": "Ghi nhận đúng nhu cầu; làm rõ trách nhiệm; tổ chức phản hồi có căn cứ; lưu và dùng lại kinh nghiệm;",
+      "x": 45,
+      "y": 572.2,
+      "w": 489.05,
+      "h": 11
+    },
+    {
+      "page": 2,
+      "text": "tạo dữ liệu để quyết định cải tiến.",
+      "x": 45,
+      "y": 587.8,
+      "w": 162.23,
+      "h": 11
+    },
+    {
+      "page": 2,
+      "text": "Đầu ra kỳ vọng",
+      "x": 45,
+      "y": 615.4,
+      "w": 86.73,
+      "h": 12.4
+    },
+    {
+      "page": 2,
+      "text": "Một quy trình được đội ngũ sử dụng, một nhóm bài tri thức đáng tin cậy và bộ số liệu đủ để đánh giá",
+      "x": 45,
+      "y": 638.4,
+      "w": 488.45,
+      "h": 11
+    },
+    {
+      "page": 2,
+      "text": "hiệu quả trước khi nhân rộng.",
+      "x": 45,
+      "y": 654.0,
+      "w": 142.72,
+      "h": 11
+    },
+    {
+      "page": 2,
+      "text": "Câu hỏi đánh giá trung tâm: cùng một nhóm yêu cầu, tổ chức có phục vụ rõ ràng hơn và giảm công việc",
+      "x": 57,
+      "y": 692.6,
+      "w": 479.85,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "lặp lại với chi phí duy trì hợp lý hay không?",
+      "x": 57,
+      "y": 707.1,
+      "w": 198.91,
+      "h": 10.5
+    },
+    {
+      "page": 2,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 2,
+      "text": "02 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 3,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 3,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 3,
+      "text": "03 / CÁCH TỔ CHỨC VẬN HÀNH",
+      "x": 45,
+      "y": 111,
+      "w": 144.48,
+      "h": 9.3
+    },
+    {
+      "page": 3,
+      "text": "Một mô hình chung,",
+      "x": 45,
+      "y": 140,
+      "w": 229.43,
+      "h": 25
+    },
+    {
+      "page": 3,
+      "text": "trách nhiệm rõ ở từng bước",
+      "x": 45,
+      "y": 170,
+      "w": 312.55,
+      "h": 25
+    },
+    {
+      "page": 3,
+      "text": "Khái niệm",
+      "x": 54,
+      "y": 229.0,
+      "w": 48.11,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Cách hiểu trong hệ thống",
+      "x": 186,
+      "y": 229.0,
+      "w": 123.18,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Portal",
+      "x": 54,
+      "y": 263.5,
+      "w": 30.14,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Cổng tiếp nhận",
+      "x": 54,
+      "y": 278.0,
+      "w": 74.23,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Trang độc lập để người dùng gửi ý kiến hoặc vấn đề cần hỗ trợ; không cần",
+      "x": 186,
+      "y": 263.5,
+      "w": 344.24,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "tài khoản nội bộ.",
+      "x": 186,
+      "y": 278.0,
+      "w": 76.98,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Ticket",
+      "x": 54,
+      "y": 314.5,
+      "w": 29.51,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Phiếu tiếp nhận",
+      "x": 54,
+      "y": 329.0,
+      "w": 76.0,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Đơn vị công việc gồm nhu cầu, người gửi, nhóm nghiệp vụ, người phụ trách,",
+      "x": 186,
+      "y": 314.5,
+      "w": 350.28,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "ưu tiên và trạng thái.",
+      "x": 186,
+      "y": 329.0,
+      "w": 96.4,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Shape Up",
+      "x": 54,
+      "y": 365.5,
+      "w": 47.4,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Bài tri thức",
+      "x": 54,
+      "y": 380.0,
+      "w": 53.37,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Vấn đề, cách giải quyết và điều kiện áp dụng được chuẩn hóa để dùng lại, có",
+      "x": 186,
+      "y": 365.5,
+      "w": 355.14,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "liên kết với tình huống nguồn.",
+      "x": 186,
+      "y": 380.0,
+      "w": 138.88,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "BỐN VAI TRÒ TRONG QUY TRÌNH",
+      "x": 45,
+      "y": 424.5,
+      "w": 150.98,
+      "h": 9.3
+    },
+    {
+      "page": 3,
+      "text": "Vai trò",
+      "x": 54,
+      "y": 467.5,
+      "w": 32.95,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Trách nhiệm chính",
+      "x": 186,
+      "y": 467.5,
+      "w": 89.09,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Người gửi",
+      "x": 54,
+      "y": 502.0,
+      "w": 46.95,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Cung cấp vấn đề, kết quả mong muốn và thông tin liên hệ; bổ sung khi được",
+      "x": 186,
+      "y": 502.0,
+      "w": 354.77,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "yêu cầu.",
+      "x": 186,
+      "y": 516.5,
+      "w": 38.29,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Đầu mối tiếp nhận",
+      "x": 54,
+      "y": 553.0,
+      "w": 89.17,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Kiểm tra nội dung, phân nhóm, giao người phụ trách và theo dõi việc xử lý.",
+      "x": 186,
+      "y": 553.0,
+      "w": 345.83,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Người xử lý",
+      "x": 54,
+      "y": 589.5,
+      "w": 55.38,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Phối hợp chuyên môn, tra cứu hướng dẫn, giải quyết và chuẩn bị phản hồi.",
+      "x": 186,
+      "y": 589.5,
+      "w": 344.36,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Phụ trách tri thức",
+      "x": 54,
+      "y": 626.0,
+      "w": 84.63,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Lựa chọn tình huống nên chuẩn hóa, rà soát bài và tổ chức cập nhật.",
+      "x": 186,
+      "y": 626.0,
+      "w": 316.83,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "Một người có thể kiêm nhiệm nhiều vai trò. Thí điểm cần quy định người chịu trách nhiệm chính và",
+      "x": 57,
+      "y": 681.5,
+      "w": 454.78,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "người rà soát; tên vai trò nghiệp vụ không mặc nhiên là một cấp phê duyệt đã được tự động hóa.",
+      "x": 57,
+      "y": 696.0,
+      "w": 448.1,
+      "h": 10.5
+    },
+    {
+      "page": 3,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 3,
+      "text": "03 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 4,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 4,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 4,
+      "text": "04 / LUỒNG VẬN HÀNH ĐỀ XUẤT",
+      "x": 45,
+      "y": 111,
+      "w": 149.59,
+      "h": 9.3
+    },
+    {
+      "page": 4,
+      "text": "Một yêu cầu được xử lý,",
+      "x": 45,
+      "y": 140,
+      "w": 271.82,
+      "h": 25
+    },
+    {
+      "page": 4,
+      "text": "nhiều lần sau được hưởng lợi",
+      "x": 45,
+      "y": 170,
+      "w": 331.8,
+      "h": 25
+    },
+    {
+      "page": 4,
+      "text": "Hình 02",
+      "x": 45,
+      "y": 218,
+      "w": 34.12,
+      "h": 9.3
+    },
+    {
+      "page": 4,
+      "text": "Luồng xử lý và vòng tái sử dụng tri thức",
+      "x": 94,
+      "y": 218,
+      "w": 164.01,
+      "h": 9.3
+    },
+    {
+      "page": 4,
+      "text": "A / XỬ LÝ YÊU CẦU",
+      "x": 117,
+      "y": 250,
+      "w": 84.79,
+      "h": 9.3
+    },
+    {
+      "page": 4,
+      "text": "B / TÍCH LŨY TRI THỨC",
+      "x": 382,
+      "y": 250,
+      "w": 102.59,
+      "h": 9.3
+    },
+    {
+      "page": 4,
+      "text": "Gửi ý kiến qua Portal",
+      "x": 169.61,
+      "y": 288.5,
+      "w": 101.79,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Ghi nhận & giao đầu mối",
+      "x": 160.78,
+      "y": 346.5,
+      "w": 119.44,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Làm rõ & xử lý",
+      "x": 185.15,
+      "y": 404.5,
+      "w": 70.71,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Phản hồi người gửi",
+      "x": 175.17,
+      "y": 462.5,
+      "w": 90.67,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Đánh giá giá trị",
+      "x": 183.04,
+      "y": 534,
+      "w": 74.92,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "dùng lại",
+      "x": 200.76,
+      "y": 548,
+      "w": 39.48,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Cần",
+      "x": 64.85,
+      "y": 355,
+      "w": 16.29,
+      "h": 9.2
+    },
+    {
+      "page": 4,
+      "text": "bổ sung",
+      "x": 56.47,
+      "y": 368,
+      "w": 33.06,
+      "h": 9.2
+    },
+    {
+      "page": 4,
+      "text": "Lưu hồ sơ xử lý",
+      "x": 183.76,
+      "y": 635.5,
+      "w": 73.49,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Không",
+      "x": 228.5,
+      "y": 597.0,
+      "w": 26.71,
+      "h": 9.2
+    },
+    {
+      "page": 4,
+      "text": "Biên tập Shape Up",
+      "x": 412.05,
+      "y": 541.0,
+      "w": 90.9,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Rà soát & công bố",
+      "x": 413.13,
+      "y": 599.0,
+      "w": 88.74,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Tra cứu cho yêu cầu mới",
+      "x": 402.96,
+      "y": 657.0,
+      "w": 109.08,
+      "h": 9.8
+    },
+    {
+      "page": 4,
+      "text": "Có",
+      "x": 344,
+      "y": 532.0,
+      "w": 11.31,
+      "h": 9.2
+    },
+    {
+      "page": 4,
+      "text": "Dùng lại cách giải quyết",
+      "x": 372,
+      "y": 390.0,
+      "w": 98.36,
+      "h": 9.2
+    },
+    {
+      "page": 4,
+      "text": "Không phải mọi phiếu đều thành bài tri thức. Cần rà soát nội dung và ẩn thông tin cá nhân trước khi công bố.",
+      "x": 45,
+      "y": 716,
+      "w": 504.96,
+      "h": 10.5
+    },
+    {
+      "page": 4,
+      "text": "Luồng đề xuất có bước yêu cầu bổ sung. Hiện đội ngũ cần ghi nhận câu trả lời nhận qua email; hệ thống chưa tự thu",
+      "x": 45,
+      "y": 757,
+      "w": 482.3,
+      "h": 9.4
+    },
+    {
+      "page": 4,
+      "text": "email trả lời vào phiếu.",
+      "x": 45,
+      "y": 770,
+      "w": 94.99,
+      "h": 9.4
+    },
+    {
+      "page": 4,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 4,
+      "text": "04 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 5,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 5,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 5,
+      "text": "05 / ĐIỂM SÁNG TẠO & GIÁ TRỊ",
+      "x": 45,
+      "y": 111,
+      "w": 139.55,
+      "h": 9.3
+    },
+    {
+      "page": 5,
+      "text": "Kết nối việc xử lý hôm nay",
+      "x": 45,
+      "y": 140,
+      "w": 302.38,
+      "h": 25
+    },
+    {
+      "page": 5,
+      "text": "với năng lực phục vụ ngày mai",
+      "x": 45,
+      "y": 170,
+      "w": 348.95,
+      "h": 25
+    },
+    {
+      "page": 5,
+      "text": "Điểm nhấn của sáng kiến là cách tổ chức vận hành: kết nối tiếp nhận, trách nhiệm xử lý, phản hồi và",
+      "x": 45,
+      "y": 219.0,
+      "w": 485.62,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "tích lũy tri thức trong một vòng thống nhất, phù hợp với đơn vị áp dụng.",
+      "x": 45,
+      "y": 234.6,
+      "w": 350.11,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "01",
+      "x": 45,
+      "y": 276.2,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 5,
+      "text": "Thông tin đi cùng trách nhiệm",
+      "x": 92,
+      "y": 276.2,
+      "w": 171.98,
+      "h": 12.4
+    },
+    {
+      "page": 5,
+      "text": "Phiếu tiếp nhận gắn một nhu cầu với đầu mối và trạng thái. Người quản lý có căn cứ để theo",
+      "x": 92,
+      "y": 300.2,
+      "w": 448.05,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "dõi; người xử lý có bối cảnh để tiếp tục công việc.",
+      "x": 92,
+      "y": 315.8,
+      "w": 238.52,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "02",
+      "x": 45,
+      "y": 365.4,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 5,
+      "text": "Tri thức hình thành từ tình huống thực",
+      "x": 92,
+      "y": 365.4,
+      "w": 218.26,
+      "h": 12.4
+    },
+    {
+      "page": 5,
+      "text": "Bài hướng dẫn được lựa chọn từ yêu cầu đã xử lý và giữ liên kết với phiếu nguồn, giúp hiểu vì",
+      "x": 92,
+      "y": 389.4,
+      "w": 451.48,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "sao bài tồn tại và khi nào nên dùng.",
+      "x": 92,
+      "y": 405.0,
+      "w": 173.3,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "03",
+      "x": 45,
+      "y": 454.6,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 5,
+      "text": "Tri thức quay trở lại công việc",
+      "x": 92,
+      "y": 454.6,
+      "w": 169.53,
+      "h": 12.4
+    },
+    {
+      "page": 5,
+      "text": "Bài đã công bố có thể được tìm, liên kết với yêu cầu mới và dùng khi chuẩn bị phản hồi. Kho tri",
+      "x": 92,
+      "y": 478.6,
+      "w": 457.88,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "thức gắn với tác vụ hằng ngày.",
+      "x": 92,
+      "y": 494.2,
+      "w": 149.31,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "04",
+      "x": 45,
+      "y": 543.8,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 5,
+      "text": "Một khung vận hành cho nhiều nghiệp vụ",
+      "x": 92,
+      "y": 543.8,
+      "w": 235.98,
+      "h": 12.4
+    },
+    {
+      "page": 5,
+      "text": "Giữ các bước cốt lõi; thay nhóm tiếp nhận, nội dung, người phụ trách và cách hướng dẫn theo",
+      "x": 92,
+      "y": 567.8,
+      "w": 452.02,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "nhu cầu của từng đơn vị.",
+      "x": 92,
+      "y": 583.4,
+      "w": 119.26,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "Giá trị kỳ vọng",
+      "x": 45,
+      "y": 619.0,
+      "w": 83.53,
+      "h": 12.4
+    },
+    {
+      "page": 5,
+      "text": "Giảm giải thích lặp lại, hỗ trợ phản hồi nhất quán, giữ kinh nghiệm khi nhân sự thay đổi và giúp nhận",
+      "x": 45,
+      "y": 642.0,
+      "w": 488.8,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "diện nhu cầu cải tiến. Mức độ đạt được cần được kiểm chứng bằng dữ liệu.",
+      "x": 45,
+      "y": 657.6,
+      "w": 359.31,
+      "h": 11
+    },
+    {
+      "page": 5,
+      "text": "Phạm vi sáng tạo: cải tiến ứng dụng và cách tổ chức công việc; không đặt luận điểm helpdesk hoặc kho kiến thức là",
+      "x": 45,
+      "y": 685.2,
+      "w": 499.85,
+      "h": 9.8
+    },
+    {
+      "page": 5,
+      "text": "phát minh mới trên thị trường.",
+      "x": 45,
+      "y": 699.2,
+      "w": 130.87,
+      "h": 9.8
+    },
+    {
+      "page": 5,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 5,
+      "text": "05 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 6,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 6,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 6,
+      "text": "06 / CẤU TRÚC SHAPE UP",
+      "x": 45,
+      "y": 111,
+      "w": 116.64,
+      "h": 9.3
+    },
+    {
+      "page": 6,
+      "text": "Đóng gói kinh nghiệm",
+      "x": 45,
+      "y": 140,
+      "w": 254.6,
+      "h": 25
+    },
+    {
+      "page": 6,
+      "text": "thành một bài dùng được",
+      "x": 45,
+      "y": 170,
+      "w": 290.1,
+      "h": 25
+    },
+    {
+      "page": 6,
+      "text": "Chọn tình huống có khả năng lặp lại, cách giải quyết đã được kiểm tra và phần hướng dẫn có thể dùng",
+      "x": 45,
+      "y": 219.0,
+      "w": 497.89,
+      "h": 11
+    },
+    {
+      "page": 6,
+      "text": "cho người khác. Không sao chép nguyên cuộc trao đổi có thông tin riêng vào kho dùng chung.",
+      "x": 45,
+      "y": 234.6,
+      "w": 456.37,
+      "h": 11
+    },
+    {
+      "page": 6,
+      "text": "Hình 03",
+      "x": 45,
+      "y": 262.2,
+      "w": 34.12,
+      "h": 9.3
+    },
+    {
+      "page": 6,
+      "text": "Mẫu nội dung đề xuất cho một bài tri thức",
+      "x": 94,
+      "y": 262.2,
+      "w": 172.78,
+      "h": 9.3
+    },
+    {
+      "page": 6,
+      "text": "Thành phần",
+      "x": 54,
+      "y": 296.2,
+      "w": 57.87,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Câu hỏi bài cần trả lời",
+      "x": 199,
+      "y": 296.2,
+      "w": 105.59,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Tình huống",
+      "x": 54,
+      "y": 330.7,
+      "w": 55.08,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Người dùng gặp vấn đề gì? Nhận biết bằng dấu hiệu nào?",
+      "x": 199,
+      "y": 330.7,
+      "w": 268.1,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Phạm vi áp dụng",
+      "x": 54,
+      "y": 367.2,
+      "w": 81.6,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Ai dùng được? Trong điều kiện nào? Khi nào cần chuyển đầu mối khác?",
+      "x": 199,
+      "y": 367.2,
+      "w": 329.64,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Cách giải quyết",
+      "x": 54,
+      "y": 403.7,
+      "w": 74.74,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Các bước đã xác nhận là gì? Kết quả mong đợi sau từng bước?",
+      "x": 199,
+      "y": 403.7,
+      "w": 288.71,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Căn cứ và nguồn",
+      "x": 54,
+      "y": 440.2,
+      "w": 80.63,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Tài liệu nào cần đối chiếu? Phiếu nguồn nào tạo ra kinh nghiệm này?",
+      "x": 199,
+      "y": 440.2,
+      "w": 318.49,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Trách nhiệm cập nhật",
+      "x": 54,
+      "y": 476.7,
+      "w": 104.94,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Ai phụ trách nội dung? Khi nào cần rà soát lại?",
+      "x": 199,
+      "y": 476.7,
+      "w": 215.93,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "CHU KỲ TRI THỨC ĐỀ XUẤT",
+      "x": 45,
+      "y": 521.2,
+      "w": 124.29,
+      "h": 9.3
+    },
+    {
+      "page": 6,
+      "text": "Bản nháp",
+      "x": 79.02,
+      "y": 568.2,
+      "w": 46.28,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Rà soát",
+      "x": 214.11,
+      "y": 568.2,
+      "w": 36.74,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Công bố",
+      "x": 342.36,
+      "y": 568.2,
+      "w": 40.87,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Sử dụng",
+      "x": 472.91,
+      "y": 568.2,
+      "w": 40.41,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "Phản hồi từ việc sử dụng là căn cứ cập nhật, sửa hoặc ngừng dùng bài không còn phù hợp. Người phụ",
+      "x": 45,
+      "y": 613.2,
+      "w": 493.87,
+      "h": 11
+    },
+    {
+      "page": 6,
+      "text": "trách nghiệp vụ chịu trách nhiệm nội dung được công bố.",
+      "x": 45,
+      "y": 628.8,
+      "w": 277.2,
+      "h": 11
+    },
+    {
+      "page": 6,
+      "text": "Đã có trường vấn đề, giải pháp, tài liệu, tác giả và phiếu nguồn. Điều kiện áp dụng và lịch rà soát có thể",
+      "x": 57,
+      "y": 667.4,
+      "w": 479.43,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "ghi trong nội dung khi thí điểm; quản lý phiên bản và nhắc rà soát tự động là hướng hoàn thiện tiếp",
+      "x": 57,
+      "y": 681.9,
+      "w": 461.9,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "theo.",
+      "x": 57,
+      "y": 696.4,
+      "w": 23.46,
+      "h": 10.5
+    },
+    {
+      "page": 6,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 6,
+      "text": "06 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 7,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 7,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 7,
+      "text": "07 / TÌNH HUỐNG MINH HỌA",
+      "x": 45,
+      "y": 111,
+      "w": 130.62,
+      "h": 9.3
+    },
+    {
+      "page": 7,
+      "text": "Một câu hỏi nghiệp vụ,",
+      "x": 45,
+      "y": 140,
+      "w": 261.28,
+      "h": 25
+    },
+    {
+      "page": 7,
+      "text": "một hướng dẫn có thể dùng lại",
+      "x": 45,
+      "y": 170,
+      "w": 354.3,
+      "h": 25
+    },
+    {
+      "page": 7,
+      "text": "Minh họa chăm sóc khách hàng: người dùng hỏi cần chuẩn bị gì cho một thủ tục. Ví dụ mô tả cách vận",
+      "x": 57,
+      "y": 230.0,
+      "w": 472.96,
+      "h": 10.5
+    },
+    {
+      "page": 7,
+      "text": "hành, không phải hướng dẫn thủ tục cụ thể của TVSI.",
+      "x": 57,
+      "y": 244.5,
+      "w": 247.01,
+      "h": 10.5
+    },
+    {
+      "page": 7,
+      "text": "01",
+      "x": 45,
+      "y": 286.0,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 7,
+      "text": "Tiếp nhận nhu cầu",
+      "x": 92,
+      "y": 286.0,
+      "w": 105.15,
+      "h": 12.4
+    },
+    {
+      "page": 7,
+      "text": "Người gửi nêu thủ tục cần thực hiện, điều chưa rõ và cách liên hệ qua Portal. Phiếu được ghi",
+      "x": 92,
+      "y": 309.0,
+      "w": 445.96,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "nhận theo nhóm nghiệp vụ.",
+      "x": 92,
+      "y": 324.6,
+      "w": 134.12,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "02",
+      "x": 45,
+      "y": 362.2,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 7,
+      "text": "Làm rõ và giao đúng đầu mối",
+      "x": 92,
+      "y": 362.2,
+      "w": 166.63,
+      "h": 12.4
+    },
+    {
+      "page": 7,
+      "text": "Đội tiếp nhận xác định trường hợp cụ thể, bổ sung thông tin cần thiết và giao người chịu trách",
+      "x": 92,
+      "y": 385.2,
+      "w": 456.18,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "nhiệm phản hồi.",
+      "x": 92,
+      "y": 400.8,
+      "w": 78.16,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "03",
+      "x": 45,
+      "y": 438.4,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 7,
+      "text": "Tra cứu, xử lý và phản hồi",
+      "x": 92,
+      "y": 438.4,
+      "w": 146.83,
+      "h": 12.4
+    },
+    {
+      "page": 7,
+      "text": "Nhân viên đối chiếu tài liệu đang áp dụng, kiểm tra hướng dẫn có sẵn và gửi câu trả lời phù",
+      "x": 92,
+      "y": 461.4,
+      "w": 442.94,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "hợp với hoàn cảnh người hỏi.",
+      "x": 92,
+      "y": 477.0,
+      "w": 140.12,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "04",
+      "x": 45,
+      "y": 514.6,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 7,
+      "text": "Tách phần kiến thức dùng chung",
+      "x": 92,
+      "y": 514.6,
+      "w": 186.35,
+      "h": 12.4
+    },
+    {
+      "page": 7,
+      "text": "Người phụ trách chọn phần hướng dẫn có thể tái sử dụng, bỏ thông tin cá nhân và nêu điều",
+      "x": 92,
+      "y": 537.6,
+      "w": 444.28,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "kiện áp dụng trước khi rà soát.",
+      "x": 92,
+      "y": 553.2,
+      "w": 147.53,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "05",
+      "x": 45,
+      "y": 590.8,
+      "w": 21.6,
+      "h": 18
+    },
+    {
+      "page": 7,
+      "text": "Sử dụng trong lần hỏi tiếp theo",
+      "x": 92,
+      "y": 590.8,
+      "w": 179.55,
+      "h": 12.4
+    },
+    {
+      "page": 7,
+      "text": "Nhân viên tìm bài đã công bố, kiểm tra còn phù hợp rồi dùng làm căn cứ. Nếu tình huống",
+      "x": 92,
+      "y": 613.8,
+      "w": 432.12,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "khác, tiếp tục xử lý và cập nhật bài khi cần.",
+      "x": 92,
+      "y": 629.4,
+      "w": 207.98,
+      "h": 11
+    },
+    {
+      "page": 7,
+      "text": "Với ý kiến cải tiến, đầu ra có thể là chấp nhận, cần làm rõ, đưa vào kế hoạch hoặc chưa phù hợp kèm lý",
+      "x": 57,
+      "y": 678.0,
+      "w": 476.13,
+      "h": 10.5
+    },
+    {
+      "page": 7,
+      "text": "do. Tiếp nhận ý kiến không đồng nghĩa cam kết triển khai mọi đề xuất.",
+      "x": 57,
+      "y": 692.5,
+      "w": 326.73,
+      "h": 10.5
+    },
+    {
+      "page": 7,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 7,
+      "text": "07 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 8,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 8,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 8,
+      "text": "08 / KHẢ NĂNG ÁP DỤNG RỘNG RÃI",
+      "x": 45,
+      "y": 111,
+      "w": 163.82,
+      "h": 9.3
+    },
+    {
+      "page": 8,
+      "text": "Mở rộng theo nghiệp vụ,",
+      "x": 45,
+      "y": 140,
+      "w": 282.43,
+      "h": 25
+    },
+    {
+      "page": 8,
+      "text": "giữ nguyên vòng vận hành",
+      "x": 45,
+      "y": 170,
+      "w": 304.9,
+      "h": 25
+    },
+    {
+      "page": 8,
+      "text": "Mô hình phù hợp khi có đầu vào rõ, đầu mối chịu trách nhiệm, kết quả cần theo dõi, nhu cầu phản hồi",
+      "x": 45,
+      "y": 219.0,
+      "w": 491.16,
+      "h": 11
+    },
+    {
+      "page": 8,
+      "text": "và kinh nghiệm có thể chuẩn hóa.",
+      "x": 45,
+      "y": 234.6,
+      "w": 163.28,
+      "h": 11
+    },
+    {
+      "page": 8,
+      "text": "Mảng nghiệp vụ",
+      "x": 54,
+      "y": 272.2,
+      "w": 77.94,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Đầu vào điển hình",
+      "x": 163,
+      "y": 272.2,
+      "w": 87.6,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Tri thức dùng lại",
+      "x": 361,
+      "y": 272.2,
+      "w": 79.7,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Chăm sóc khách",
+      "x": 54,
+      "y": 306.7,
+      "w": 78.67,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "hàng",
+      "x": 54,
+      "y": 321.2,
+      "w": 24.37,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Câu hỏi thủ tục, phản ánh trải nghiệm,",
+      "x": 163,
+      "y": 306.7,
+      "w": 178.1,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "yêu cầu hướng dẫn.",
+      "x": 163,
+      "y": 321.2,
+      "w": 91.17,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Câu trả lời theo tình huống; cách xử lý",
+      "x": 361,
+      "y": 306.7,
+      "w": 177.04,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "điểm vướng thường gặp.",
+      "x": 361,
+      "y": 321.2,
+      "w": 114.23,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Kinh doanh",
+      "x": 54,
+      "y": 357.7,
+      "w": 55.17,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Câu hỏi về sản phẩm, tài liệu cần giải",
+      "x": 163,
+      "y": 357.7,
+      "w": 172.71,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "thích, góp ý cách phục vụ.",
+      "x": 163,
+      "y": 372.2,
+      "w": 120.13,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Hướng dẫn đã kiểm tra; điều kiện áp",
+      "x": 361,
+      "y": 357.7,
+      "w": 168.75,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "dụng; đầu mối chuyển tiếp.",
+      "x": 361,
+      "y": 372.2,
+      "w": 126.07,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Công nghệ / sản",
+      "x": 54,
+      "y": 408.7,
+      "w": 78.82,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "phẩm số",
+      "x": 54,
+      "y": 423.2,
+      "w": 41.41,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Lỗi sử dụng, khó khăn thao tác, đề",
+      "x": 163,
+      "y": 408.7,
+      "w": 159.44,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "xuất tính năng.",
+      "x": 163,
+      "y": 423.2,
+      "w": 70.14,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Cách khắc phục; dấu hiệu nhận biết;",
+      "x": 361,
+      "y": 408.7,
+      "w": 167.71,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "thông tin cần thu thập.",
+      "x": 361,
+      "y": 423.2,
+      "w": 106.14,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Vận hành nội bộ",
+      "x": 54,
+      "y": 459.7,
+      "w": 79.3,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Vướng mắc phối hợp, bàn giao, tra cứu",
+      "x": 163,
+      "y": 459.7,
+      "w": 179.81,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "quy trình.",
+      "x": 163,
+      "y": 474.2,
+      "w": 44.31,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Bảng kiểm; hướng dẫn phối hợp; cách",
+      "x": 361,
+      "y": 459.7,
+      "w": 175.08,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "xử lý ngoại lệ.",
+      "x": 361,
+      "y": 474.2,
+      "w": 65.08,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Nhân sự / hành",
+      "x": 54,
+      "y": 510.7,
+      "w": 73.08,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "chính",
+      "x": 54,
+      "y": 525.2,
+      "w": 26.06,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Câu hỏi thủ tục, biểu mẫu, dịch vụ cho",
+      "x": 163,
+      "y": 510.7,
+      "w": 177.0,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "nhân viên.",
+      "x": 163,
+      "y": 525.2,
+      "w": 47.95,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Hướng dẫn thủ tục; câu hỏi thường",
+      "x": 361,
+      "y": 510.7,
+      "w": 162.13,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "gặp theo phạm vi được phép.",
+      "x": 361,
+      "y": 525.2,
+      "w": 135.83,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "Cách nhân rộng",
+      "x": 45,
+      "y": 569.7,
+      "w": 90.33,
+      "h": 12.4
+    },
+    {
+      "page": 8,
+      "text": "Bắt đầu bằng cấu hình nhóm và người phụ trách; chuẩn hóa mẫu tiếp nhận, trạng thái và mẫu bài.",
+      "x": 45,
+      "y": 592.7,
+      "w": 476.09,
+      "h": 11
+    },
+    {
+      "page": 8,
+      "text": "Nghiệp vụ đặc thù có thể cần thêm trường thông tin, phân quyền hoặc bước duyệt.",
+      "x": 45,
+      "y": 608.3,
+      "w": 402.8,
+      "h": 11
+    },
+    {
+      "page": 8,
+      "text": "Những công việc có nhiều cấp phê duyệt, thời hạn bắt buộc hoặc dữ liệu riêng của cá nhân cần được",
+      "x": 57,
+      "y": 646.9,
+      "w": 464.79,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "đánh giá quy trình và quyền truy cập trước khi áp dụng. Không chỉ đổi tên danh mục rồi triển khai đồng",
+      "x": 57,
+      "y": 661.4,
+      "w": 478.41,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "loạt.",
+      "x": 57,
+      "y": 675.9,
+      "w": 20.58,
+      "h": 10.5
+    },
+    {
+      "page": 8,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 8,
+      "text": "08 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 9,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 9,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 9,
+      "text": "09 / TÍNH KHẢ THI & NGUỒN LỰC",
+      "x": 45,
+      "y": 111,
+      "w": 150.22,
+      "h": 9.3
+    },
+    {
+      "page": 9,
+      "text": "Khả thi từ nền tảng đã có,",
+      "x": 45,
+      "y": 140,
+      "w": 297.12,
+      "h": 25
+    },
+    {
+      "page": 9,
+      "text": "triển khai theo phạm vi nhỏ",
+      "x": 45,
+      "y": 170,
+      "w": 316.5,
+      "h": 25
+    },
+    {
+      "page": 9,
+      "text": "Căn cứ hiện có",
+      "x": 54,
+      "y": 229.0,
+      "w": 70.26,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Ý nghĩa đối với triển khai",
+      "x": 257,
+      "y": 229.0,
+      "w": 119.9,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Cổng tiếp nhận độc lập",
+      "x": 54,
+      "y": 263.5,
+      "w": 112.62,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Có thể kiểm chứng việc gửi yêu cầu ngoài khu vực làm việc",
+      "x": 257,
+      "y": 263.5,
+      "w": 272.86,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "nội bộ.",
+      "x": 257,
+      "y": 278.0,
+      "w": 31.3,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Phiếu, phân công, trạng thái, email",
+      "x": 54,
+      "y": 314.5,
+      "w": 168.93,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Có luồng tiếp nhận và chuẩn bị phản hồi; lịch sử gửi được lưu",
+      "x": 257,
+      "y": 314.5,
+      "w": 283.76,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "theo phiếu.",
+      "x": 257,
+      "y": 329.0,
+      "w": 52.16,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Chuyển phiếu thành Shape Up",
+      "x": 54,
+      "y": 365.5,
+      "w": 147.75,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Đã nối được tình huống nguồn với bản nháp tri thức và thư",
+      "x": 257,
+      "y": 365.5,
+      "w": 272.18,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "viện tra cứu.",
+      "x": 257,
+      "y": 380.0,
+      "w": 56.85,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Nhóm nghiệp vụ và thống kê",
+      "x": 54,
+      "y": 416.5,
+      "w": 139.69,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Có cơ sở tổ chức thí điểm theo phạm vi và theo dõi lượng",
+      "x": 257,
+      "y": 416.5,
+      "w": 264.94,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "yêu cầu.",
+      "x": 257,
+      "y": 431.0,
+      "w": 38.29,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "Nguồn lực có thể tổ chức theo quy mô",
+      "x": 45,
+      "y": 475.5,
+      "w": 217.02,
+      "h": 12.4
+    },
+    {
+      "page": 9,
+      "text": "Một đầu mối điều phối; đại diện tiếp nhận và xử lý của mỗi nhóm; người rà soát tri thức; hỗ trợ kỹ thuật",
+      "x": 45,
+      "y": 498.5,
+      "w": 499.1,
+      "h": 11
+    },
+    {
+      "page": 9,
+      "text": "cho hạ tầng, dữ liệu, tài khoản và gửi thư. Các vai trò có thể kiêm nhiệm trong phạm vi nhỏ.",
+      "x": 45,
+      "y": 514.1,
+      "w": 442.63,
+      "h": 11
+    },
+    {
+      "page": 9,
+      "text": "Nhóm chi phí cần dự toán",
+      "x": 45,
+      "y": 541.7,
+      "w": 145.92,
+      "h": 12.4
+    },
+    {
+      "page": 9,
+      "text": "Hạ tầng và lưu trữ; tên miền và gửi thư; thời gian cấu hình, đào tạo; thời gian biên tập, rà soát; vận hành",
+      "x": 45,
+      "y": 564.7,
+      "w": 503.46,
+      "h": 11
+    },
+    {
+      "page": 9,
+      "text": "và bảo trì. Dự toán dựa trên số người dùng, lượng yêu cầu, dung lượng và yêu cầu dịch vụ của thí điểm.",
+      "x": 45,
+      "y": 580.3,
+      "w": 500.47,
+      "h": 11
+    },
+    {
+      "page": 9,
+      "text": "Điều kiện trước khi mở ra bên ngoài",
+      "x": 45,
+      "y": 607.9,
+      "w": 203.58,
+      "h": 12.4
+    },
+    {
+      "page": 9,
+      "text": "Chốt phạm vi tiếp nhận, trách nhiệm phản hồi, quyền xem nội dung và ảnh, kiểm soát yêu cầu rác, sao",
+      "x": 45,
+      "y": 630.9,
+      "w": 497.38,
+      "h": 11
+    },
+    {
+      "page": 9,
+      "text": "lưu và phương án khi gián đoạn. Kiểm tra môi trường triển khai theo nhu cầu thực tế.",
+      "x": 45,
+      "y": 646.5,
+      "w": 410.69,
+      "h": 11
+    },
+    {
+      "page": 9,
+      "text": "Đã có bản hiện thực hóa để kiểm chứng các luồng cốt lõi. Khả năng vận hành chính thức, mức chịu tải",
+      "x": 57,
+      "y": 685.1,
+      "w": 470.17,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "và hiệu quả kinh doanh cần được xác nhận trong triển khai và thí điểm.",
+      "x": 57,
+      "y": 699.6,
+      "w": 328.51,
+      "h": 10.5
+    },
+    {
+      "page": 9,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 9,
+      "text": "09 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 10,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 10,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 10,
+      "text": "10 / KẾ HOẠCH ÁP DỤNG ĐỀ XUẤT",
+      "x": 45,
+      "y": 111,
+      "w": 157.55,
+      "h": 9.3
+    },
+    {
+      "page": 10,
+      "text": "Thí điểm sáu tuần",
+      "x": 45,
+      "y": 140,
+      "w": 206.43,
+      "h": 25
+    },
+    {
+      "page": 10,
+      "text": "để ra quyết định bằng bằng chứng",
+      "x": 45,
+      "y": 170,
+      "w": 396.5,
+      "h": 25
+    },
+    {
+      "page": 10,
+      "text": "Chọn một nhóm hỗ trợ công nghệ và một nhóm nghiệp vụ ngoài công nghệ để kiểm chứng cả luồng xử",
+      "x": 45,
+      "y": 219.0,
+      "w": 502.44,
+      "h": 11
+    },
+    {
+      "page": 10,
+      "text": "lý và khả năng mở rộng. Sáu tuần là khung tham khảo, điều chỉnh theo nguồn lực đơn vị.",
+      "x": 45,
+      "y": 234.6,
+      "w": 431.43,
+      "h": 11
+    },
+    {
+      "page": 10,
+      "text": "Giai đoạn",
+      "x": 54,
+      "y": 272.2,
+      "w": 45.91,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Công việc trọng tâm",
+      "x": 155,
+      "y": 272.2,
+      "w": 98.73,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Đầu ra",
+      "x": 388,
+      "y": 272.2,
+      "w": 32.53,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Tuần 1-2",
+      "x": 54,
+      "y": 306.7,
+      "w": 44.49,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Chuẩn bị & đo",
+      "x": 54,
+      "y": 321.2,
+      "w": 68.73,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "nền",
+      "x": 54,
+      "y": 335.7,
+      "w": 17.98,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Khảo sát cách làm hiện tại; chọn loại yêu cầu;",
+      "x": 155,
+      "y": 306.7,
+      "w": 210.69,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "giao trách nhiệm; cấu hình nhóm và quyền;",
+      "x": 155,
+      "y": 321.2,
+      "w": 199.84,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "hướng dẫn đội ngũ.",
+      "x": 155,
+      "y": 335.7,
+      "w": 90.38,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Phạm vi, dữ liệu nền, chỉ tiêu và",
+      "x": 388,
+      "y": 306.7,
+      "w": 147.13,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "mục tiêu được chốt trước vận",
+      "x": 388,
+      "y": 321.2,
+      "w": 134.88,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "hành.",
+      "x": 388,
+      "y": 335.7,
+      "w": 25.85,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Tuần 3-5",
+      "x": 54,
+      "y": 372.2,
+      "w": 44.49,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Vận hành thí",
+      "x": 54,
+      "y": 386.7,
+      "w": 62.09,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "điểm",
+      "x": 54,
+      "y": 401.2,
+      "w": 23.88,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Theo dõi phiếu, xử lý và phản hồi; chọn tình",
+      "x": 155,
+      "y": 372.2,
+      "w": 202.67,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "huống để biên tập bài; rà soát hằng tuần; ghi",
+      "x": 155,
+      "y": 386.7,
+      "w": 209.02,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "nhận số liệu.",
+      "x": 155,
+      "y": 401.2,
+      "w": 59.18,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Yêu cầu được xử lý, bài được",
+      "x": 388,
+      "y": 372.2,
+      "w": 132.15,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "công bố, dữ liệu đo và phản hồi",
+      "x": 388,
+      "y": 386.7,
+      "w": 145.95,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "sử dụng.",
+      "x": 388,
+      "y": 401.2,
+      "w": 40.17,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Tuần 6",
+      "x": 54,
+      "y": 437.7,
+      "w": 33.63,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Đánh giá &",
+      "x": 54,
+      "y": 452.2,
+      "w": 54.11,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "quyết định",
+      "x": 54,
+      "y": 466.7,
+      "w": 51.73,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "So sánh nhóm yêu cầu tương đương; tính",
+      "x": 155,
+      "y": 437.7,
+      "w": 191.67,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "công sức phát sinh; đánh giá chất lượng và",
+      "x": 155,
+      "y": 452.2,
+      "w": 199.19,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "mức phù hợp.",
+      "x": 155,
+      "y": 466.7,
+      "w": 63.45,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "Mở rộng, điều chỉnh rồi thử tiếp",
+      "x": 388,
+      "y": 437.7,
+      "w": 145.78,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "hoặc giữ phạm vi hiện tại.",
+      "x": 388,
+      "y": 452.2,
+      "w": 118.76,
+      "h": 10.5
+    },
+    {
+      "page": 10,
+      "text": "ĐIỀU KIỆN QUYẾT ĐỊNH NHÂN RỘNG",
+      "x": 45,
+      "y": 511.2,
+      "w": 166.64,
+      "h": 9.3
+    },
+    {
+      "page": 10,
+      "text": "Quy trình được thực hiện",
+      "x": 45,
+      "y": 544.2,
+      "w": 141.22,
+      "h": 12.4
+    },
+    {
+      "page": 10,
+      "text": "Đội ngũ có thể tiếp nhận, giao việc, phản hồi và duy trì bài tri thức theo cách đã thống nhất.",
+      "x": 45,
+      "y": 567.2,
+      "w": 444.37,
+      "h": 11
+    },
+    {
+      "page": 10,
+      "text": "Dữ liệu đủ tin cậy",
+      "x": 45,
+      "y": 594.8,
+      "w": 100.04,
+      "h": 12.4
+    },
+    {
+      "page": 10,
+      "text": "Cách đo nhất quán, có đường cơ sở và phân biệt được nhóm yêu cầu hoặc độ phức tạp.",
+      "x": 45,
+      "y": 617.8,
+      "w": 422.59,
+      "h": 11
+    },
+    {
+      "page": 10,
+      "text": "Giá trị tương xứng công sức",
+      "x": 45,
+      "y": 645.4,
+      "w": 158.0,
+      "h": 12.4
+    },
+    {
+      "page": 10,
+      "text": "Lợi ích quan sát được bù đắp công vận hành và biên tập; có người tiếp tục duy trì sau thí điểm.",
+      "x": 45,
+      "y": 668.4,
+      "w": 457.96,
+      "h": 11
+    },
+    {
+      "page": 10,
+      "text": "Mục tiêu và ngưỡng đánh giá được thống nhất trước giai đoạn vận hành, tránh chọn số liệu có lợi sau khi kết thúc.",
+      "x": 45,
+      "y": 696.0,
+      "w": 492.51,
+      "h": 9.8
+    },
+    {
+      "page": 10,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 10,
+      "text": "10 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 11,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 11,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 11,
+      "text": "11 / CHỈ TIÊU & PHƯƠNG PHÁP ĐÁNH GIÁ",
+      "x": 45,
+      "y": 111,
+      "w": 189.92,
+      "h": 9.3
+    },
+    {
+      "page": 11,
+      "text": "Đo hiệu quả phục vụ,",
+      "x": 45,
+      "y": 140,
+      "w": 242.48,
+      "h": 25
+    },
+    {
+      "page": 11,
+      "text": "không chỉ đếm số phiếu",
+      "x": 45,
+      "y": 170,
+      "w": 273.15,
+      "h": 25
+    },
+    {
+      "page": 11,
+      "text": "Chỉ tiêu",
+      "x": 54,
+      "y": 229.0,
+      "w": 37.29,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Cách đo và lưu ý",
+      "x": 196,
+      "y": 229.0,
+      "w": 80.02,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Phản hồi đầu tiên",
+      "x": 54,
+      "y": 263.5,
+      "w": 84.95,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Trung vị thời gian từ tiếp nhận đến phản hồi có nội dung đầu tiên. Cần ghi",
+      "x": 196,
+      "y": 263.5,
+      "w": 343.52,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "mốc đầu tiên, không dùng email tự xác nhận.",
+      "x": 196,
+      "y": 278.0,
+      "w": 209.33,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Thời gian hoàn tất",
+      "x": 54,
+      "y": 314.5,
+      "w": 88.71,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Từ tiếp nhận đến tiêu chí kết thúc đã thống nhất; tách nhóm chờ người gửi",
+      "x": 196,
+      "y": 314.5,
+      "w": 344.63,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "và độ phức tạp khi so sánh.",
+      "x": 196,
+      "y": 329.0,
+      "w": 126.86,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Tỷ lệ dùng lại tri thức",
+      "x": 54,
+      "y": 365.5,
+      "w": 103.98,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Phiếu đủ điều kiện thực sự dùng bài đã công bố / tổng phiếu đủ điều kiện.",
+      "x": 196,
+      "y": 365.5,
+      "w": 341.47,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Kiểm tra liên kết bài có hữu ích.",
+      "x": 196,
+      "y": 380.0,
+      "w": 145.36,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Chất lượng bài",
+      "x": 54,
+      "y": 416.5,
+      "w": 71.43,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Tỷ lệ bài trong mẫu kiểm tra đạt tiêu chí đúng, đủ điều kiện áp dụng,",
+      "x": 196,
+      "y": 416.5,
+      "w": 318.49,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "không lộ thông tin riêng và còn cập nhật.",
+      "x": 196,
+      "y": 431.0,
+      "w": 191.1,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Xử lý lại & trải nghiệm",
+      "x": 54,
+      "y": 467.5,
+      "w": 108.4,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Theo dõi yêu cầu chưa giải quyết thỏa đáng; khảo sát ngắn mức dễ gửi,",
+      "x": 196,
+      "y": 467.5,
+      "w": 330.88,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "độ rõ câu trả lời và công sức sử dụng.",
+      "x": 196,
+      "y": 482.0,
+      "w": 173.69,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "Thu thập dữ liệu phù hợp với phiên bản hiện tại",
+      "x": 45,
+      "y": 526.5,
+      "w": 270.57,
+      "h": 12.4
+    },
+    {
+      "page": 11,
+      "text": "Liên kết phiếu và bài hỗ trợ theo dõi tái sử dụng. Mốc phản hồi đầu tiên, lịch sử trạng thái và khảo sát",
+      "x": 45,
+      "y": 549.5,
+      "w": 492.78,
+      "h": 11
+    },
+    {
+      "page": 11,
+      "text": "cần ghi bổ sung bằng bảng theo dõi có kiểm tra hoặc hoàn thiện chức năng đo trong thí điểm.",
+      "x": 45,
+      "y": 565.1,
+      "w": 456.57,
+      "h": 11
+    },
+    {
+      "page": 11,
+      "text": "ƯỚC LƯỢNG LỢI ÍCH THỜI GIAN",
+      "x": 45,
+      "y": 592.7,
+      "w": 143.8,
+      "h": 9.3
+    },
+    {
+      "page": 11,
+      "text": "Số tình huống lặp lại đã xác nhận × chênh lệch thời gian xử lý trước/sau, trừ công biên tập, rà soát và",
+      "x": 57,
+      "y": 635.7,
+      "w": 469.15,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "duy trì tri thức.",
+      "x": 57,
+      "y": 650.2,
+      "w": 68.06,
+      "h": 10.5
+    },
+    {
+      "page": 11,
+      "text": "So sánh các nhóm yêu cầu tương đương và báo cáo trung vị. Chỉ quy đổi tiền khi có đơn giá và phương",
+      "x": 45,
+      "y": 691.7,
+      "w": 498.52,
+      "h": 11
+    },
+    {
+      "page": 11,
+      "text": "pháp được đơn vị thống nhất; thời gian tiết kiệm không tự động là khoản tiền mặt tiết kiệm.",
+      "x": 45,
+      "y": 707.3,
+      "w": 443.99,
+      "h": 11
+    },
+    {
+      "page": 11,
+      "text": "Các chỉ tiêu là phương án đo đề xuất. Hồ sơ chưa đưa ra số tiết kiệm, tỷ lệ cải thiện hoặc hiệu quả kinh doanh đã",
+      "x": 45,
+      "y": 734.9,
+      "w": 486.37,
+      "h": 9.8
+    },
+    {
+      "page": 11,
+      "text": "đạt.",
+      "x": 45,
+      "y": 748.9,
+      "w": 16.57,
+      "h": 9.8
+    },
+    {
+      "page": 11,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 11,
+      "text": "11 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    },
+    {
+      "page": 12,
+      "text": "HỒ SƠ SÁNG KIẾN",
+      "x": 470.24,
+      "y": 43,
+      "w": 80.03,
+      "h": 9.2
+    },
+    {
+      "page": 12,
+      "text": "TVSI HELPDESK",
+      "x": 482.72,
+      "y": 58,
+      "w": 67.55,
+      "h": 9
+    },
+    {
+      "page": 12,
+      "text": "12 / QUẢN TRỊ & KIẾN NGHỊ",
+      "x": 45,
+      "y": 111,
+      "w": 123.69,
+      "h": 9.3
+    },
+    {
+      "page": 12,
+      "text": "Đề xuất thí điểm,",
+      "x": 45,
+      "y": 140,
+      "w": 197.98,
+      "h": 25
+    },
+    {
+      "page": 12,
+      "text": "tạo nền tảng để mở rộng",
+      "x": 45,
+      "y": 170,
+      "w": 286.15,
+      "h": 25
+    },
+    {
+      "page": 12,
+      "text": "Bảo đảm chất lượng tri thức",
+      "x": 45,
+      "y": 219,
+      "w": 159.86,
+      "h": 12.4
+    },
+    {
+      "page": 12,
+      "text": "Giao người phụ trách từng nhóm bài; rà soát theo mức biến động; giữ điều kiện áp dụng và liên kết tình",
+      "x": 45,
+      "y": 242.0,
+      "w": 501.18,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "huống nguồn; sửa hoặc ngừng dùng bài không còn phù hợp.",
+      "x": 45,
+      "y": 257.6,
+      "w": 293.69,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "Giữ đúng phạm vi thông tin",
+      "x": 45,
+      "y": 285.2,
+      "w": 156.76,
+      "h": 12.4
+    },
+    {
+      "page": 12,
+      "text": "Portal công khai là nơi gửi ý kiến, không đồng nghĩa người ngoài được xem toàn bộ phiếu hoặc kho tri",
+      "x": 45,
+      "y": 308.2,
+      "w": 494.2,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "thức. Cần kiểm tra quyền xem phiếu, ảnh và bài; ẩn thông tin cá nhân trước khi chia sẻ nội dung dùng",
+      "x": 45,
+      "y": 323.8,
+      "w": 493.07,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "chung.",
+      "x": 45,
+      "y": 339.4,
+      "w": 32.71,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "Con người quyết định nội dung phản hồi",
+      "x": 45,
+      "y": 367.0,
+      "w": 229.52,
+      "h": 12.4
+    },
+    {
+      "page": 12,
+      "text": "Nếu bật hỗ trợ AI, dùng như gợi ý tìm bài hoặc soạn nháp trong phạm vi dữ liệu được thống nhất. Người",
+      "x": 45,
+      "y": 390.0,
+      "w": 505.1,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "phụ trách kiểm tra độ đúng và điều kiện áp dụng trước khi gửi. Quy trình cốt lõi không phụ thuộc AI.",
+      "x": 45,
+      "y": 405.6,
+      "w": 485.74,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "KIẾN NGHỊ",
+      "x": 45,
+      "y": 433.2,
+      "w": 47.45,
+      "h": 9.3
+    },
+    {
+      "page": 12,
+      "text": "Cho phép thí điểm ở hai nhóm nghiệp vụ, giao đầu mối điều phối, thống nhất trách nhiệm nội dung,",
+      "x": 45,
+      "y": 468.2,
+      "w": 483.7,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "nguồn lực và phương pháp đo. Dùng kết quả thực tế để quyết định mức độ mở rộng.",
+      "x": 45,
+      "y": 483.8,
+      "w": 410.44,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "Hình 04",
+      "x": 45,
+      "y": 511.4,
+      "w": 34.12,
+      "h": 9.3
+    },
+    {
+      "page": 12,
+      "text": "Chuỗi tình huống có thể kiểm chứng bằng trình diễn sản phẩm",
+      "x": 94,
+      "y": 511.4,
+      "w": 257.55,
+      "h": 9.3
+    },
+    {
+      "page": 12,
+      "text": "Gửi ý kiến > Tiếp nhận và xử lý > Phản hồi > Tạo bài tri thức > Dùng lại cho yêu cầu tương tự.",
+      "x": 57,
+      "y": 546.4,
+      "w": 432.33,
+      "h": 10.5
+    },
+    {
+      "page": 12,
+      "text": "Giá trị dài hạn là một thói quen vận hành: sau khi giải quyết một tình huống, tổ chức đồng thời giữ lại",
+      "x": 45,
+      "y": 587.9,
+      "w": 491.3,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "phần kinh nghiệm giúp lần sau làm tốt hơn. Một yêu cầu được xử lý đem lại lợi ích cho người gửi; một",
+      "x": 45,
+      "y": 603.5,
+      "w": 492.11,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "bài tri thức tốt có thể phục vụ nhiều lần tiếp theo.",
+      "x": 45,
+      "y": 619.1,
+      "w": 240.1,
+      "h": 11
+    },
+    {
+      "page": 12,
+      "text": "Căn cứ hồ sơ: mô hình do tác giả đề xuất và các chức năng trong bản hiện thực hóa TVSI Helpdesk, đối chiếu ngày",
+      "x": 45,
+      "y": 660.7,
+      "w": 465.72,
+      "h": 9.2
+    },
+    {
+      "page": 12,
+      "text": "01/10/2026. Nhận diện: website chính thức TVSI (www.tvsi.com.vn). Tình huống nêu trong hồ sơ là minh họa; kế hoạch và",
+      "x": 45,
+      "y": 673.7,
+      "w": 500.92,
+      "h": 9.2
+    },
+    {
+      "page": 12,
+      "text": "chỉ tiêu là đề xuất thí điểm.",
+      "x": 45,
+      "y": 686.7,
+      "w": 110.16,
+      "h": 9.2
+    },
+    {
+      "page": 12,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức",
+      "x": 45,
+      "y": 802.89,
+      "w": 157.09,
+      "h": 8.7
+    },
+    {
+      "page": 12,
+      "text": "12 / 12",
+      "x": 522.44,
+      "y": 802.89,
+      "w": 27.83,
+      "h": 8.7
+    }
+  ],
+  "sourceText": [
+    {
+      "page": 1,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 1,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 1,
+      "text": "01  /  TỔNG QUAN SÁNG KIẾN"
+    },
+    {
+      "page": 1,
+      "text": "Từ phản hồi"
+    },
+    {
+      "page": 1,
+      "text": "đến tri thức"
+    },
+    {
+      "page": 1,
+      "text": "Hệ thống tiếp nhận ý kiến, phối hợp xử lý\nvà tích lũy tri thức nghiệp vụ"
+    },
+    {
+      "page": 1,
+      "text": "Tác giả: Trần Thị Quý  |  Phòng Marketing"
+    },
+    {
+      "page": 1,
+      "text": "TÓM TẮT"
+    },
+    {
+      "page": 1,
+      "text": "Một cổng tiếp nhận chung giúp ghi nhận ý kiến và vấn đề cần hỗ trợ, giao đúng đầu mối, theo dõi việc xử lý và phản hồi người gửi. Những cách giải quyết có giá trị được biên tập thành bài tri thức để đội ngũ sử dụng lại."
+    },
+    {
+      "page": 1,
+      "text": "Hình 01"
+    },
+    {
+      "page": 1,
+      "text": "Chu trình tiếp nhận, xử lý và tích lũy tri thức để dùng lại."
+    },
+    {
+      "page": 1,
+      "text": "01 / TIẾP NHẬN"
+    },
+    {
+      "page": 1,
+      "text": "Tiếp nhận\ncó đầu mối"
+    },
+    {
+      "page": 1,
+      "text": "Ghi nhận thành phiếu và xác định người phụ trách."
+    },
+    {
+      "page": 1,
+      "text": "02 / XỬ LÝ"
+    },
+    {
+      "page": 1,
+      "text": "Xử lý\ncó phản hồi"
+    },
+    {
+      "page": 1,
+      "text": "Theo dõi việc giải quyết và trả lời người gửi."
+    },
+    {
+      "page": 1,
+      "text": "03 / TÍCH LŨY"
+    },
+    {
+      "page": 1,
+      "text": "Kinh nghiệm\nđược tích lũy"
+    },
+    {
+      "page": 1,
+      "text": "Chuẩn hóa cách giải quyết có giá trị thành bài Shape Up."
+    },
+    {
+      "page": 1,
+      "text": "Dùng lại cho yêu cầu tiếp theo"
+    },
+    {
+      "page": 1,
+      "text": "SHAPE UP"
+    },
+    {
+      "page": 1,
+      "text": "Bài tri thức đã chuẩn hóa, gồm vấn đề, cách giải quyết và điều kiện áp dụng. Giữ liên kết với tình huống nguồn để tra cứu và dùng lại."
+    },
+    {
+      "page": 1,
+      "text": "PHẠM VI ÁP DỤNG"
+    },
+    {
+      "page": 1,
+      "text": "Công nghệ · Chăm sóc khách hàng · Kinh doanh · Vận hành nội bộ"
+    },
+    {
+      "page": 1,
+      "text": "Đã có bản hiện thực hóa để kiểm chứng luồng cốt lõi.\nHiệu quả vận hành sẽ được đo trong giai đoạn thí điểm."
+    },
+    {
+      "page": 1,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 1,
+      "text": "01 / 12"
+    },
+    {
+      "page": 2,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 2,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 2,
+      "text": "02  /  BÀI TOÁN & MỤC TIÊU"
+    },
+    {
+      "page": 2,
+      "text": "Giữ lại giá trị sau mỗi\nyêu cầu được giải quyết"
+    },
+    {
+      "page": 2,
+      "text": "Một phản hồi mang theo hai giá trị: nhu cầu cần được giải quyết ngay và kinh nghiệm có thể giúp tổ chức làm tốt hơn trong tương lai. Sáng kiến kết nối hai giá trị này trong một quy trình chung."
+    },
+    {
+      "page": 2,
+      "text": "NHỮNG ĐIỂM CẦN KHẢO SÁT TẠI ĐƠN VỊ THÍ ĐIỂM"
+    },
+    {
+      "page": 2,
+      "text": "Điểm vướng có thể gặp"
+    },
+    {
+      "page": 2,
+      "text": "Hướng cải tiến"
+    },
+    {
+      "page": 2,
+      "text": "Trao đổi phân tán, khó xác định trách nhiệm"
+    },
+    {
+      "page": 2,
+      "text": "Mỗi yêu cầu có phiếu, nhóm nghiệp vụ và đầu mối."
+    },
+    {
+      "page": 2,
+      "text": "Hỏi lại thông tin, giải thích lại cùng một vấn đề"
+    },
+    {
+      "page": 2,
+      "text": "Chuẩn hóa thông tin đầu vào và dùng hướng dẫn phù hợp."
+    },
+    {
+      "page": 2,
+      "text": "Kinh nghiệm nằm trong trao đổi cá nhân"
+    },
+    {
+      "page": 2,
+      "text": "Biên tập cách giải quyết thành tri thức chung."
+    },
+    {
+      "page": 2,
+      "text": "Khó nhìn được nhóm nhu cầu lặp lại"
+    },
+    {
+      "page": 2,
+      "text": "Theo dõi theo nhóm để chọn chủ đề cần cải tiến."
+    },
+    {
+      "page": 2,
+      "text": "Các điểm trên là giả thuyết cần khảo sát, không phải kết luận về thực trạng của mọi đơn vị."
+    },
+    {
+      "page": 2,
+      "text": "Mục tiêu của sáng kiến"
+    },
+    {
+      "page": 2,
+      "text": "Ghi nhận đúng nhu cầu; làm rõ trách nhiệm; tổ chức phản hồi có căn cứ; lưu và dùng lại kinh nghiệm; tạo dữ liệu để quyết định cải tiến."
+    },
+    {
+      "page": 2,
+      "text": "Đầu ra kỳ vọng"
+    },
+    {
+      "page": 2,
+      "text": "Một quy trình được đội ngũ sử dụng, một nhóm bài tri thức đáng tin cậy và bộ số liệu đủ để đánh giá hiệu quả trước khi nhân rộng."
+    },
+    {
+      "page": 2,
+      "text": "Câu hỏi đánh giá trung tâm: cùng một nhóm yêu cầu, tổ chức có phục vụ rõ ràng hơn và giảm công việc lặp lại với chi phí duy trì hợp lý hay không?"
+    },
+    {
+      "page": 2,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 2,
+      "text": "02 / 12"
+    },
+    {
+      "page": 3,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 3,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 3,
+      "text": "03  /  CÁCH TỔ CHỨC VẬN HÀNH"
+    },
+    {
+      "page": 3,
+      "text": "Một mô hình chung,\ntrách nhiệm rõ ở từng bước"
+    },
+    {
+      "page": 3,
+      "text": "Khái niệm"
+    },
+    {
+      "page": 3,
+      "text": "Cách hiểu trong hệ thống"
+    },
+    {
+      "page": 3,
+      "text": "Portal\nCổng tiếp nhận"
+    },
+    {
+      "page": 3,
+      "text": "Trang độc lập để người dùng gửi ý kiến hoặc vấn đề cần hỗ trợ; không cần tài khoản nội bộ."
+    },
+    {
+      "page": 3,
+      "text": "Ticket\nPhiếu tiếp nhận"
+    },
+    {
+      "page": 3,
+      "text": "Đơn vị công việc gồm nhu cầu, người gửi, nhóm nghiệp vụ, người phụ trách, ưu tiên và trạng thái."
+    },
+    {
+      "page": 3,
+      "text": "Shape Up\nBài tri thức"
+    },
+    {
+      "page": 3,
+      "text": "Vấn đề, cách giải quyết và điều kiện áp dụng được chuẩn hóa để dùng lại, có liên kết với tình huống nguồn."
+    },
+    {
+      "page": 3,
+      "text": "BỐN VAI TRÒ TRONG QUY TRÌNH"
+    },
+    {
+      "page": 3,
+      "text": "Vai trò"
+    },
+    {
+      "page": 3,
+      "text": "Trách nhiệm chính"
+    },
+    {
+      "page": 3,
+      "text": "Người gửi"
+    },
+    {
+      "page": 3,
+      "text": "Cung cấp vấn đề, kết quả mong muốn và thông tin liên hệ; bổ sung khi được yêu cầu."
+    },
+    {
+      "page": 3,
+      "text": "Đầu mối tiếp nhận"
+    },
+    {
+      "page": 3,
+      "text": "Kiểm tra nội dung, phân nhóm, giao người phụ trách và theo dõi việc xử lý."
+    },
+    {
+      "page": 3,
+      "text": "Người xử lý"
+    },
+    {
+      "page": 3,
+      "text": "Phối hợp chuyên môn, tra cứu hướng dẫn, giải quyết và chuẩn bị phản hồi."
+    },
+    {
+      "page": 3,
+      "text": "Phụ trách tri thức"
+    },
+    {
+      "page": 3,
+      "text": "Lựa chọn tình huống nên chuẩn hóa, rà soát bài và tổ chức cập nhật."
+    },
+    {
+      "page": 3,
+      "text": "Một người có thể kiêm nhiệm nhiều vai trò. Thí điểm cần quy định người chịu trách nhiệm chính và người rà soát; tên vai trò nghiệp vụ không mặc nhiên là một cấp phê duyệt đã được tự động hóa."
+    },
+    {
+      "page": 3,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 3,
+      "text": "03 / 12"
+    },
+    {
+      "page": 4,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 4,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 4,
+      "text": "04  /  LUỒNG VẬN HÀNH ĐỀ XUẤT"
+    },
+    {
+      "page": 4,
+      "text": "Một yêu cầu được xử lý,\nnhiều lần sau được hưởng lợi"
+    },
+    {
+      "page": 4,
+      "text": "Hình 02"
+    },
+    {
+      "page": 4,
+      "text": "Luồng xử lý và vòng tái sử dụng tri thức"
+    },
+    {
+      "page": 4,
+      "text": "A / XỬ LÝ YÊU CẦU"
+    },
+    {
+      "page": 4,
+      "text": "B / TÍCH LŨY TRI THỨC"
+    },
+    {
+      "page": 4,
+      "text": "Gửi ý kiến qua Portal"
+    },
+    {
+      "page": 4,
+      "text": "Ghi nhận & giao đầu mối"
+    },
+    {
+      "page": 4,
+      "text": "Làm rõ & xử lý"
+    },
+    {
+      "page": 4,
+      "text": "Phản hồi người gửi"
+    },
+    {
+      "page": 4,
+      "text": "Đánh giá giá trị\ndùng lại"
+    },
+    {
+      "page": 4,
+      "text": "Cần\nbổ sung"
+    },
+    {
+      "page": 4,
+      "text": "Lưu hồ sơ xử lý"
+    },
+    {
+      "page": 4,
+      "text": "Không"
+    },
+    {
+      "page": 4,
+      "text": "Biên tập Shape Up"
+    },
+    {
+      "page": 4,
+      "text": "Rà soát & công bố"
+    },
+    {
+      "page": 4,
+      "text": "Tra cứu cho yêu cầu mới"
+    },
+    {
+      "page": 4,
+      "text": "Có"
+    },
+    {
+      "page": 4,
+      "text": "Dùng lại cách giải quyết"
+    },
+    {
+      "page": 4,
+      "text": "Không phải mọi phiếu đều thành bài tri thức. Cần rà soát nội dung và ẩn thông tin cá nhân trước khi công bố."
+    },
+    {
+      "page": 4,
+      "text": "Luồng đề xuất có bước yêu cầu bổ sung. Hiện đội ngũ cần ghi nhận câu trả lời nhận qua email; hệ thống chưa tự thu email trả lời vào phiếu."
+    },
+    {
+      "page": 4,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 4,
+      "text": "04 / 12"
+    },
+    {
+      "page": 5,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 5,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 5,
+      "text": "05  /  ĐIỂM SÁNG TẠO & GIÁ TRỊ"
+    },
+    {
+      "page": 5,
+      "text": "Kết nối việc xử lý hôm nay\nvới năng lực phục vụ ngày mai"
+    },
+    {
+      "page": 5,
+      "text": "Điểm nhấn của sáng kiến là cách tổ chức vận hành: kết nối tiếp nhận, trách nhiệm xử lý, phản hồi và tích lũy tri thức trong một vòng thống nhất, phù hợp với đơn vị áp dụng."
+    },
+    {
+      "page": 5,
+      "text": "01"
+    },
+    {
+      "page": 5,
+      "text": "Thông tin đi cùng trách nhiệm"
+    },
+    {
+      "page": 5,
+      "text": "Phiếu tiếp nhận gắn một nhu cầu với đầu mối và trạng thái. Người quản lý có căn cứ để theo dõi; người xử lý có bối cảnh để tiếp tục công việc."
+    },
+    {
+      "page": 5,
+      "text": "02"
+    },
+    {
+      "page": 5,
+      "text": "Tri thức hình thành từ tình huống thực"
+    },
+    {
+      "page": 5,
+      "text": "Bài hướng dẫn được lựa chọn từ yêu cầu đã xử lý và giữ liên kết với phiếu nguồn, giúp hiểu vì sao bài tồn tại và khi nào nên dùng."
+    },
+    {
+      "page": 5,
+      "text": "03"
+    },
+    {
+      "page": 5,
+      "text": "Tri thức quay trở lại công việc"
+    },
+    {
+      "page": 5,
+      "text": "Bài đã công bố có thể được tìm, liên kết với yêu cầu mới và dùng khi chuẩn bị phản hồi. Kho tri thức gắn với tác vụ hằng ngày."
+    },
+    {
+      "page": 5,
+      "text": "04"
+    },
+    {
+      "page": 5,
+      "text": "Một khung vận hành cho nhiều nghiệp vụ"
+    },
+    {
+      "page": 5,
+      "text": "Giữ các bước cốt lõi; thay nhóm tiếp nhận, nội dung, người phụ trách và cách hướng dẫn theo nhu cầu của từng đơn vị."
+    },
+    {
+      "page": 5,
+      "text": "Giá trị kỳ vọng"
+    },
+    {
+      "page": 5,
+      "text": "Giảm giải thích lặp lại, hỗ trợ phản hồi nhất quán, giữ kinh nghiệm khi nhân sự thay đổi và giúp nhận diện nhu cầu cải tiến. Mức độ đạt được cần được kiểm chứng bằng dữ liệu."
+    },
+    {
+      "page": 5,
+      "text": "Phạm vi sáng tạo: cải tiến ứng dụng và cách tổ chức công việc; không đặt luận điểm helpdesk hoặc kho kiến thức là phát minh mới trên thị trường."
+    },
+    {
+      "page": 5,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 5,
+      "text": "05 / 12"
+    },
+    {
+      "page": 6,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 6,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 6,
+      "text": "06  /  CẤU TRÚC SHAPE UP"
+    },
+    {
+      "page": 6,
+      "text": "Đóng gói kinh nghiệm\nthành một bài dùng được"
+    },
+    {
+      "page": 6,
+      "text": "Chọn tình huống có khả năng lặp lại, cách giải quyết đã được kiểm tra và phần hướng dẫn có thể dùng cho người khác. Không sao chép nguyên cuộc trao đổi có thông tin riêng vào kho dùng chung."
+    },
+    {
+      "page": 6,
+      "text": "Hình 03"
+    },
+    {
+      "page": 6,
+      "text": "Mẫu nội dung đề xuất cho một bài tri thức"
+    },
+    {
+      "page": 6,
+      "text": "Thành phần"
+    },
+    {
+      "page": 6,
+      "text": "Câu hỏi bài cần trả lời"
+    },
+    {
+      "page": 6,
+      "text": "Tình huống"
+    },
+    {
+      "page": 6,
+      "text": "Người dùng gặp vấn đề gì? Nhận biết bằng dấu hiệu nào?"
+    },
+    {
+      "page": 6,
+      "text": "Phạm vi áp dụng"
+    },
+    {
+      "page": 6,
+      "text": "Ai dùng được? Trong điều kiện nào? Khi nào cần chuyển đầu mối khác?"
+    },
+    {
+      "page": 6,
+      "text": "Cách giải quyết"
+    },
+    {
+      "page": 6,
+      "text": "Các bước đã xác nhận là gì? Kết quả mong đợi sau từng bước?"
+    },
+    {
+      "page": 6,
+      "text": "Căn cứ và nguồn"
+    },
+    {
+      "page": 6,
+      "text": "Tài liệu nào cần đối chiếu? Phiếu nguồn nào tạo ra kinh nghiệm này?"
+    },
+    {
+      "page": 6,
+      "text": "Trách nhiệm cập nhật"
+    },
+    {
+      "page": 6,
+      "text": "Ai phụ trách nội dung? Khi nào cần rà soát lại?"
+    },
+    {
+      "page": 6,
+      "text": "CHU KỲ TRI THỨC ĐỀ XUẤT"
+    },
+    {
+      "page": 6,
+      "text": "Bản nháp"
+    },
+    {
+      "page": 6,
+      "text": "Rà soát"
+    },
+    {
+      "page": 6,
+      "text": "Công bố"
+    },
+    {
+      "page": 6,
+      "text": "Sử dụng"
+    },
+    {
+      "page": 6,
+      "text": "Phản hồi từ việc sử dụng là căn cứ cập nhật, sửa hoặc ngừng dùng bài không còn phù hợp. Người phụ trách nghiệp vụ chịu trách nhiệm nội dung được công bố."
+    },
+    {
+      "page": 6,
+      "text": "Đã có trường vấn đề, giải pháp, tài liệu, tác giả và phiếu nguồn. Điều kiện áp dụng và lịch rà soát có thể ghi trong nội dung khi thí điểm; quản lý phiên bản và nhắc rà soát tự động là hướng hoàn thiện tiếp theo."
+    },
+    {
+      "page": 6,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 6,
+      "text": "06 / 12"
+    },
+    {
+      "page": 7,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 7,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 7,
+      "text": "07  /  TÌNH HUỐNG MINH HỌA"
+    },
+    {
+      "page": 7,
+      "text": "Một câu hỏi nghiệp vụ,\nmột hướng dẫn có thể dùng lại"
+    },
+    {
+      "page": 7,
+      "text": "Minh họa chăm sóc khách hàng: người dùng hỏi cần chuẩn bị gì cho một thủ tục. Ví dụ mô tả cách vận hành, không phải hướng dẫn thủ tục cụ thể của TVSI."
+    },
+    {
+      "page": 7,
+      "text": "01"
+    },
+    {
+      "page": 7,
+      "text": "Tiếp nhận nhu cầu"
+    },
+    {
+      "page": 7,
+      "text": "Người gửi nêu thủ tục cần thực hiện, điều chưa rõ và cách liên hệ qua Portal. Phiếu được ghi nhận theo nhóm nghiệp vụ."
+    },
+    {
+      "page": 7,
+      "text": "02"
+    },
+    {
+      "page": 7,
+      "text": "Làm rõ và giao đúng đầu mối"
+    },
+    {
+      "page": 7,
+      "text": "Đội tiếp nhận xác định trường hợp cụ thể, bổ sung thông tin cần thiết và giao người chịu trách nhiệm phản hồi."
+    },
+    {
+      "page": 7,
+      "text": "03"
+    },
+    {
+      "page": 7,
+      "text": "Tra cứu, xử lý và phản hồi"
+    },
+    {
+      "page": 7,
+      "text": "Nhân viên đối chiếu tài liệu đang áp dụng, kiểm tra hướng dẫn có sẵn và gửi câu trả lời phù hợp với hoàn cảnh người hỏi."
+    },
+    {
+      "page": 7,
+      "text": "04"
+    },
+    {
+      "page": 7,
+      "text": "Tách phần kiến thức dùng chung"
+    },
+    {
+      "page": 7,
+      "text": "Người phụ trách chọn phần hướng dẫn có thể tái sử dụng, bỏ thông tin cá nhân và nêu điều kiện áp dụng trước khi rà soát."
+    },
+    {
+      "page": 7,
+      "text": "05"
+    },
+    {
+      "page": 7,
+      "text": "Sử dụng trong lần hỏi tiếp theo"
+    },
+    {
+      "page": 7,
+      "text": "Nhân viên tìm bài đã công bố, kiểm tra còn phù hợp rồi dùng làm căn cứ. Nếu tình huống khác, tiếp tục xử lý và cập nhật bài khi cần."
+    },
+    {
+      "page": 7,
+      "text": "Với ý kiến cải tiến, đầu ra có thể là chấp nhận, cần làm rõ, đưa vào kế hoạch hoặc chưa phù hợp kèm lý do. Tiếp nhận ý kiến không đồng nghĩa cam kết triển khai mọi đề xuất."
+    },
+    {
+      "page": 7,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 7,
+      "text": "07 / 12"
+    },
+    {
+      "page": 8,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 8,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 8,
+      "text": "08  /  KHẢ NĂNG ÁP DỤNG RỘNG RÃI"
+    },
+    {
+      "page": 8,
+      "text": "Mở rộng theo nghiệp vụ,\ngiữ nguyên vòng vận hành"
+    },
+    {
+      "page": 8,
+      "text": "Mô hình phù hợp khi có đầu vào rõ, đầu mối chịu trách nhiệm, kết quả cần theo dõi, nhu cầu phản hồi và kinh nghiệm có thể chuẩn hóa."
+    },
+    {
+      "page": 8,
+      "text": "Mảng nghiệp vụ"
+    },
+    {
+      "page": 8,
+      "text": "Đầu vào điển hình"
+    },
+    {
+      "page": 8,
+      "text": "Tri thức dùng lại"
+    },
+    {
+      "page": 8,
+      "text": "Chăm sóc khách hàng"
+    },
+    {
+      "page": 8,
+      "text": "Câu hỏi thủ tục, phản ánh trải nghiệm, yêu cầu hướng dẫn."
+    },
+    {
+      "page": 8,
+      "text": "Câu trả lời theo tình huống; cách xử lý điểm vướng thường gặp."
+    },
+    {
+      "page": 8,
+      "text": "Kinh doanh"
+    },
+    {
+      "page": 8,
+      "text": "Câu hỏi về sản phẩm, tài liệu cần giải thích, góp ý cách phục vụ."
+    },
+    {
+      "page": 8,
+      "text": "Hướng dẫn đã kiểm tra; điều kiện áp dụng; đầu mối chuyển tiếp."
+    },
+    {
+      "page": 8,
+      "text": "Công nghệ / sản phẩm số"
+    },
+    {
+      "page": 8,
+      "text": "Lỗi sử dụng, khó khăn thao tác, đề xuất tính năng."
+    },
+    {
+      "page": 8,
+      "text": "Cách khắc phục; dấu hiệu nhận biết; thông tin cần thu thập."
+    },
+    {
+      "page": 8,
+      "text": "Vận hành nội bộ"
+    },
+    {
+      "page": 8,
+      "text": "Vướng mắc phối hợp, bàn giao, tra cứu quy trình."
+    },
+    {
+      "page": 8,
+      "text": "Bảng kiểm; hướng dẫn phối hợp; cách xử lý ngoại lệ."
+    },
+    {
+      "page": 8,
+      "text": "Nhân sự / hành chính"
+    },
+    {
+      "page": 8,
+      "text": "Câu hỏi thủ tục, biểu mẫu, dịch vụ cho nhân viên."
+    },
+    {
+      "page": 8,
+      "text": "Hướng dẫn thủ tục; câu hỏi thường gặp theo phạm vi được phép."
+    },
+    {
+      "page": 8,
+      "text": "Cách nhân rộng"
+    },
+    {
+      "page": 8,
+      "text": "Bắt đầu bằng cấu hình nhóm và người phụ trách; chuẩn hóa mẫu tiếp nhận, trạng thái và mẫu bài. Nghiệp vụ đặc thù có thể cần thêm trường thông tin, phân quyền hoặc bước duyệt."
+    },
+    {
+      "page": 8,
+      "text": "Những công việc có nhiều cấp phê duyệt, thời hạn bắt buộc hoặc dữ liệu riêng của cá nhân cần được đánh giá quy trình và quyền truy cập trước khi áp dụng. Không chỉ đổi tên danh mục rồi triển khai đồng loạt."
+    },
+    {
+      "page": 8,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 8,
+      "text": "08 / 12"
+    },
+    {
+      "page": 9,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 9,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 9,
+      "text": "09  /  TÍNH KHẢ THI & NGUỒN LỰC"
+    },
+    {
+      "page": 9,
+      "text": "Khả thi từ nền tảng đã có,\ntriển khai theo phạm vi nhỏ"
+    },
+    {
+      "page": 9,
+      "text": "Căn cứ hiện có"
+    },
+    {
+      "page": 9,
+      "text": "Ý nghĩa đối với triển khai"
+    },
+    {
+      "page": 9,
+      "text": "Cổng tiếp nhận độc lập"
+    },
+    {
+      "page": 9,
+      "text": "Có thể kiểm chứng việc gửi yêu cầu ngoài khu vực làm việc nội bộ."
+    },
+    {
+      "page": 9,
+      "text": "Phiếu, phân công, trạng thái, email"
+    },
+    {
+      "page": 9,
+      "text": "Có luồng tiếp nhận và chuẩn bị phản hồi; lịch sử gửi được lưu theo phiếu."
+    },
+    {
+      "page": 9,
+      "text": "Chuyển phiếu thành Shape Up"
+    },
+    {
+      "page": 9,
+      "text": "Đã nối được tình huống nguồn với bản nháp tri thức và thư viện tra cứu."
+    },
+    {
+      "page": 9,
+      "text": "Nhóm nghiệp vụ và thống kê"
+    },
+    {
+      "page": 9,
+      "text": "Có cơ sở tổ chức thí điểm theo phạm vi và theo dõi lượng yêu cầu."
+    },
+    {
+      "page": 9,
+      "text": "Nguồn lực có thể tổ chức theo quy mô"
+    },
+    {
+      "page": 9,
+      "text": "Một đầu mối điều phối; đại diện tiếp nhận và xử lý của mỗi nhóm; người rà soát tri thức; hỗ trợ kỹ thuật cho hạ tầng, dữ liệu, tài khoản và gửi thư. Các vai trò có thể kiêm nhiệm trong phạm vi nhỏ."
+    },
+    {
+      "page": 9,
+      "text": "Nhóm chi phí cần dự toán"
+    },
+    {
+      "page": 9,
+      "text": "Hạ tầng và lưu trữ; tên miền và gửi thư; thời gian cấu hình, đào tạo; thời gian biên tập, rà soát; vận hành và bảo trì. Dự toán dựa trên số người dùng, lượng yêu cầu, dung lượng và yêu cầu dịch vụ của thí điểm."
+    },
+    {
+      "page": 9,
+      "text": "Điều kiện trước khi mở ra bên ngoài"
+    },
+    {
+      "page": 9,
+      "text": "Chốt phạm vi tiếp nhận, trách nhiệm phản hồi, quyền xem nội dung và ảnh, kiểm soát yêu cầu rác, sao lưu và phương án khi gián đoạn. Kiểm tra môi trường triển khai theo nhu cầu thực tế."
+    },
+    {
+      "page": 9,
+      "text": "Đã có bản hiện thực hóa để kiểm chứng các luồng cốt lõi. Khả năng vận hành chính thức, mức chịu tải và hiệu quả kinh doanh cần được xác nhận trong triển khai và thí điểm."
+    },
+    {
+      "page": 9,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 9,
+      "text": "09 / 12"
+    },
+    {
+      "page": 10,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 10,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 10,
+      "text": "10  /  KẾ HOẠCH ÁP DỤNG ĐỀ XUẤT"
+    },
+    {
+      "page": 10,
+      "text": "Thí điểm sáu tuần\nđể ra quyết định bằng bằng chứng"
+    },
+    {
+      "page": 10,
+      "text": "Chọn một nhóm hỗ trợ công nghệ và một nhóm nghiệp vụ ngoài công nghệ để kiểm chứng cả luồng xử lý và khả năng mở rộng. Sáu tuần là khung tham khảo, điều chỉnh theo nguồn lực đơn vị."
+    },
+    {
+      "page": 10,
+      "text": "Giai đoạn"
+    },
+    {
+      "page": 10,
+      "text": "Công việc trọng tâm"
+    },
+    {
+      "page": 10,
+      "text": "Đầu ra"
+    },
+    {
+      "page": 10,
+      "text": "Tuần 1-2\nChuẩn bị & đo nền"
+    },
+    {
+      "page": 10,
+      "text": "Khảo sát cách làm hiện tại; chọn loại yêu cầu; giao trách nhiệm; cấu hình nhóm và quyền; hướng dẫn đội ngũ."
+    },
+    {
+      "page": 10,
+      "text": "Phạm vi, dữ liệu nền, chỉ tiêu và mục tiêu được chốt trước vận hành."
+    },
+    {
+      "page": 10,
+      "text": "Tuần 3-5\nVận hành thí điểm"
+    },
+    {
+      "page": 10,
+      "text": "Theo dõi phiếu, xử lý và phản hồi; chọn tình huống để biên tập bài; rà soát hằng tuần; ghi nhận số liệu."
+    },
+    {
+      "page": 10,
+      "text": "Yêu cầu được xử lý, bài được công bố, dữ liệu đo và phản hồi sử dụng."
+    },
+    {
+      "page": 10,
+      "text": "Tuần 6\nĐánh giá & quyết định"
+    },
+    {
+      "page": 10,
+      "text": "So sánh nhóm yêu cầu tương đương; tính công sức phát sinh; đánh giá chất lượng và mức phù hợp."
+    },
+    {
+      "page": 10,
+      "text": "Mở rộng, điều chỉnh rồi thử tiếp hoặc giữ phạm vi hiện tại."
+    },
+    {
+      "page": 10,
+      "text": "ĐIỀU KIỆN QUYẾT ĐỊNH NHÂN RỘNG"
+    },
+    {
+      "page": 10,
+      "text": "Quy trình được thực hiện"
+    },
+    {
+      "page": 10,
+      "text": "Đội ngũ có thể tiếp nhận, giao việc, phản hồi và duy trì bài tri thức theo cách đã thống nhất."
+    },
+    {
+      "page": 10,
+      "text": "Dữ liệu đủ tin cậy"
+    },
+    {
+      "page": 10,
+      "text": "Cách đo nhất quán, có đường cơ sở và phân biệt được nhóm yêu cầu hoặc độ phức tạp."
+    },
+    {
+      "page": 10,
+      "text": "Giá trị tương xứng công sức"
+    },
+    {
+      "page": 10,
+      "text": "Lợi ích quan sát được bù đắp công vận hành và biên tập; có người tiếp tục duy trì sau thí điểm."
+    },
+    {
+      "page": 10,
+      "text": "Mục tiêu và ngưỡng đánh giá được thống nhất trước giai đoạn vận hành, tránh chọn số liệu có lợi sau khi kết thúc."
+    },
+    {
+      "page": 10,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 10,
+      "text": "10 / 12"
+    },
+    {
+      "page": 11,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 11,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 11,
+      "text": "11  /  CHỈ TIÊU & PHƯƠNG PHÁP ĐÁNH GIÁ"
+    },
+    {
+      "page": 11,
+      "text": "Đo hiệu quả phục vụ,\nkhông chỉ đếm số phiếu"
+    },
+    {
+      "page": 11,
+      "text": "Chỉ tiêu"
+    },
+    {
+      "page": 11,
+      "text": "Cách đo và lưu ý"
+    },
+    {
+      "page": 11,
+      "text": "Phản hồi đầu tiên"
+    },
+    {
+      "page": 11,
+      "text": "Trung vị thời gian từ tiếp nhận đến phản hồi có nội dung đầu tiên. Cần ghi mốc đầu tiên, không dùng email tự xác nhận."
+    },
+    {
+      "page": 11,
+      "text": "Thời gian hoàn tất"
+    },
+    {
+      "page": 11,
+      "text": "Từ tiếp nhận đến tiêu chí kết thúc đã thống nhất; tách nhóm chờ người gửi và độ phức tạp khi so sánh."
+    },
+    {
+      "page": 11,
+      "text": "Tỷ lệ dùng lại tri thức"
+    },
+    {
+      "page": 11,
+      "text": "Phiếu đủ điều kiện thực sự dùng bài đã công bố / tổng phiếu đủ điều kiện. Kiểm tra liên kết bài có hữu ích."
+    },
+    {
+      "page": 11,
+      "text": "Chất lượng bài"
+    },
+    {
+      "page": 11,
+      "text": "Tỷ lệ bài trong mẫu kiểm tra đạt tiêu chí đúng, đủ điều kiện áp dụng, không lộ thông tin riêng và còn cập nhật."
+    },
+    {
+      "page": 11,
+      "text": "Xử lý lại & trải nghiệm"
+    },
+    {
+      "page": 11,
+      "text": "Theo dõi yêu cầu chưa giải quyết thỏa đáng; khảo sát ngắn mức dễ gửi, độ rõ câu trả lời và công sức sử dụng."
+    },
+    {
+      "page": 11,
+      "text": "Thu thập dữ liệu phù hợp với phiên bản hiện tại"
+    },
+    {
+      "page": 11,
+      "text": "Liên kết phiếu và bài hỗ trợ theo dõi tái sử dụng. Mốc phản hồi đầu tiên, lịch sử trạng thái và khảo sát cần ghi bổ sung bằng bảng theo dõi có kiểm tra hoặc hoàn thiện chức năng đo trong thí điểm."
+    },
+    {
+      "page": 11,
+      "text": "ƯỚC LƯỢNG LỢI ÍCH THỜI GIAN"
+    },
+    {
+      "page": 11,
+      "text": "Số tình huống lặp lại đã xác nhận × chênh lệch thời gian xử lý trước/sau, trừ công biên tập, rà soát và duy trì tri thức."
+    },
+    {
+      "page": 11,
+      "text": "So sánh các nhóm yêu cầu tương đương và báo cáo trung vị. Chỉ quy đổi tiền khi có đơn giá và phương pháp được đơn vị thống nhất; thời gian tiết kiệm không tự động là khoản tiền mặt tiết kiệm."
+    },
+    {
+      "page": 11,
+      "text": "Các chỉ tiêu là phương án đo đề xuất. Hồ sơ chưa đưa ra số tiết kiệm, tỷ lệ cải thiện hoặc hiệu quả kinh doanh đã đạt."
+    },
+    {
+      "page": 11,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 11,
+      "text": "11 / 12"
+    },
+    {
+      "page": 12,
+      "text": "HỒ SƠ SÁNG KIẾN"
+    },
+    {
+      "page": 12,
+      "text": "TVSI HELPDESK"
+    },
+    {
+      "page": 12,
+      "text": "12  /  QUẢN TRỊ & KIẾN NGHỊ"
+    },
+    {
+      "page": 12,
+      "text": "Đề xuất thí điểm,\ntạo nền tảng để mở rộng"
+    },
+    {
+      "page": 12,
+      "text": "Bảo đảm chất lượng tri thức"
+    },
+    {
+      "page": 12,
+      "text": "Giao người phụ trách từng nhóm bài; rà soát theo mức biến động; giữ điều kiện áp dụng và liên kết tình huống nguồn; sửa hoặc ngừng dùng bài không còn phù hợp."
+    },
+    {
+      "page": 12,
+      "text": "Giữ đúng phạm vi thông tin"
+    },
+    {
+      "page": 12,
+      "text": "Portal công khai là nơi gửi ý kiến, không đồng nghĩa người ngoài được xem toàn bộ phiếu hoặc kho tri thức. Cần kiểm tra quyền xem phiếu, ảnh và bài; ẩn thông tin cá nhân trước khi chia sẻ nội dung dùng chung."
+    },
+    {
+      "page": 12,
+      "text": "Con người quyết định nội dung phản hồi"
+    },
+    {
+      "page": 12,
+      "text": "Nếu bật hỗ trợ AI, dùng như gợi ý tìm bài hoặc soạn nháp trong phạm vi dữ liệu được thống nhất. Người phụ trách kiểm tra độ đúng và điều kiện áp dụng trước khi gửi. Quy trình cốt lõi không phụ thuộc AI."
+    },
+    {
+      "page": 12,
+      "text": "KIẾN NGHỊ"
+    },
+    {
+      "page": 12,
+      "text": "Cho phép thí điểm ở hai nhóm nghiệp vụ, giao đầu mối điều phối, thống nhất trách nhiệm nội dung, nguồn lực và phương pháp đo. Dùng kết quả thực tế để quyết định mức độ mở rộng."
+    },
+    {
+      "page": 12,
+      "text": "Hình 04"
+    },
+    {
+      "page": 12,
+      "text": "Chuỗi tình huống có thể kiểm chứng bằng trình diễn sản phẩm"
+    },
+    {
+      "page": 12,
+      "text": "Gửi ý kiến > Tiếp nhận và xử lý > Phản hồi > Tạo bài tri thức > Dùng lại cho yêu cầu tương tự."
+    },
+    {
+      "page": 12,
+      "text": "Giá trị dài hạn là một thói quen vận hành: sau khi giải quyết một tình huống, tổ chức đồng thời giữ lại phần kinh nghiệm giúp lần sau làm tốt hơn. Một yêu cầu được xử lý đem lại lợi ích cho người gửi; một bài tri thức tốt có thể phục vụ nhiều lần tiếp theo."
+    },
+    {
+      "page": 12,
+      "text": "Căn cứ hồ sơ: mô hình do tác giả đề xuất và các chức năng trong bản hiện thực hóa TVSI Helpdesk, đối chiếu ngày 01/10/2026. Nhận diện: website chính thức TVSI (www.tvsi.com.vn). Tình huống nêu trong hồ sơ là minh họa; kế hoạch và chỉ tiêu là đề xuất thí điểm."
+    },
+    {
+      "page": 12,
+      "text": "TVSI Helpdesk · Từ phản hồi đến tri thức"
+    },
+    {
+      "page": 12,
+      "text": "12 / 12"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import styles from '../shared.module.css'
@@ -42,9 +44,9 @@ export default function SecuritySettingsPage() {
   }
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <span className="card-title">🔒 Đổi mật khẩu đăng nhập</span>
+    <div className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <h2><Icon name="lock" size={18} /> Đổi mật khẩu đăng nhập</h2>
       </div>
       
       <form className={styles.form} onSubmit={handleUpdatePassword}>

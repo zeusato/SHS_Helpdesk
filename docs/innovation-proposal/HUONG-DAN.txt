@@ -1,0 +1,38 @@
+HỒ SƠ SÁNG KIẾN TVSI — TỪ PHẢN HỒI ĐẾN TRI THỨC
+Tác giả: Trần Thị Quý | Phòng Marketing
+
+TỆP SỬ DỤNG
+TVSI_Tu_phan_hoi_den_tri_thuc.html: bản HTML độc lập, có đủ logo và phông chữ, mở trực tiếp bằng trình duyệt. Không cần chạy ứng dụng Helpdesk hoặc kết nối mạng.
+../../output/pdf/TVSI_Tu_phan_hoi_den_tri_thuc_v2.pdf: bản PDF mới nhất, 12 trang A4, Hình 01 có mũi tên thể hiện chu trình. Bản PDF cũ được giữ vì đang được mở.
+
+CHỈNH SỬA TRONG TRÌNH DUYỆT
+1. Bấm “Sửa nội dung”.
+2. Bấm đoạn chữ cần thay, nhập nội dung và chọn “Áp dụng”.
+3. Mỗi đoạn được giới hạn số dòng để tránh đè lên các thành phần kế tiếp. Nếu cần thêm nhiều nội dung hoặc thay bố cục, sửa nguồn build_proposal.py rồi dựng lại, hoặc yêu cầu chỉnh tài liệu.
+4. Bấm “Lưu bản HTML” để tải bản chứa các thay đổi. Thay đổi chưa lưu sẽ mất khi đóng hoặc tải lại trang.
+5. Bản HTML đã lưu vẫn có thể mở độc lập, sửa và in tiếp.
+
+IN HOẶC LƯU PDF
+Bấm “In / lưu PDF”, chọn Save as PDF / Lưu dưới dạng PDF trong hộp thoại trình duyệt.
+Khổ A4, tỉ lệ 100%, tắt đầu trang/chân trang của trình duyệt. Tài liệu có sẵn số trang.
+Bản in xuất đủ 12 trang, không chỉ trang đang xem. Thanh điều khiển và hộp sửa sẽ không xuất hiện.
+Sau khi sửa HTML, in từ chính bản HTML đã sửa để PDF phản ánh thay đổi; PDF xuất sẵn không tự cập nhật.
+
+NỘI DUNG
+01 Tổng quan sáng kiến
+02 Bài toán và mục tiêu
+03 Cách tổ chức vận hành
+04 Luồng vận hành đề xuất
+05 Điểm sáng tạo và giá trị
+06 Cấu trúc Shape Up
+07 Tình huống minh họa
+08 Khả năng áp dụng rộng rãi
+09 Tính khả thi và nguồn lực
+10 Kế hoạch áp dụng đề xuất
+11 Chỉ tiêu và phương pháp đánh giá
+12 Quản trị và kiến nghị
+
+GHI CHÚ
+Bản này theo hướng A đã được chọn. Không đặt tên cuộc thi khi chưa được cung cấp; không dùng số liệu giả làm hiệu quả thực đo.
+Mẫu hồ sơ chính thức và giới hạn trang chưa được cung cấp. Có thể điều chỉnh theo quy định ban tổ chức khi có.
+build_proposal.py là nguồn bố cục và nội dung dựng đồng thời HTML/PDF. Việc chạy lại nguồn sẽ ghi đè HTML được sinh tự động; giữ riêng bản HTML đã sửa thủ công trước khi dựng lại.

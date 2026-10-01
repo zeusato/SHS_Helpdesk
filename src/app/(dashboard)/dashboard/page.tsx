@@ -5,6 +5,8 @@ import { formatDistanceToNow } from 'date-fns'
 import { vi } from 'date-fns/locale'
 import { createClient } from '@/lib/supabase/client'
 import styles from './page.module.css'
+import Link from 'next/link'
+import Icon from '@/components/ui/Icon'
 
 interface ProjectStat {
   id: string
@@ -86,154 +88,53 @@ export default function DashboardPage() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.header}>
-        <h1>Dashboard</h1>
-        <p className="text-secondary">Tổng quan hệ thống Helpdesk & Shape Up</p>
+      <header className={styles.header}>
+        <div><p className={styles.eyebrow}>TVSI / Không gian làm việc</p><h1>Tổng quan hỗ trợ</h1><p className={styles.intro}>Theo dõi yêu cầu, phối hợp xử lý và chia sẻ tri thức.</p></div>
+        <Link href="/portal" className="btn btn-primary"><Icon name="plus" size={18} />Tạo ticket</Link>
+      </header>
+      {!loading && !stats && <div className={styles.notice} role="alert"><Icon name="warning" size={18} /> Chưa tải được dữ liệu tổng quan.<button className="btn btn-ghost btn-sm" onClick={fetchDashboardData}>Thử lại</button></div>}
+      <section className={styles.statsGrid} aria-label="Thống kê hỗ trợ" aria-busy={loading}>
+        {[
+          { label: 'Ticket mới', value: stats?.ticketsNew, color: 'var(--color-brand)' },
+          { label: 'Đang xử lý', value: stats?.ticketsInProgress, color: 'var(--color-info)' },
+          { label: 'Đã giải quyết', value: stats?.ticketsResolved, color: 'var(--color-success)' },
+          { label: 'Bài Shape Up', value: stats?.shapeUpsTotal, color: 'var(--color-text-muted)' },
+        ].map(item => <article className={styles.statCard} key={item.label}>
+          <span className={styles.statLabel}><i style={{ background: item.color }} />{item.label}</span>
+          <strong className={styles.statValue}>{loading ? <span className={styles.skeleton} /> : (item.value ?? '—')}</strong>
+        </article>)}
+      </section>
+      <div className={styles.workspaceGrid}>
+        <section className={styles.recentSection}>
+          <div className={styles.sectionHeader}><h2>Ticket gần đây</h2><Link href="/tickets" className={styles.sectionLink}>Xem tất cả <Icon name="arrowRight" size={16} /></Link></div>
+          <div className={styles.recentList} aria-busy={loading}>
+            {loading ? [1, 2, 3, 4].map(i => <div key={i} className={styles.recentItem}><span className={styles.skeleton} style={{ width: '60%', height: 19 }} /><span className={styles.skeleton} style={{ width: 70, height: 23 }} /></div>) : recentTickets.length === 0 ? <div className={styles.emptyState}><Icon name="ticket" size={27} /><p>Chưa có ticket nào</p><span>Yêu cầu mới sẽ xuất hiện tại đây.</span></div> : recentTickets.map(t => <Link href={'/tickets/' + t.id} key={t.id} className={styles.recentItem}>
+              <div className={styles.recentInfo}><span className={styles.recentTitle}>{t.title}</span><span className={styles.recentMeta}>{t.requester_name} · {timeAgo(t.created_at)}</span></div>
+              <span className={'badge ' + (STATUS_MAP[t.status]?.badge || '')}>{STATUS_MAP[t.status]?.label || t.status}</span>
+            </Link>)}
+          </div>
+        </section>
+        <aside className={styles.knowledge}>
+          <p className={styles.eyebrow}>Thư viện / Shape Up</p><h2>Chia sẻ để<br />cùng giải quyết.</h2>
+          <div className={styles.guide}><h3>Ghi nhận yêu cầu rõ ràng</h3><p>Nêu vấn đề, bước thực hiện và kết quả mong muốn trong ticket.</p></div>
+          <div className={styles.guide}><h3>Theo dõi đến khi hoàn tất</h3><p>Theo dõi trạng thái và bổ sung thông tin trong luồng trao đổi.</p></div>
+          <Link href="/shapeups" className={styles.sectionLink}>Khám phá Shape Up <Icon name="arrowRight" size={16} /></Link>
+        </aside>
       </div>
-
-      {/* Stats Grid */}
-      <div className={styles.statsGrid}>
-        <div className={`card ${styles.statCard}`}>
-          <div className={styles.statIcon} style={{ background: 'var(--color-info-bg)', color: 'var(--color-info)' }}>🎫</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>
-              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.ticketsNew ?? 0)}
-            </span>
-            <span className={styles.statLabel}>Ticket mới</span>
-          </div>
-        </div>
-        <div className={`card ${styles.statCard}`}>
-          <div className={styles.statIcon} style={{ background: 'var(--color-warning-bg)', color: 'var(--color-warning)' }}>⏳</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>
-              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.ticketsInProgress ?? 0)}
-            </span>
-            <span className={styles.statLabel}>Đang xử lý</span>
-          </div>
-        </div>
-        <div className={`card ${styles.statCard}`}>
-          <div className={styles.statIcon} style={{ background: 'var(--color-success-bg)', color: 'var(--color-success)' }}>✅</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>
-              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.ticketsResolved ?? 0)}
-            </span>
-            <span className={styles.statLabel}>Đã giải quyết</span>
-          </div>
-        </div>
-        <div className={`card ${styles.statCard}`}>
-          <div className={styles.statIcon} style={{ background: 'rgba(168, 85, 247, 0.12)', color: '#a855f7' }}>📚</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statValue}>
-              {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '40px' }} /> : (stats?.shapeUpsTotal ?? 0)}
-            </span>
-            <span className={styles.statLabel}>Shape Up</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Project Breakdown */}
-      <div className="card" style={{ marginBottom: 'var(--space-lg)' }}>
-        <div className="card-header">
-          <span className="card-title">📊 Thống kê theo Dự án</span>
-        </div>
-        <div className="table-container">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Dự án</th>
-                <th>Mới</th>
-                <th>Đang xử lý</th>
-                <th>Đã xử lý</th>
-                <th>Thư viện (Shape Up)</th>
-                <th>Tổng cộng</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
-                [1, 2, 3].map(i => (
-                  <tr key={i}>
-                    <td><span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '120px' }} /></td>
-                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
-                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
-                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
-                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
-                    <td><span className={`${styles.skeleton} ${styles.skeletonBadge}`} /></td>
-                  </tr>
-                ))
-              ) : (stats?.projectStats || []).length === 0 ? (
-                <tr><td colSpan={6} className="text-center text-muted">Chưa có dữ liệu dự án</td></tr>
-              ) : stats?.projectStats.map(p => (
-                <tr key={p.id}>
-                  <td style={{ fontWeight: 600 }}>{p.name}</td>
-                  <td><span className="badge badge-new" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.new}</span></td>
-                  <td><span className="badge badge-in-progress" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.in_progress}</span></td>
-                  <td><span className="badge badge-resolved" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.resolved}</span></td>
-                  <td><span className="badge badge-pending" style={{ minWidth: '32px', justifyContent: 'center', background: 'rgba(168, 85, 247, 0.12)', color: '#a855f7' }}>{p.shape_ups}</span></td>
-                  <td><span className="badge badge-closed" style={{ minWidth: '32px', justifyContent: 'center' }}>{p.total + p.shape_ups}</span></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className={styles.gridTwo}>
-        {/* Summary */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">📈 Tổng hợp</span>
-          </div>
-          <div className={styles.summaryList}>
-            {[
-              { label: 'Tổng ticket', value: stats?.ticketsTotal },
-              { label: 'Ticket đã đóng', value: stats?.ticketsClosed },
-              { label: 'Shape Up bản nháp', value: stats?.shapeUpsDraft },
-              { label: 'Shape Up đã xuất bản', value: stats?.shapeUpsPublished },
-            ].map((row, i) => (
-              <div key={i} className={styles.summaryRow}>
-                <span className="text-secondary">{row.label}</span>
-                <strong>
-                  {loading ? <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '30px' }} /> : (row.value ?? 0)}
-                </strong>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Recent Tickets */}
-        <div className="card">
-          <div className="card-header">
-            <span className="card-title">🕐 Ticket gần đây</span>
-          </div>
-          <div className={styles.recentList}>
-            {loading ? (
-              [1, 2, 3, 4, 5].map(i => (
-                <div key={i} className={styles.recentItem}>
-                  <div className={styles.recentInfo}>
-                    <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '150px', marginBottom: '4px' }} />
-                    <span className={`${styles.skeleton} ${styles.skeletonText}`} style={{ width: '100px', height: '12px' }} />
-                  </div>
-                  <span className={`${styles.skeleton} ${styles.skeletonBadge}`} />
-                </div>
-              ))
-            ) : recentTickets.length === 0 ? (
-              <p className="text-muted">Chưa có ticket nào</p>
-            ) : (
-              recentTickets.map(t => (
-                <div key={t.id} className={styles.recentItem}>
-                  <div className={styles.recentInfo}>
-                    <span className={styles.recentTitle}>{t.title}</span>
-                    <span className="text-muted text-sm">{t.requester_name} · {timeAgo(t.created_at)}</span>
-                  </div>
-                  <span className={`badge ${STATUS_MAP[t.status]?.badge || ''}`}>
-                    {STATUS_MAP[t.status]?.label || t.status}
-                  </span>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
+      <section className={styles.projectSection}>
+        <div className={styles.sectionHeader}><div><p className={styles.eyebrow}>Phân bổ công việc</p><h2>Thống kê theo dự án</h2></div></div>
+        <div className={styles.tableWrap}><table className="table"><thead><tr><th scope="col">Dự án</th><th scope="col">Mới</th><th scope="col">Đang xử lý</th><th scope="col">Đã giải quyết</th><th scope="col">Bài Shape Up</th><th scope="col">Tổng cộng</th></tr></thead><tbody>
+          {loading ? [1, 2, 3].map(i => <tr key={i}>{[1, 2, 3, 4, 5, 6].map(j => <td key={j}><span className={styles.skeleton} style={{ width: j === 1 ? 130 : 34, height: 18 }} /></td>)}</tr>) : (stats?.projectStats || []).length === 0 ? <tr><td colSpan={6} className={styles.tableEmpty}>Chưa có dữ liệu dự án</td></tr> : stats?.projectStats.map(p => <tr key={p.id}><td className={styles.projectName}>{p.name}</td><td>{p.new}</td><td>{p.in_progress}</td><td>{p.resolved}</td><td>{p.shape_ups}</td><td><strong>{p.total + p.shape_ups}</strong></td></tr>)}
+        </tbody></table></div>
+      </section>
+      <section className={styles.summary} aria-label="Tổng hợp">
+        {[
+          { label: 'Tổng ticket', value: stats?.ticketsTotal },
+          { label: 'Ticket đã đóng', value: stats?.ticketsClosed },
+          { label: 'Shape Up bản nháp', value: stats?.shapeUpsDraft },
+          { label: 'Shape Up đã xuất bản', value: stats?.shapeUpsPublished },
+        ].map(row => <div className={styles.summaryRow} key={row.label}><span>{row.label}</span><strong>{loading ? '…' : (row.value ?? '—')}</strong></div>)}
+      </section>
     </div>
   )
 }

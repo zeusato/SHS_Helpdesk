@@ -1,0 +1,30 @@
+[
+  {
+    "id": "577bd6d5-50ae-4de8-b425-263373658bc4",
+    "name": "SH SMart - Mobile APP",
+    "description": "Hệ thống trading SH SMart trên nền tảng di động Android và iOS",
+    "status": "active",
+    "created_at": "2026-05-07T07:22:03.121288+00:00"
+  },
+  {
+    "id": "bed6421b-2cfc-45f5-9987-da44acc3ed09",
+    "name": "SH SMart - WEB",
+    "description": "Nền tảng giao dịch SH Smart trên Web",
+    "status": "active",
+    "created_at": "2026-05-07T07:22:31.736737+00:00"
+  },
+  {
+    "id": "0417f9d5-c70b-4448-b7dd-09c9171ff88a",
+    "name": "SHA Mobile",
+    "description": "Nền tảng quản lý khách hàng SH Advisor cho thiết bị di động",
+    "status": "active",
+    "created_at": "2026-05-07T09:52:55.971624+00:00"
+  },
+  {
+    "id": "82f53b3f-3f15-4190-8577-04755df7d4c4",
+    "name": "SHA WEB",
+    "description": "Nền tảng quản lý khách hàng SH Advisor trên Web",
+    "status": "active",
+    "created_at": "2026-05-07T09:53:15.214112+00:00"
+  }
+]

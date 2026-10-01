@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState } from 'react'
 import styles from '../shared.module.css'
 import { encryptKey, decryptKey } from '@/lib/utils/crypto'
@@ -30,9 +32,9 @@ export default function AiSettingsPage() {
   }
 
   return (
-    <div className="card">
-      <div className="card-header">
-        <span className="card-title">🤖 Tích hợp AI (Gemini API)</span>
+    <div className={styles.section}>
+      <div className={styles.sectionHeader}>
+        <h2><Icon name="sparkles" size={18} /> Tích hợp AI (Gemini API)</h2>
       </div>
       
       <form className={styles.form} onSubmit={handleSaveApiKey}>

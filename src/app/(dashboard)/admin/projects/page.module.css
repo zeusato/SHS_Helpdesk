@@ -1,13 +1,15 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-}
+.page { display:flex; flex-direction:column; gap:28px; min-width:0; }
+.header { display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; padding:8px 0 24px; border-bottom:1px solid var(--color-border); }
+.header h1 { font-size:clamp(29px,3vw,38px); font-weight:700; letter-spacing:-.9px; }
+.header p { margin-top:9px; max-width:600px; }
+.eyebrow { display:block; margin-bottom:9px; font-size:12px; text-transform:uppercase; letter-spacing:.12em; color:var(--color-brand); font-weight:700; }
+.page > :global(.table-container) { border-radius:0; border:0; border-bottom:1px solid var(--color-border); }
+.page :global(.table) { min-width:720px; }
+.page :global(.table th) { padding:14px 16px; background:var(--color-bg-primary); font-size:12px; }
+.page :global(.table td) { padding:19px 16px; }
+.page :global(.table th:first-child),.page :global(.table td:first-child) { padding-left:0; }
+.page :global(.table th:last-child),.page :global(.table td:last-child) { padding-right:0; }
+.page :global(.empty-state) { padding:65px 20px; }
+.page :global(.empty-state-icon) { color:var(--color-text-muted); }
+.formRow { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media(max-width:600px) { .page { gap:20px; } .header { gap:19px; padding-bottom:22px; } .header > :global(.btn) { min-height:42px; } .formRow { grid-template-columns:1fr; } }

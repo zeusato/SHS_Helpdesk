@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
@@ -25,7 +27,7 @@ export default function ShapeUpDetailPage() {
     project_id: searchParams.get('project_id') || '',
     images: [],
   })
-  
+
   const [projects, setProjects] = useState<Project[]>([])
   const [linkedTickets, setLinkedTickets] = useState<Ticket[]>([])
   const [loading, setLoading] = useState(!isNew)
@@ -35,14 +37,14 @@ export default function ShapeUpDetailPage() {
 
   const fetchShapeUp = useCallback(async () => {
     if (isNew) return
-    
+
     // Fetch Shape Up details
     const { data: suData } = await supabase
       .from('shape_ups')
       .select('*, project:projects(id, name), author:users!created_by(id, name)')
       .eq('id', shapeUpId)
       .single()
-      
+
     if (suData) setShapeUp(suData)
 
     // Fetch linked tickets
@@ -50,20 +52,20 @@ export default function ShapeUpDetailPage() {
       .from('ticket_shapeup')
       .select('*, ticket:tickets(*)')
       .eq('shapeup_id', shapeUpId)
-      
+
     if (tsData) {
       setLinkedTickets(tsData.map(ts => ts.ticket) as unknown as Ticket[])
     }
-    
+
     setLoading(false)
   }, [isNew, shapeUpId, supabase])
 
   const fetchProjects = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return
-    
+
     const { data: profile } = await supabase.from('users').select('role').eq('id', user.id).single()
-    
+
     if (profile?.role === 'manager') {
       const { data } = await supabase.from('projects').select('id, name').eq('status', 'active').order('name')
       setProjects((data || []) as Project[])
@@ -138,7 +140,7 @@ export default function ShapeUpDetailPage() {
   const handleSave = async (status: 'draft' | 'published' = 'draft') => {
     setSaving(true)
     const { data: { user } } = await supabase.auth.getUser()
-    
+
     if (!user) {
       setSaving(false)
       return
@@ -163,7 +165,7 @@ export default function ShapeUpDetailPage() {
         ...payload,
         created_by: user.id,
       }).select('id').single()
-      
+
       if (!error && data) {
         resultId = data.id
         // Handle source ticket if came from URL
@@ -184,7 +186,7 @@ export default function ShapeUpDetailPage() {
       if (error) alert('Lỗi lưu: ' + error.message)
       else fetchShapeUp()
     }
-    
+
     setSaving(false)
   }
 
@@ -194,17 +196,17 @@ export default function ShapeUpDetailPage() {
     <div className={styles.page}>
       <div className={styles.header}>
         <div className="flex gap-sm items-center">
-          <button className="btn btn-ghost btn-sm" onClick={() => router.push('/shapeups')}>← Danh sách</button>
+          <button className="btn btn-ghost btn-sm" onClick={() => router.push('/shapeups')}><Icon name="arrowLeft" size={18} /> Danh sách</button>
           <span className="text-muted">/</span>
           <span className="text-muted">{isNew ? 'Tạo mới' : shapeUp.id?.slice(0,8)}</span>
         </div>
         <div className="flex gap-sm items-center">
           {saving && <span className="text-sm text-muted flex items-center gap-xs"><span className="spinner" /> Đang lưu...</span>}
           <button className="btn btn-secondary" onClick={() => handleSave('draft')} disabled={saving || !shapeUp.title}>
-            💾 Lưu nháp
+            <Icon name="file" size={18} /> Lưu nháp
           </button>
           <button className="btn btn-primary" onClick={() => handleSave('published')} disabled={saving || !shapeUp.title}>
-            🚀 Xuất bản
+            <Icon name="upload" size={18} /> Xuất bản
           </button>
         </div>
       </div>
@@ -214,28 +216,28 @@ export default function ShapeUpDetailPage() {
           <div className="card">
             <div className="input-group">
               <label className="input-label input-required">Tiêu đề Shape Up</label>
-              <input 
-                className="input" 
-                style={{ fontSize: '1.25rem', padding: '12px 16px' }} 
-                value={shapeUp.title || ''} 
-                onChange={e => setShapeUp({ ...shapeUp, title: e.target.value })} 
+              <input
+                className="input"
+                style={{ fontSize: '1.25rem', padding: '12px 16px' }}
+                value={shapeUp.title || ''}
+                onChange={e => setShapeUp({ ...shapeUp, title: e.target.value })}
                 placeholder="Ví dụ: Tích hợp thanh toán VNPay..."
               />
             </div>
 
             <div className={styles.editorGroup}>
               <label className="input-label">Mô tả vấn đề gốc</label>
-              <RichTextEditor 
-                content={shapeUp.issue_detail || ''} 
-                onChange={(html) => setShapeUp({ ...shapeUp, issue_detail: html })} 
+              <RichTextEditor
+                content={shapeUp.issue_detail || ''}
+                onChange={(html) => setShapeUp({ ...shapeUp, issue_detail: html })}
               />
             </div>
 
             <div className={styles.editorGroup}>
               <label className="input-label">Cách giải quyết (Solution)</label>
-              <RichTextEditor 
-                content={shapeUp.solution || ''} 
-                onChange={(html) => setShapeUp({ ...shapeUp, solution: html })} 
+              <RichTextEditor
+                content={shapeUp.solution || ''}
+                onChange={(html) => setShapeUp({ ...shapeUp, solution: html })}
               />
             </div>
 
@@ -273,9 +275,9 @@ export default function ShapeUpDetailPage() {
           </div>
 
           <div className="card">
-            <h4 style={{ marginBottom: 'var(--space-md)' }}>🖼️ Ảnh đính kèm</h4>
-            
-            <div 
+            <h4 style={{ marginBottom: 'var(--space-md)' }}><Icon name="image" size={18} /> Ảnh đính kèm</h4>
+
+            <div
               className={`${styles.dragDropZone} ${isDragging ? styles.dragging : ''}`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -288,7 +290,7 @@ export default function ShapeUpDetailPage() {
                 </div>
               ) : (
                 <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', cursor: 'pointer', padding: '16px 0' }}>
-                  <span style={{ fontSize: '24px' }}>📥</span>
+                  <span style={{ fontSize: '24px' }}><Icon name="upload" size={18} /></span>
                   <span className="text-sm text-secondary text-center">
                     Kéo thả ảnh vào đây<br/>hoặc click để chọn file
                   </span>
@@ -296,18 +298,18 @@ export default function ShapeUpDetailPage() {
                 </label>
               )}
             </div>
-            
+
             {shapeUp.images && (shapeUp.images as string[]).length > 0 && (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '8px', marginTop: '16px' }}>
                 {(shapeUp.images as string[]).map((url, i) => (
                   <div key={i} style={{ position: 'relative', aspectRatio: '1', borderRadius: 'var(--radius-sm)', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
                     <Image src={url} alt="Đính kèm" fill style={{ objectFit: 'cover' }} />
-                    <button 
-                      className="btn btn-icon" 
+                    <button aria-label="Đóng"
+                      className="btn btn-icon"
                       style={{ position: 'absolute', top: '4px', right: '4px', background: 'rgba(0,0,0,0.6)', color: 'white', width: '20px', height: '20px', minWidth: '20px', fontSize: '12px' }}
                       onClick={(e) => { e.preventDefault(); e.stopPropagation(); removeImage(i); }}
                       title="Xoá ảnh"
-                    >✕</button>
+                    ><Icon name="close" size={18} /></button>
                   </div>
                 ))}
               </div>
@@ -316,19 +318,19 @@ export default function ShapeUpDetailPage() {
 
           {!isNew && (
             <div className="card">
-              <h4 style={{ marginBottom: 'var(--space-md)' }}>🎫 Ticket liên kết</h4>
+              <h4 style={{ marginBottom: 'var(--space-md)' }}><Icon name="ticket" size={18} /> Ticket liên kết</h4>
               {linkedTickets.length === 0 ? (
                 <p className="text-muted text-sm">Chưa có ticket nào được gắn thẻ Shape Up này.</p>
               ) : (
                 <div className="flex flex-col gap-sm">
                   {linkedTickets.map(t => (
-                    <div key={t.id} className={styles.linkedTicket} onClick={() => router.push(`/tickets/${t.id}`)}>
-                      <div className="font-medium text-sm">{t.title}</div>
-                      <div className="text-xs text-muted flex justify-between mt-xs">
+                    <button type="button" key={t.id} className={styles.linkedTicket} onClick={() => router.push(`/tickets/${t.id}`)}>
+                      <span className="font-medium text-sm">{t.title}</span>
+                      <span className="text-xs text-muted flex justify-between mt-xs">
                         <span>{t.id.slice(0,8)}</span>
                         <span>{new Date(t.created_at).toLocaleDateString('vi-VN')}</span>
-                      </div>
-                    </div>
+                      </span>
+                    </button>
                   ))}
                 </div>
               )}

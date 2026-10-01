@@ -1,0 +1,25 @@
+2026-10-01 — Đã hoàn thiện hướng A
+
+Chỉnh Hình 01 theo phản hồi tác giả: thêm mũi tên Tiếp nhận → Xử lý → Tích lũy và vòng quay lại bước xử lý, chú thích “Dùng lại cho yêu cầu tiếp theo”. Đổi nhãn và chú thích hình cho đúng ý nghĩa. HTML chính đã cập nhật; PDF mới nhất là output/pdf/TVSI_Tu_phan_hoi_den_tri_thuc_v2.pdf do bản cũ đang bị khóa ghi. Đã render lại trang thay đổi và kiểm tra nội dung/khung chữ 12 trang.
+
+Đại ca chọn “A”. Bản chính: TVSI_Tu_phan_hoi_den_tri_thuc.html trong thư mục này; PDF ở output/pdf/TVSI_Tu_phan_hoi_den_tri_thuc.pdf trong gốc dự án.
+Tác giả theo thông tin cung cấp: Trần Thị Quý | Phòng Marketing.
+12 trang A4. Đã render và xem toàn bộ 12 trang PDF; kiểm tra đủ nội dung chữ và không chồng chữ bằng verify_proposal.py. Đã kiểm tra HTML, chuyển trang và sửa nội dung qua trình duyệt.
+HTML độc lập, logo/font nhúng; có nút sửa nội dung, lưu bản HTML và in/lưu PDF. Nút in xuất toàn bộ trang qua CSS print.
+
+--- Nhật ký giai đoạn chọn hướng (đã hoàn tất) ---
+
+Đã soạn manuscript.txt với 12 phần nội dung, chưa dàn bản hoàn chỉnh để nộp.
+Đã tạo 3 hướng A4, mỗi hướng 2 trang có cùng nội dung giới thiệu + lưu đồ.
+Đã kiểm tra 6 trang trực tiếp bằng Browser, sửa overlap trang A1 và giao cắt đường nối với chữ B2.
+Các trang mẫu không tràn khung A4; font/nhãn tiếng Việt và logo hiển thị đúng.
+Ảnh kiểm tra cuối: design-demos/preview-a.png, preview-b.png, preview-c.png.
+Trang so sánh: design-demos/index.html; nút chuyển giới thiệu/lưu đồ đã kiểm tra.
+Server xem trước cục bộ: node docs/innovation-proposal/preview-server.mjs (127.0.0.1:8765).
+
+Chờ tác giả chọn hướng cho hồ sơ này theo gate ba hướng của huashu-design.
+Lựa chọn C trước đây dành cho giao diện ứng dụng, không phải lựa chọn cho tài liệu mới.
+Chưa tạo direction-approved.md vì tác giả chưa chọn hướng tài liệu.
+Chưa có trả lời về mẫu hồ sơ hoặc giới hạn trang; tạm xây khung A4 10–12 trang.
+
+Sau khi chọn: ghi nguyên văn lựa chọn vào direction-approved.md; biên tập và dàn trang đầy đủ; xuất PDF để nộp, kiểm tra từng trang; giữ HTML có thể sửa. Bổ sung thông tin tác giả/đơn vị/tên cuộc thi khi được cung cấp. Không tự gửi hồ sơ cho ban tổ chức.

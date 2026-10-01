@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { Project, User, ProjectPO } from '@/lib/types'
@@ -54,11 +56,12 @@ export default function AdminAssignmentsPage() {
     <div className={styles.page}>
       <div className={styles.header}>
         <div>
+          <span className={styles.eyebrow}>Quản trị hệ thống</span>
           <h1>Phân quyền PO</h1>
           <p className="text-secondary mt-sm">Gán Product Owner quản lý dự án</p>
         </div>
         <button className="btn btn-primary" onClick={() => { setForm({ project_id: '', user_id: '' }); setShowModal(true) }}>
-          ＋ Gán PO
+          <Icon name="plus" size={18} /> Gán PO
         </button>
       </div>
 
@@ -79,7 +82,7 @@ export default function AdminAssignmentsPage() {
             ) : assignments.length === 0 ? (
               <tr><td colSpan={5}>
                 <div className="empty-state">
-                  <div className="empty-state-icon">🔗</div>
+                  <div className="empty-state-icon"><Icon name="users" size={18} /></div>
                   <div className="empty-state-title">Chưa có phân quyền nào</div>
                 </div>
               </td></tr>
@@ -90,7 +93,7 @@ export default function AdminAssignmentsPage() {
                 <td className="text-secondary">{a.user?.email || '—'}</td>
                 <td className="text-muted text-sm">{new Date(a.created_at).toLocaleDateString('vi-VN')}</td>
                 <td>
-                  <button className="btn btn-ghost btn-sm" onClick={() => handleRemove(a.id)}>🗑️</button>
+                  <button aria-label="Xóa" className="btn btn-ghost btn-sm" onClick={() => handleRemove(a.id)}><Icon name="trash" size={18} /></button>
                 </td>
               </tr>
             ))}
@@ -103,7 +106,7 @@ export default function AdminAssignmentsPage() {
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h3>Gán PO vào dự án</h3>
-              <button className="btn btn-ghost btn-icon" onClick={() => setShowModal(false)}>✕</button>
+              <button aria-label="Đóng" className="btn btn-ghost btn-icon" onClick={() => setShowModal(false)}><Icon name="close" size={18} /></button>
             </div>
             <form onSubmit={handleAssign}>
               <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>

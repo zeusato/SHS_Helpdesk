@@ -4,6 +4,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import styles from './page.module.css'
+import BrandLogo from '@/components/ui/BrandLogo'
+import Icon from '@/components/ui/Icon'
+import Link from 'next/link'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -40,44 +43,41 @@ export default function LoginPage() {
 
   return (
     <div className={styles.loginPage}>
-      <div className={styles.loginContainer}>
-        {/* Left side - Branding */}
-        <div className={styles.brandSide}>
+      <header className={styles.header}>
+        <div className={styles.identity}><BrandLogo /><span>Helpdesk<small>Không gian hỗ trợ nội bộ</small></span></div>
+        <Link href="/portal" className={styles.portalLink} aria-label="Gửi yêu cầu hỗ trợ">Gửi yêu cầu hỗ trợ <Icon name="arrowRight" size={17} /></Link>
+      </header>
+      <main className={styles.loginContainer}>
+        <section className={styles.brandSide} aria-labelledby="brand-heading">
           <div className={styles.brandContent}>
-            <div className={styles.brandIcon}>
-              <img src="/LOGO.png" alt="Logo" className={styles.logoImg} />
-            </div>
-            <h1 className={styles.brandTitle}>SHS Helpdesk</h1>
+            <p className={styles.eyebrow}>TVSI / Kết nối & hỗ trợ</p>
+            <h1 id="brand-heading" className={styles.brandTitle}>Cùng phối hợp.<br />Cùng giải quyết.</h1>
             <p className={styles.brandDesc}>
-              Hệ thống quản lý Ticket và Thư viện tri thức Shape Up.
-              Tiếp nhận, xử lý và phản hồi nhanh chóng.
+              Một không gian để tiếp nhận yêu cầu, theo dõi xử lý và chia sẻ tri thức trong đội ngũ TVSI.
             </p>
             <div className={styles.features}>
               <div className={styles.feature}>
-                <span className={styles.featureIcon}>🎫</span>
-                <span>Quản lý Ticket thông minh</span>
+                <Icon name="ticket" size={21} />
+                <div><strong>Yêu cầu được kết nối</strong><span>Tiếp nhận và theo dõi ticket xuyên suốt.</span></div>
               </div>
               <div className={styles.feature}>
-                <span className={styles.featureIcon}>📚</span>
-                <span>Thư viện tri thức Shape Up</span>
-              </div>
-              <div className={styles.feature}>
-                <span className={styles.featureIcon}>🤖</span>
-                <span>Gợi ý giải pháp bằng AI</span>
+                <Icon name="book" size={21} />
+                <div><strong>Kiến thức được sẻ chia</strong><span>Tìm giải pháp trong thư viện Shape Up.</span></div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Right side - Login form */}
         <div className={styles.formSide}>
-          <form className={styles.form} onSubmit={handleLogin}>
+          <form className={styles.form} onSubmit={handleLogin} aria-busy={loading}>
+            <p className={styles.eyebrow}>Chào mừng trở lại</p>
             <h2 className={styles.formTitle}>Đăng nhập</h2>
             <p className={styles.formSubtitle}>Nhập thông tin tài khoản để truy cập hệ thống</p>
 
             {error && (
-              <div className={styles.error}>
-                <span>⚠️</span> {error}
+              <div className={styles.error} role="alert">
+                <Icon name="warning" size={18} /> {error}
               </div>
             )}
 
@@ -85,9 +85,11 @@ export default function LoginPage() {
               <label className="input-label" htmlFor="email">Email</label>
               <input
                 id="email"
+                name="email"
                 type="email"
+                autoComplete="username"
                 className="input"
-                placeholder="your@email.com"
+                placeholder="Nhập email của bạn"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -99,7 +101,9 @@ export default function LoginPage() {
               <label className="input-label" htmlFor="password">Mật khẩu</label>
               <input
                 id="password"
+                name="password"
                 type="password"
+                autoComplete="current-password"
                 className="input"
                 placeholder="••••••••"
                 value={password}
@@ -119,12 +123,14 @@ export default function LoginPage() {
                   Đang đăng nhập...
                 </>
               ) : (
-                'Đăng nhập'
+                <>Đăng nhập <Icon name="arrowRight" size={18} /></>
               )}
             </button>
+            <p className={styles.formNote}><Icon name="lock" size={15} /> Sử dụng tài khoản đã được cấp để truy cập.</p>
           </form>
         </div>
-      </div>
+      </main>
+      <footer className={styles.footer}><span>TVSI Helpdesk</span><span>Công ty Cổ phần Chứng khoán Tân Việt</span></footer>
     </div>
   )
 }

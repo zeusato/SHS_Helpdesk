@@ -1,5 +1,7 @@
 'use client'
 
+import Icon from '@/components/ui/Icon'
+
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import type { Project } from '@/lib/types'
@@ -68,11 +70,12 @@ export default function AdminProjectsPage() {
     <div className={styles.page}>
       <div className={styles.header}>
         <div>
-          <h1>Quản lý Dự án</h1>
+          <span className={styles.eyebrow}>Quản trị hệ thống</span>
+          <h1>Quản lý dự án</h1>
           <p className="text-secondary mt-sm">Danh sách nền tảng / dự án trong hệ thống</p>
         </div>
         <button className="btn btn-primary" onClick={openCreate}>
-          ＋ Thêm dự án
+          <Icon name="plus" size={18} /> Thêm dự án
         </button>
       </div>
 
@@ -93,7 +96,7 @@ export default function AdminProjectsPage() {
             ) : projects.length === 0 ? (
               <tr><td colSpan={5}>
                 <div className="empty-state">
-                  <div className="empty-state-icon">📁</div>
+                  <div className="empty-state-icon"><Icon name="folder" size={18} /></div>
                   <div className="empty-state-title">Chưa có dự án nào</div>
                   <p className="text-muted">Bấm &quot;Thêm dự án&quot; để bắt đầu</p>
                 </div>
@@ -107,8 +110,8 @@ export default function AdminProjectsPage() {
                   <td className="text-muted text-sm">{new Date(p.created_at).toLocaleDateString('vi-VN')}</td>
                   <td>
                     <div className="flex gap-xs">
-                      <button className="btn btn-ghost btn-sm" onClick={() => openEdit(p)}>✏️</button>
-                      <button className="btn btn-ghost btn-sm" onClick={() => handleDelete(p.id)}>🗑️</button>
+                      <button aria-label="Chỉnh sửa" className="btn btn-ghost btn-sm" onClick={() => openEdit(p)}><Icon name="edit" size={18} /></button>
+                      <button aria-label="Xóa" className="btn btn-ghost btn-sm" onClick={() => handleDelete(p.id)}><Icon name="trash" size={18} /></button>
                     </div>
                   </td>
                 </tr>
@@ -124,7 +127,7 @@ export default function AdminProjectsPage() {
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h3>{editingProject ? 'Sửa dự án' : 'Thêm dự án mới'}</h3>
-              <button className="btn btn-ghost btn-icon" onClick={() => setShowModal(false)}>✕</button>
+              <button aria-label="Đóng" className="btn btn-ghost btn-icon" onClick={() => setShowModal(false)}><Icon name="close" size={18} /></button>
             </div>
             <form onSubmit={handleSave}>
               <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>

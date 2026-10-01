@@ -23,14 +23,15 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   })
 
   useEffect(() => {
-    document.body.className = theme === 'dark' ? 'dark-theme' : ''
+    document.body.classList.toggle('dark-theme', theme === 'dark')
+    document.documentElement.style.colorScheme = theme
   }, [theme])
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light'
     setTheme(newTheme)
     localStorage.setItem('theme', newTheme)
-    document.body.className = newTheme === 'dark' ? 'dark-theme' : ''
+    document.body.classList.toggle('dark-theme', newTheme === 'dark')
   }
 
   return (

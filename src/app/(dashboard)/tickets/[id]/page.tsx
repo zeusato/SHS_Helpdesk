@@ -6,8 +6,10 @@ import Image from 'next/image'
 import { createClient } from '@/lib/supabase/client'
 import type { Ticket, Project, User, ShapeUp, TicketShapeUp } from '@/lib/types'
 import styles from './page.module.css'
+import Icon from '@/components/ui/Icon'
 import { decryptKey } from '@/lib/utils/crypto'
 import { marked } from 'marked'
+import { literalContains } from '@/lib/data/pagination'
 import RichTextEditor from '@/components/ui/RichTextEditor'
 import editorStyles from '@/components/ui/RichTextEditor.module.css'
 
@@ -80,19 +82,15 @@ export default function TicketDetailPage() {
   const fetchTicket = useCallback(async () => {
     const { data } = await supabase
       .from('tickets')
-      .select('*, project:projects(*), assignee:users!assignee_id(*), linked_shapeups:ticket_shapeup(shape_up:shape_ups(*))')
+      .select('*, project:projects(id,name), assignee:users!assignee_id(id,name), linked_shapeups:ticket_shapeup(ticket_id,shapeup_id,linked_by_user,linked_date,shape_up:shape_ups(*))')
       .eq('id', ticketId)
       .single()
     
     if (data) {
       setTicket(data as unknown as Ticket)
 
-      // Fetch linked shape ups
-      const { data: links } = await supabase
-        .from('ticket_shapeup')
-        .select('*, shapeup:shape_ups(*)')
-        .eq('ticket_id', ticketId)
-      setLinkedShapeUps((links || []) as (TicketShapeUp & { shapeup: ShapeUp })[])
+      // Reuse the joined result; keep full solutions for the AI reply action.
+      setLinkedShapeUps((data.linked_shapeups || []).map((link: TicketShapeUp & { shape_up: ShapeUp }) => ({ ...link, shapeup: link.shape_up })))
 
       // Fetch POs assigned to this project
       const { data: projectPo } = await supabase
@@ -121,7 +119,8 @@ export default function TicketDetailPage() {
 
   const updateField = async (field: string, value: string | null) => {
     setSaving(true)
-    await supabase.from('tickets').update({ [field]: value }).eq('id', ticketId)
+    const { error } = await supabase.from('tickets').update({ [field]: value }).eq('id', ticketId)
+    if (error) { setSaving(false); alert('Không lưu được thay đổi. Vui lòng thử lại.'); return }
     setTicket(prev => prev ? { ...prev, [field]: value } : null)
     setSaving(false)
   }
@@ -137,7 +136,7 @@ export default function TicketDetailPage() {
 
     try {
       // Fetch some shape ups to compare
-      const { data: allShapes } = await supabase.from('shape_ups').select('*').limit(50)
+      const { data: allShapes } = await supabase.from('shape_ups').select('id,title,status').eq('status', 'published').order('updated_at', { ascending: false }).limit(50)
       if (!allShapes) return
 
       const prompt = `Dựa trên yêu cầu hỗ trợ của khách hàng dưới đây, hãy tìm trong danh sách Knowledge Base (Shape Up) các mục liên quan nhất.
@@ -167,7 +166,7 @@ YÊU CẦU:
       if (result.trim() !== 'none') {
         const ids = result.split(',').map((id: string) => id.trim())
         const recommended = allShapes.filter(s => ids.includes(s.id))
-        setShapeUpResults(recommended)
+        setShapeUpResults(recommended as ShapeUp[])
       } else {
         alert('AI không tìm thấy Shape Up nào thực sự liên quan.')
       }
@@ -181,7 +180,8 @@ YÊU CẦU:
   const handleSaveNote = async () => {
     if (!ticket) return
     setSaving(true)
-    await supabase.from('tickets').update({ note: ticket.note }).eq('id', ticketId)
+    const { error } = await supabase.from('tickets').update({ note: ticket.note }).eq('id', ticketId)
+    if (error) alert('Không lưu được ghi chú. Vui lòng thử lại.')
     setSaving(false)
   }
 
@@ -288,6 +288,7 @@ YÊU CẦU:
 
       const resData = await response.json()
       if (resData.success) {
+        if (resData.dbWarning) alert(resData.dbWarning)
         await supabase.from('tickets').update({ 
           reply_date: new Date().toISOString(),
           status: 'resolved' 
@@ -313,10 +314,10 @@ YÊU CẦU:
     setSearchingShapeUp(true)
     const { data } = await supabase
       .from('shape_ups')
-      .select('*')
+      .select('id,title,status')
       .eq('project_id', ticket.project_id)
       .eq('status', 'published')
-      .ilike('title', `%${shapeUpQuery}%`)
+      .ilike('title', literalContains(shapeUpQuery))
       .limit(10)
     setShapeUpResults((data || []) as ShapeUp[])
     setSearchingShapeUp(false)
@@ -399,15 +400,15 @@ YÊU CẦU:
   return (
     <div className={styles.page}>
       <div className={styles.breadcrumb}>
-        <button className="btn btn-ghost btn-sm" onClick={() => router.push('/tickets')}>← Danh sách Ticket</button>
+        <button className="btn btn-ghost btn-sm" onClick={() => router.push('/tickets')}><Icon name="arrowLeft" size={16} /> Danh sách ticket</button>
         <span className="text-muted">/ {ticket.id.slice(0, 8)}</span>
-        {saving && <span className={styles.savingIndicator}><span className="spinner" /> Đang lưu...</span>}
+        {saving && <span className={styles.savingIndicator} role="status"><span className="spinner" /> Đang lưu...</span>}
       </div>
 
       <div className={styles.layout}>
         <div className={styles.main}>
           <div className="card">
-            <h2 className={styles.title}>{ticket.title}</h2>
+            <p className={styles.eyebrow}>Yêu cầu hỗ trợ / {ticket.id.slice(0, 8).toUpperCase()}</p><h1 className={styles.title}>{ticket.title}</h1>
             <div className={styles.meta}>
               <span>Từ: <strong>{ticket.requester_name}</strong></span>
               <span>{ticket.requester_email}</span>
@@ -436,19 +437,19 @@ YÊU CẦU:
 
           <div className="card">
             <div className="card-header">
-              <span className="card-title">📚 Shape Up liên quan</span>
+              <span className="card-title">Shape Up liên quan</span>
               <button className="btn btn-secondary btn-sm" onClick={() => setShowShapeUpSearch(!showShapeUpSearch)}>
-                ＋ Liên kết
+                <Icon name="plus" size={15} /> Liên kết
               </button>
             </div>
 
             {showShapeUpSearch && (
               <div className={styles.searchBox}>
                 <div className="flex gap-sm">
-                  <input className="input" placeholder="Tìm Shape Up theo tiêu đề..." value={shapeUpQuery}
+                  <input className="input" aria-label="Tìm Shape Up theo tiêu đề" placeholder="Tìm Shape Up theo tiêu đề..." value={shapeUpQuery}
                     onChange={e => setShapeUpQuery(e.target.value)} onKeyDown={e => e.key === 'Enter' && searchShapeUps()} />
-                  <button className="btn btn-primary btn-sm" onClick={searchShapeUps} disabled={searchingShapeUp}>
-                    {searchingShapeUp ? <span className="spinner" /> : '🔍'}
+                  <button className="btn btn-primary btn-sm" aria-label="Tìm Shape Up" onClick={searchShapeUps} disabled={searchingShapeUp}>
+                    {searchingShapeUp ? <span className="spinner" /> : <Icon name="search" size={17} />}
                   </button>
                   <button 
                     className="btn btn-secondary btn-sm" 
@@ -456,13 +457,13 @@ YÊU CẦU:
                     disabled={recommendingShapeUp}
                     title="Dùng AI tìm Shape Up liên quan"
                   >
-                    {recommendingShapeUp ? <span className="spinner" /> : '🪄 AI Gợi ý'}
+                    {recommendingShapeUp ? <span className="spinner" /> : <><Icon name="sparkles" size={16} /> AI gợi ý</>}
                   </button>
                 </div>
                 {shapeUpResults.length > 0 && (
                   <div className={styles.searchResults}>
                     {shapeUpResults.map(s => (
-                      <div key={s.id} className={styles.searchResultItem} onClick={() => linkShapeUp(s.id)}>
+                      <div key={s.id} className={styles.searchResultItem} role="button" tabIndex={0} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); linkShapeUp(s.id) } }} onClick={() => linkShapeUp(s.id)}>
                         <strong>{s.title}</strong>
                         <span className="text-muted text-sm">{s.issue_detail?.slice(0, 80)}...</span>
                       </div>
@@ -482,7 +483,7 @@ YÊU CẦU:
                       <strong>{link.shapeup?.title}</strong>
                       <div className="text-muted text-sm">{link.shapeup?.solution?.slice(0, 100)}...</div>
                     </div>
-                    <button className="btn btn-ghost btn-sm" onClick={() => unlinkShapeUp(link.shapeup?.id)}>✕</button>
+                    <button className="btn btn-ghost btn-sm" aria-label="Bỏ liên kết Shape Up" onClick={() => unlinkShapeUp(link.shapeup?.id)}><Icon name="close" size={17} /></button>
                   </div>
                 ))}
               </div>
@@ -492,9 +493,9 @@ YÊU CẦU:
           {/* Reply Email */}
           <div className="card">
             <div className="card-header">
-              <span className="card-title">📧 Phản hồi Email</span>
+              <span className="card-title">Phản hồi email</span>
               <button className="btn btn-primary btn-sm" onClick={() => setShowReply(!showReply)}>
-                {showReply ? 'Đóng' : '✉️ Soạn phản hồi'}
+                {showReply ? 'Đóng' : <><Icon name="mail" size={16} /> Soạn phản hồi</>}
               </button>
             </div>
 
@@ -513,10 +514,10 @@ YÊU CẦU:
                     <label className="input-label" style={{ marginBottom: 0 }}>Nội dung</label>
                     <div className="flex gap-sm">
                       <button className="btn btn-ghost btn-sm" onClick={handleFillFromShapeUp}>
-                        📚 Chèn giải pháp
+                        <Icon name="book" size={16} /> Chèn giải pháp
                       </button>
                       <button className="btn btn-secondary btn-sm" onClick={handleAIDraft} disabled={draftingAI}>
-                        {draftingAI ? <><span className="spinner" /> Đang soạn...</> : '🪄 AI soạn thảo'}
+                        {draftingAI ? <><span className="spinner" /> Đang soạn...</> : <><Icon name="sparkles" size={16} /> AI soạn thảo</>}
                       </button>
                     </div>
                   </div>
@@ -527,7 +528,7 @@ YÊU CẦU:
                 </div>
                 <div className="flex justify-end items-center">
                   <button className="btn btn-primary" onClick={() => setShowPreview(true)} disabled={!replyContent.trim()}>
-                    👁️ Xem trước & Gửi
+                    <Icon name="eye" size={17} /> Xem trước & gửi
                   </button>
                 </div>
               </div>
@@ -542,14 +543,14 @@ YÊU CẦU:
 
             <div className={styles.fieldGroup}>
               <label className="input-label">Trạng thái</label>
-              <select className="select" value={ticket.status} onChange={e => updateField('status', e.target.value)}>
+              <select className="select" aria-label="Trạng thái ticket" value={ticket.status} onChange={e => updateField('status', e.target.value)}>
                 {STATUS_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
             </div>
 
             <div className={styles.fieldGroup}>
               <label className="input-label">Mức ưu tiên</label>
-              <select className="select" value={ticket.priority} onChange={e => updateField('priority', e.target.value)}>
+              <select className="select" aria-label="Mức ưu tiên ticket" value={ticket.priority} onChange={e => updateField('priority', e.target.value)}>
                 {PRIORITY_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
               </select>
             </div>
@@ -568,7 +569,7 @@ YÊU CẦU:
 
             <div className={styles.fieldGroup}>
               <label className="input-label">Ghi chú nội bộ</label>
-              <textarea className="textarea" rows={3} value={ticket.note || ''}
+              <textarea className="textarea" aria-label="Ghi chú nội bộ" rows={3} value={ticket.note || ''}
                 onChange={e => setTicket(prev => prev ? { ...prev, note: e.target.value } : null)}
                 onBlur={handleSaveNote} placeholder="Ghi chú cho team..." />
             </div>
@@ -579,7 +580,7 @@ YÊU CẦU:
             onClick={handleOpenConvertModal}
             disabled={linkedShapeUps.length > 0}
           >
-            {linkedShapeUps.length > 0 ? '✅ Đã có Shape Up' : '📚 Chuyển thành Shape Up'}
+            {linkedShapeUps.length > 0 ? <><Icon name="circleCheck" size={17} /> Đã có Shape Up</> : <><Icon name="book" size={17} /> Chuyển thành Shape Up</>}
           </button>
         </div>
       </div>
@@ -587,10 +588,10 @@ YÊU CẦU:
       {/* Convert to Shape Up Modal */}
       {showConvertModal && (
         <div className="modal-overlay" onClick={() => setShowConvertModal(false)}>
-          <div className="modal" style={{ maxWidth: '640px' }} onClick={e => e.stopPropagation()}>
+          <div className="modal" role="dialog" aria-modal="true" aria-label="Chuyển ticket thành Shape Up" style={{ maxWidth: '640px' }} onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>📚 Chuyển Ticket thành Shape Up</h3>
-              <button className="btn btn-ghost btn-icon" onClick={() => setShowConvertModal(false)}>✕</button>
+              <h3>Chuyển ticket thành Shape Up</h3>
+              <button className="btn btn-ghost btn-icon" aria-label="Đóng hộp thoại chuyển đổi" onClick={() => setShowConvertModal(false)}><Icon name="close" size={17} /></button>
             </div>
             <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
               <div className="input-group">
@@ -605,7 +606,7 @@ YÊU CẦU:
                 <label className="input-label">Cách giải quyết</label>
                 <textarea className="textarea" rows={4} value={convertForm.solution} onChange={e => setConvertForm({ ...convertForm, solution: e.target.value })} placeholder="Mô tả cách giải quyết vấn đề..." />
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-md)' }}>
+              <div className={styles.formGrid}>
                 <div className="input-group">
                   <label className="input-label">Link tài liệu</label>
                   <input className="input" value={convertForm.document_link} onChange={e => setConvertForm({ ...convertForm, document_link: e.target.value })} placeholder="https://..." />
@@ -619,12 +620,12 @@ YÊU CẦU:
                 <label className="input-label">Ghi chú nội bộ</label>
                 <textarea className="textarea" rows={2} value={convertForm.note} onChange={e => setConvertForm({ ...convertForm, note: e.target.value })} />
               </div>
-              <p className="text-muted text-sm">💡 Shape Up sẽ được tạo ở trạng thái <strong>Bản nháp</strong>, tự động liên kết với ticket này, và ảnh đính kèm sẽ được copy sang.</p>
+              <p className="text-muted text-sm">Shape Up sẽ được tạo ở trạng thái <strong>Bản nháp</strong>, tự động liên kết với ticket này, và ảnh đính kèm sẽ được copy sang.</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={() => setShowConvertModal(false)}>Hủy</button>
               <button className="btn btn-primary" onClick={handleSaveConvert} disabled={savingConvert || !convertForm.title.trim()}>
-                {savingConvert ? <><span className="spinner" /> Đang tạo...</> : '📚 Tạo Shape Up'}
+                {savingConvert ? <><span className="spinner" /> Đang tạo...</> : <><Icon name="book" size={17} /> Tạo Shape Up</>}
               </button>
             </div>
           </div>
@@ -633,10 +634,10 @@ YÊU CẦU:
       {/* Preview Modal */}
       {showPreview && (
         <div className="modal-overlay" onClick={() => setShowPreview(false)}>
-          <div className="modal" style={{ maxWidth: '700px' }} onClick={e => e.stopPropagation()}>
+          <div className="modal" role="dialog" aria-modal="true" aria-label="Xem trước email" style={{ maxWidth: '700px' }} onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h3>📧 Xem trước Email</h3>
-              <button className="btn btn-ghost btn-icon" onClick={() => setShowPreview(false)}>✕</button>
+              <h3>Xem trước email</h3>
+              <button className="btn btn-ghost btn-icon" aria-label="Đóng xem trước email" onClick={() => setShowPreview(false)}><Icon name="close" size={17} /></button>
             </div>
             <div className="modal-body">
               <div style={{ background: '#f8fafc', padding: '24px', borderRadius: '8px', border: '1px solid #e2e8f0', color: '#1e293b' }}>
@@ -658,7 +659,7 @@ YÊU CẦU:
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={() => setShowPreview(false)}>Quay lại sửa</button>
               <button className="btn btn-primary" onClick={handleRealSend} disabled={sendingReply}>
-                {sendingReply ? <><span className="spinner" /> Đang gửi...</> : '🚀 Xác nhận Gửi Email'}
+                {sendingReply ? <><span className="spinner" /> Đang gửi...</> : <><Icon name="send" size={17} /> Xác nhận gửi email</>}
               </button>
             </div>
           </div>

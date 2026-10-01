@@ -1,13 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { compressImage } from '@/lib/utils/upload'
 import type { Project } from '@/lib/types'
 import styles from './page.module.css'
+import BrandLogo from '@/components/ui/BrandLogo'
+import Icon from '@/components/ui/Icon'
+import Link from 'next/link'
 
 export default function PortalPage() {
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [projects, setProjects] = useState<Project[]>([])
   const [form, setForm] = useState({
     project_id: '',
@@ -33,7 +36,7 @@ export default function PortalPage() {
       setProjects((data || []) as Project[])
     }
     fetchProjects()
-  }, [])
+  }, [supabase])
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = Array.from(e.target.files || [])
@@ -91,19 +94,20 @@ export default function PortalPage() {
           }
         )
 
+        if (!res.ok) throw new Error('Không tải được ảnh đính kèm')
         if (res.ok) {
           imageUrls.push(`${supabaseUrl}/storage/v1/object/public/attachments/${filename}`)
         }
       }
 
       // Insert ticket
-      const { data: newTicket, error: insertError } = await supabase.from('tickets').insert({
+      const { error: insertError } = await supabase.from('tickets').insert({
         ...form,
         images: imageUrls,
         attachments: [],
         status: 'new',
         priority: 'medium',
-      }).select().single()
+      })
 
       if (insertError) {
         setError(insertError.message)
@@ -122,8 +126,10 @@ export default function PortalPage() {
     return (
       <div className={styles.portalPage}>
         <div className={styles.successCard}>
-          <div className={styles.successIcon}>✅</div>
-          <h2>Gửi yêu cầu thành công!</h2>
+          <BrandLogo />
+          <div className={styles.successIcon}><Icon name="circleCheck" size={42} /></div>
+          <p className={styles.eyebrow}>TVSI Helpdesk</p>
+          <h1>Yêu cầu đã được tiếp nhận.</h1>
           <p>Ticket của bạn đã được tiếp nhận. Chúng tôi sẽ phản hồi qua email <strong>{form.requester_email}</strong> trong thời gian sớm nhất.</p>
           <button className="btn btn-primary btn-lg" onClick={() => {
             setSubmitted(false)
@@ -133,6 +139,7 @@ export default function PortalPage() {
           }}>
             Tạo yêu cầu mới
           </button>
+          <Link href="/login" className={styles.successLink}>Trở về đăng nhập <Icon name="arrowRight" size={16} /></Link>
         </div>
       </div>
     )
@@ -141,36 +148,46 @@ export default function PortalPage() {
   return (
     <div className={styles.portalPage}>
       <div className={styles.portalContainer}>
-        <div className={styles.portalHeader}>
-          <div className={styles.portalLogo}>
-            <img src="/LOGO.png" alt="Logo" className={styles.logoImg} />
+        <header className={styles.portalHeader}>
+          <div className={styles.identity}><BrandLogo /><span>Helpdesk<small>Cổng tiếp nhận yêu cầu</small></span></div>
+          <Link href="/login" className={styles.loginLink}>Đăng nhập <Icon name="arrowRight" size={17} /></Link>
+        </header>
+        <main className={styles.content}>
+        <aside className={styles.intro}>
+          <p className={styles.eyebrow}>TVSI / Hỗ trợ</p>
+          <h1>Gửi yêu cầu.<br />Kết nối hỗ trợ.</h1>
+          <p className={styles.introDescription}>Chia sẻ vấn đề bạn đang gặp. Đội ngũ hỗ trợ sẽ tiếp nhận và phối hợp giải quyết.</p>
+          <div className={styles.guide}>
+            <h2>Để được hỗ trợ tốt hơn</h2>
+            <p>Nêu rõ vấn đề, các bước đã thực hiện và kết quả mong muốn.</p>
+            <p>Đính kèm ảnh chụp màn hình nếu cần làm rõ tình huống.</p>
           </div>
-          <h1>SHS Helpdesk</h1>
-          <p>Hệ thống tiếp nhận và xử lý yêu cầu hỗ trợ</p>
-        </div>
+          <div className={styles.replyNote}><Icon name="mail" size={20} /><p>Phản hồi sẽ được gửi đến email bạn cung cấp.</p></div>
+        </aside>
 
-        <form className={styles.portalForm} onSubmit={handleSubmit}>
+        <form className={styles.portalForm} onSubmit={handleSubmit} aria-busy={submitting}>
+          <div className={styles.formHeading}><h2>Yêu cầu hỗ trợ</h2><p>Các trường có dấu <span aria-hidden="true">*</span> là bắt buộc.</p></div>
           {error && (
-            <div className={styles.error}>⚠️ {error}</div>
+            <div className={styles.error} role="alert"><Icon name="warning" size={18} /> {error}</div>
           )}
 
           {/* Thông tin người gửi */}
           <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Thông tin người gửi</h3>
+            <h3 className={styles.sectionTitle}><span className={styles.sectionNumber}>01</span>Thông tin người gửi</h3>
             <div className={styles.formGrid}>
               <div className="input-group">
                 <label className="input-label input-required" htmlFor="portal-name">Họ và tên</label>
-                <input id="portal-name" className="input" placeholder="Nguyễn Văn A" value={form.requester_name}
+                <input id="portal-name" name="name" autoComplete="name" className="input" placeholder="Nhập họ và tên" value={form.requester_name}
                   onChange={e => setForm({ ...form, requester_name: e.target.value })} required />
               </div>
               <div className="input-group">
                 <label className="input-label input-required" htmlFor="portal-email">Email</label>
-                <input id="portal-email" className="input" type="email" placeholder="email@company.com" value={form.requester_email}
+                <input id="portal-email" name="email" autoComplete="email" className="input" type="email" placeholder="Nhập email nhận phản hồi" value={form.requester_email}
                   onChange={e => setForm({ ...form, requester_email: e.target.value })} required />
               </div>
               <div className="input-group">
                 <label className="input-label" htmlFor="portal-dept">Phòng ban</label>
-                <input id="portal-dept" className="input" placeholder="VD: Kinh doanh, Kỹ thuật..." value={form.requester_department}
+                <input id="portal-dept" name="department" className="input" placeholder="Nhập tên phòng ban" value={form.requester_department}
                   onChange={e => setForm({ ...form, requester_department: e.target.value })} />
               </div>
               <div className="input-group">
@@ -186,7 +203,7 @@ export default function PortalPage() {
 
           {/* Nội dung yêu cầu */}
           <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Nội dung yêu cầu</h3>
+            <h3 className={styles.sectionTitle}><span className={styles.sectionNumber}>02</span>Nội dung yêu cầu</h3>
             <div className="input-group">
               <label className="input-label input-required" htmlFor="portal-title">Tiêu đề</label>
               <input id="portal-title" className="input" placeholder="Tóm tắt ngắn gọn vấn đề" value={form.title}
@@ -194,19 +211,19 @@ export default function PortalPage() {
             </div>
             <div className="input-group" style={{ marginTop: 'var(--space-md)' }}>
               <label className="input-label input-required" htmlFor="portal-detail">Mô tả chi tiết</label>
-              <textarea id="portal-detail" className="textarea" rows={6} placeholder="Mô tả chi tiết vấn đề, các bước tái hiện lỗi..." value={form.issue_detail}
+              <textarea id="portal-detail" className="textarea" rows={5} placeholder="Mô tả vấn đề, các bước đã thực hiện và kết quả mong muốn…" value={form.issue_detail}
                 onChange={e => setForm({ ...form, issue_detail: e.target.value })} required />
             </div>
           </div>
 
           {/* Upload ảnh */}
           <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Ảnh đính kèm <span className={styles.optional}>(không bắt buộc)</span></h3>
+            <h3 className={styles.sectionTitle}><span className={styles.sectionNumber}>03</span>Ảnh đính kèm <span className={styles.optional}>Không bắt buộc</span></h3>
             <div className={styles.uploadArea}>
               <label className={styles.uploadLabel} htmlFor="portal-files">
-                <span className={styles.uploadIcon}>📎</span>
-                <span>Kéo thả hoặc bấm để chọn ảnh</span>
-                <span className={styles.uploadHint}>Tối đa 500KB/ảnh (tự động nén)</span>
+                <Icon name="upload" size={24} />
+                <span>Bấm để chọn ảnh đính kèm</span>
+                <span className={styles.uploadHint}>Có thể chọn nhiều ảnh · Tự động nén trước khi gửi</span>
               </label>
               <input id="portal-files" type="file" accept="image/*" multiple
                 onChange={handleFileChange} className={styles.uploadInput} />
@@ -217,7 +234,7 @@ export default function PortalPage() {
                 {previews.map((url, i) => (
                   <div key={i} className={styles.previewItem}>
                     <img src={url} alt={`Ảnh ${i + 1}`} className={styles.previewImg} />
-                    <button type="button" className={styles.removeBtn} onClick={() => removeFile(i)}>✕</button>
+                    <button type="button" className={styles.removeBtn} aria-label={`Xóa ảnh ${i + 1}`} onClick={() => removeFile(i)}><Icon name="close" size={16} /></button>
                     <span className={styles.fileSize}>{(files[i].size / 1024).toFixed(0)}KB</span>
                   </div>
                 ))}
@@ -225,14 +242,16 @@ export default function PortalPage() {
             )}
           </div>
 
-          <button type="submit" className={`btn btn-primary btn-lg ${styles.submitBtn}`} disabled={submitting}>
+          <div className={styles.submitRow}><p>Kiểm tra thông tin trước khi gửi yêu cầu.</p><button type="submit" className={`btn btn-primary btn-lg ${styles.submitBtn}`} disabled={submitting}>
             {submitting ? (
               <><span className="spinner" /> Đang gửi...</>
             ) : (
-              '📨 Gửi yêu cầu'
+              <>Gửi yêu cầu <Icon name="arrowRight" size={18} /></>
             )}
-          </button>
+          </button></div>
         </form>
+        </main>
+        <footer className={styles.footer}><span>TVSI Helpdesk</span><span>Công ty Cổ phần Chứng khoán Tân Việt</span></footer>
       </div>
     </div>
   )

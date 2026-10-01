@@ -1,0 +1,6 @@
+.link { position: relative; }
+.link:has([data-pending="true"]) { color: var(--color-brand); }
+.cue { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--color-brand); opacity: 0; pointer-events: none; }
+.cue[data-pending="true"] { opacity: 1; animation: pendingPulse 900ms ease-in-out infinite alternate; }
+@keyframes pendingPulse { from { opacity: .45; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cue[data-pending="true"] { animation: none; } }

@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import type { User, Notification } from '@/lib/types'
 import styles from './Header.module.css'
+import Link from 'next/link'
+import BrandLogo from '@/components/ui/BrandLogo'
+import Icon from '@/components/ui/Icon'
 
 interface HeaderProps {
   user: User | null
@@ -24,7 +27,8 @@ export default function Header({ user }: HeaderProps) {
   const profileRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    requestAnimationFrame(() => setMounted(true))
+    const frame = requestAnimationFrame(() => setMounted(true))
+    return () => cancelAnimationFrame(frame)
   }, [])
 
   const unreadCount = notifications.filter(n => !n.is_read).length
@@ -52,7 +56,7 @@ export default function Header({ user }: HeaderProps) {
         table: 'notifications',
         filter: `user_id=eq.${user.id}`,
       }, (payload) => {
-        setNotifications(prev => [payload.new as Notification, ...prev])
+        setNotifications(prev => [payload.new as Notification, ...prev.filter(item => item.id !== payload.new.id)].slice(0, 20))
       })
       .subscribe()
 
@@ -66,7 +70,18 @@ export default function Header({ user }: HeaderProps) {
       if (profileRef.current && !profileRef.current.contains(e.target as Node)) setShowProfile(false)
     }
     document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
+    const escape = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      if (notifRef.current?.contains(document.activeElement)) notifRef.current.querySelector('button')?.focus()
+      if (profileRef.current?.contains(document.activeElement)) profileRef.current.querySelector('button')?.focus()
+      setShowNotifications(false)
+      setShowProfile(false)
+    }
+    document.addEventListener('keydown', escape)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener('keydown', escape)
+    }
   }, [])
 
   const markAsRead = async (id: string) => {
@@ -83,14 +98,17 @@ export default function Header({ user }: HeaderProps) {
   const handleLogout = async () => {
     await supabase.auth.signOut()
     router.push('/login')
+    router.refresh()
   }
 
   const roleLabel = user?.role === 'manager' ? 'Quản trị viên' : 'Product Owner'
 
   return (
     <header className={styles.header}>
+      <div className={styles.headerInner}>
       <div className={styles.headerLeft}>
-        <h2 className={styles.pageTitle}>SHS Helpdesk</h2>
+        <Link href="/dashboard" className={styles.brandLink} aria-label="TVSI Helpdesk — Tổng quan"><BrandLogo /></Link>
+        <div className={styles.brandTitle}><strong>Helpdesk</strong><span>Không gian hỗ trợ nội bộ</span></div>
       </div>
 
       <div className={styles.headerRight}>
@@ -99,25 +117,28 @@ export default function Header({ user }: HeaderProps) {
           className={styles.iconBtn} 
           onClick={toggleTheme}
           title={theme === 'dark' ? 'Chuyển sang Chế độ sáng' : 'Chuyển sang Chế độ tối'}
+          aria-label={theme === 'dark' ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối'}
         >
-          {mounted ? (theme === 'dark' ? '☀️' : '🌙') : '...'}
+          <Icon name={mounted && theme === 'dark' ? 'sun' : 'moon'} size={19} />
         </button>
 
         {/* Notifications */}
         <div className={styles.dropdown} ref={notifRef}>
           <button
             className={styles.iconBtn}
-            onClick={() => setShowNotifications(!showNotifications)}
+            onClick={() => { setShowNotifications(!showNotifications); setShowProfile(false) }}
             aria-label="Thông báo"
+            aria-expanded={showNotifications}
+            aria-controls="notifications-panel"
           >
-            🔔
+            <Icon name="bell" size={19} />
             {unreadCount > 0 && (
               <span className={styles.badge}>{unreadCount > 9 ? '9+' : unreadCount}</span>
             )}
           </button>
 
           {showNotifications && (
-            <div className={styles.dropdownMenu + ' ' + styles.notifMenu}>
+            <div className={styles.dropdownMenu + ' ' + styles.notifMenu} id="notifications-panel" aria-label="Thông báo gần đây">
               <div className={styles.dropdownHeader}>
                 <span>Thông báo</span>
                 {unreadCount > 0 && (
@@ -131,7 +152,8 @@ export default function Header({ user }: HeaderProps) {
                   <div className={styles.emptyNotif}>Không có thông báo</div>
                 ) : (
                   notifications.map(n => (
-                    <div
+                    <button
+                      type="button"
                       key={n.id}
                       className={`${styles.notifItem} ${!n.is_read ? styles.unread : ''}`}
                       onClick={() => {
@@ -145,7 +167,7 @@ export default function Header({ user }: HeaderProps) {
                       <div className={styles.notifTime}>
                         {new Date(n.created_at).toLocaleString('vi-VN')}
                       </div>
-                    </div>
+                    </button>
                   ))
                 )}
               </div>
@@ -157,29 +179,34 @@ export default function Header({ user }: HeaderProps) {
         <div className={styles.dropdown} ref={profileRef}>
           <button
             className={styles.profileBtn}
-            onClick={() => setShowProfile(!showProfile)}
+            onClick={() => { setShowProfile(!showProfile); setShowNotifications(false) }}
+            aria-label="Mở menu tài khoản"
+            aria-expanded={showProfile}
+            aria-controls="profile-panel"
           >
             <div className={styles.avatar}>
               {user?.name?.charAt(0)?.toUpperCase() || 'U'}
             </div>
             <div className={styles.profileInfo}>
-              <span className={styles.profileName}>{user?.name || 'User'}</span>
+              <span className={styles.profileName}>{user?.name || 'Tài khoản'}</span>
               <span className={styles.profileRole}>{roleLabel}</span>
             </div>
+            <Icon name="chevronDown" size={14} />
           </button>
 
           {showProfile && (
-            <div className={styles.dropdownMenu}>
-              <button className={styles.menuItem} onClick={() => { router.push('/settings'); setShowProfile(false) }}>
-                🔧 Cài đặt
+            <div className={styles.dropdownMenu} id="profile-panel">
+              <button className={styles.menuItem} onClick={() => { router.push('/settings/security'); setShowProfile(false) }}>
+                <Icon name="settings" size={17} /> Cài đặt
               </button>
               <div className={styles.menuDivider} />
               <button className={styles.menuItem + ' ' + styles.menuDanger} onClick={handleLogout}>
-                🚪 Đăng xuất
+                <Icon name="logout" size={17} /> Đăng xuất
               </button>
             </div>
           )}
         </div>
+      </div>
       </div>
     </header>
   )
