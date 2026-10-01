@@ -11,9 +11,38 @@ const nunito = localFont({
   display: "swap",
 });
 
+const title = "TVSI Helpdesk | Hỗ trợ & Tri thức";
+const description = "TVSI Helpdesk — Nền tảng tiếp nhận ý kiến, quản lý yêu cầu hỗ trợ và thư viện tri thức của Chứng khoán Tân Việt.";
+// Set the public origin before building for a custom deployment domain.
+const deploymentHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (deploymentHost ? `https://${deploymentHost}` : "http://localhost:3000");
+const socialImage = {
+  url: "/brand/tvsi-helpdesk-og.png",
+  width: 1200,
+  height: 630,
+  alt: "TVSI Helpdesk với logo TVSI và hình khối đỏ trên nền sáng.",
+};
+
 export const metadata: Metadata = {
-  title: "TVSI Helpdesk | Hỗ trợ & Tri thức",
-  description: "TVSI Helpdesk — Hệ thống hỗ trợ, quản lý yêu cầu và thư viện tri thức Shape Up của Chứng khoán Tân Việt.",
+  metadataBase: new URL(siteUrl),
+  applicationName: "TVSI Helpdesk",
+  title,
+  description,
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    siteName: "TVSI Helpdesk",
+    url: "/",
+    title,
+    description,
+    images: [{ ...socialImage, type: "image/png" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [socialImage],
+  },
 };
 
 import ThemeProvider from "@/components/providers/ThemeProvider";
