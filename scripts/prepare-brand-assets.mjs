@@ -1,4 +1,4 @@
-import { writeFile } from 'node:fs/promises';
+import { copyFile, writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
 
@@ -7,10 +7,18 @@ import { fileURLToPath } from 'node:url';
 const root = new URL('../', import.meta.url);
 const path = relative => fileURLToPath(new URL(relative, root));
 
-await sharp(path('assets/brand/tvsi-helpdesk-og-source.png'))
+await sharp(path('assets/brand/tvsi-helpdesk-og-v2-source.png'))
   .resize(1200, 630, { fit: 'cover' })
   .png({ compressionLevel: 9 })
-  .toFile(path('public/brand/tvsi-helpdesk-og.png'));
+  .toFile(path('public/brand/tvsi-helpdesk-og-v2.png'));
+
+// Keep older direct image links on the current artwork as well.
+await copyFile(path('public/brand/tvsi-helpdesk-og-v2.png'), path('public/brand/tvsi-helpdesk-og.png'));
+
+if (process.argv.includes('--og-only')) {
+  console.log('Prepared TVSI OG v2 (1200 × 630).');
+  process.exit(0);
+}
 
 const source = path('assets/brand/tvsi-helpdesk-icon-source.png');
 const icon = await sharp(source).resize(256, 256, {

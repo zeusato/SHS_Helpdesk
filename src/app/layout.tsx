@@ -17,10 +17,10 @@ const description = "TVSI Helpdesk — Nền tảng tiếp nhận ý kiến, qu�
 const deploymentHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (deploymentHost ? `https://${deploymentHost}` : "http://localhost:3000");
 const socialImage = {
-  url: "/brand/tvsi-helpdesk-og.png",
+  url: "/brand/tvsi-helpdesk-og-v2.png",
   width: 1200,
   height: 630,
-  alt: "TVSI Helpdesk với logo TVSI và hình khối đỏ trên nền sáng.",
+  alt: "Logo TVSI đỏ–đen và tên Helpdesk trên nền trắng.",
 };
 
 export const metadata: Metadata = {

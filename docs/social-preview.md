@@ -5,16 +5,20 @@
 - `src/app/favicon.ico`: icon TVSI đỏ–trắng, gồm các cỡ 16/32/48/64/128/256 px cho tab trình duyệt.
 - `src/app/icon.png`: bản PNG 256 × 256 của cùng biểu tượng.
 - `src/app/apple-icon.png`: icon 180 × 180 trên nền trắng cho màn hình chính của thiết bị Apple.
-- `public/brand/tvsi-helpdesk-og.png`: ảnh chia sẻ 1200 × 630, dùng chung cho Open Graph và Twitter Card.
+- `public/brand/tvsi-helpdesk-og-v2.png`: ảnh chia sẻ 1200 × 630, dùng chung cho Open Graph và Twitter Card. Tên file mới tách khỏi cache của bản cũ.
 - `src/app/layout.tsx`: tiêu đề, mô tả tiếng Việt và metadata áp dụng toàn ứng dụng.
 
 Hai ảnh được tạo bằng công cụ **imagegen tích hợp**, dùng logo TVSI của dự án làm tham chiếu. OG chỉ có logo và tên Helpdesk, không có slogan, quy trình hay mũi tên. Ảnh nguồn nằm trong `assets/brand/`, prompt đầy đủ ở `assets/brand/imagegen-prompts.json`.
+
+OG v2 (15/10/2026) thay hình dải lụa trừu tượng bằng biểu tượng tròn và chữ TVSI rõ hình, với chiều sâu nhẹ trên nền trắng. Nguồn: `assets/brand/tvsi-helpdesk-og-v2-source.png`; prompt riêng: `assets/brand/og-v2-prompt.txt`. Đường dẫn ảnh cũ `public/brand/tvsi-helpdesk-og.png` cũng phục vụ bản mới; metadata dùng đường dẫn v2. Ảnh nguồn cũ giữ lại để đối chiếu. Bộ icon không thay đổi trong lần sửa này.
 
 Sau khi thay ảnh nguồn, chạy lệnh dưới để xuất các kích thước. Script chỉ đóng gói ảnh, không tự vẽ hoặc chèn chữ:
 
 ```sh
 node scripts/prepare-brand-assets.mjs
 ```
+
+Chỉ xuất lại OG: `node scripts/prepare-brand-assets.mjs --og-only`.
 
 ## Tên miền khi triển khai
 
